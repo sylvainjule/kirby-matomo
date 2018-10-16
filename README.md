@@ -313,4 +313,5 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
 - [ ] Bulk request widgets
 - [ ] Make it responsive
 - [ ] Make it lighter
+- [ ] Handle API calls errors
 - [ ] Keep array maps out of the vue files -> js helper
