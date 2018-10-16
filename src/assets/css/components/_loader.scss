@@ -1,0 +1,17 @@
+.loader {
+    display: inline-block;
+    overflow: hidden;
+    height: 1.3em;
+    margin-top: -0.3em;
+    line-height: 1.5em;
+    vertical-align: text-bottom;
+    &::after {
+	    content: "⠋\A⠙\A⠹\A⠸\A⠼\A⠴\A⠦\A⠧\A⠇\A⠏";
+	    display: inline-table;
+	    white-space: pre;
+	    text-align: left;
+    	animation: spin10 0.8s steps(10) infinite;
+    }
+}
+
+@keyframes spin10 { to { transform: translateY(-15.0em); } }

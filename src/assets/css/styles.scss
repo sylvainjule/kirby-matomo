@@ -1,0 +1,19 @@
+@import
+	'abstracts/variables',
+	'abstracts/mixins';
+
+@import
+	'common/icons',
+	'common/typography';
+
+@import
+	'components/loader',
+	'components/chart',
+	'components/overview',
+	'components/realtime',
+	'components/visits-summary',
+	'components/widgets';
+
+@import
+	'sections/main',
+	'sections/sidebar';

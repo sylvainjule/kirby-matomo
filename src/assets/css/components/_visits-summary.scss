@@ -1,0 +1,33 @@
+.matomo-visits-summary {
+	ul {
+		margin-top: calc(20px - 0.5rem);
+		li {
+			display: flex;
+			align-items: center;
+			font-size: 0.75rem;
+			padding: 0.5rem 10px 0.5rem 5px;
+			.icon {
+				width: 18px;
+				height: 18px;
+				margin-right: 10px;
+				svg {
+					fill: lighten($grey, 20%);
+				}
+			}
+			.number {
+				margin-left: auto;
+			}
+			&:not(:last-child) {
+				border-bottom: 1px solid lighten(#d9d9d9, 7%);
+			}
+			&:hover {
+				background: #fafafa;
+				.icon {
+					svg {
+						fill: $grey;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+.matomo-chart {
+	position: relative;
+	width: 100%;
+	margin-top: 2.5rem;
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(239, 239, 239, 0.85);
+		z-index: 1000;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: opacity 0.3s ease-out;
+		.loader {
+			font-size: 30px;
+		}
+	}
+	.chart {
+		height: 52.5vh;
+	}
+}

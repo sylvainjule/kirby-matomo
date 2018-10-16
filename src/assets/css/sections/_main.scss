@@ -1,0 +1,20 @@
+.matomo-period-selector {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	display: flex;
+	.matomo-period-option {
+		padding-bottom: 2px;
+		opacity: 0.3;
+		cursor: pointer;
+		transition: opacity 0.2s ease-out;
+		&:not(:last-child) {
+			margin-right: 12px;
+		}
+		&.active, &:hover {
+			opacity: 1;
+		}
+		&.active {
+			border-bottom: 1px solid black;
+		}
+	}
+}

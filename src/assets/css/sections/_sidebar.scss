@@ -1,0 +1,60 @@
+.matomo-dashboard-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 1px;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 5px rgba(22,23,26,.05);
+    .icon {
+    	width: 38px;
+    	height: 38px;
+    	background: #d52a20;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	svg {
+    		fill: white;
+    		width: 21px;
+    		height: 21px;
+    	}
+    }
+    .text {
+    	white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    align-items: baseline;
+	    width: calc(100% - 38px);
+	    line-height: 1.25rem;
+	    padding: .5rem .75rem;
+	    em {
+	    	font-style: normal;
+		    margin-right: 1rem;
+		    flex-grow: 1;
+		    font-size: .875rem;
+		    color: #16171a;
+	    }
+	}
+}
+
+.matomo-block {
+	position: relative;
+	&:not(:first-child) {
+		margin-top: 1.5rem;
+	}
+	padding: 1rem;
+	padding-bottom: 0.75em;
+	padding-top: 1.25em;
+	background: white;
+	box-shadow: 0 2px 5px rgba(22,23,26,.05);
+	.title {
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		letter-spacing: 0.15px;
+		color: lighten($grey, 10%);
+	}
+	.loader {
+		font-size: 16px;
+		margin-top: 10px;
+	}
+}
