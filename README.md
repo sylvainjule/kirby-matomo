@@ -121,7 +121,7 @@ The script is only active for not logged in users by default. If you want to cha
 'sylvainjule.matomo.trackUsers' => false
 ```
 
-### 3.7. `debug`
+#### 3.7. `debug`
 
 If you want to always run the script (even on localhost or if you are logged in), set this option to `true`.
 
@@ -169,8 +169,8 @@ columns:
 There are a bunch of options to help you adjust this default panel view. 
 Both sections have three components :
 
-- *The mainview* (`matomo-main`) includes `chart`, `overview` and `widgets`
-- *The sidebar* (`matomo-sidebar`) includes `link`, `realtime` and `summary`
+- **The mainview** (`matomo-main`) includes `chart`, `overview` and `widgets`
+- **The sidebar** (`matomo-sidebar`) includes `link`, `realtime` and `summary`
 
 You can chose to hide them like this:
 
