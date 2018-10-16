@@ -18,11 +18,11 @@ return array(
         		return $content;
         	}
         	catch (Exception $e) {
-        		$data = array(
+        		$error = array(
 		            'status' => 'error',
 		            'error'  => $e->getMessage()
 		        );
-		        return response::json($data);
+		        return $error;
         	}
         }
     ),
@@ -37,11 +37,11 @@ return array(
         		return $content;
         	}
         	catch (Exception $e) {
-        		$data = array(
+        		$error = array(
 		            'status' => 'error',
 		            'error'  => $e->getMessage()
 		        );
-		        return response::json($data);
+		        return $error;
         	}
         }
     ),
@@ -60,11 +60,11 @@ return array(
         		return $content;
         	}
         	catch (Exception $e) {
-        		$data = array(
+        		$error = array(
 		            'status' => 'error',
 		            'error'  => $e->getMessage()
 		        );
-		        return response::json($data);
+		        return $error;
         	}
         }
     ),
@@ -83,11 +83,11 @@ return array(
         		return $content;
         	}
         	catch (Exception $e) {
-        		$data = array(
+        		$error = array(
 		            'status' => 'error',
 		            'error'  => $e->getMessage()
 		        );
-		        return response::json($data);
+		        return $error;
         	}
         }
     ),
@@ -102,11 +102,11 @@ return array(
         		return $content;
         	}
         	catch (Exception $e) {
-        		$data = array(
+        		$error = array(
 		            'status' => 'error',
 		            'error'  => $e->getMessage()
 		        );
-		        return response::json($data);
+		        return $error;
         	}
         }
     )
