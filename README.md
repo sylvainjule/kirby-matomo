@@ -1,6 +1,6 @@
 # Kirby Matomo
 
-This plugin helps you generating a tracking code for Matomo, and displays some useful metrics directly within the panel.
+This plugin helps you generate a tracking code for Matomo, and displays some useful metrics directly within the panel.
 
 ![matomo-screenshot](https://user-images.githubusercontent.com/14079751/47005802-d5300a00-d134-11e8-8e8e-ed4525c94bb3.jpg)
 

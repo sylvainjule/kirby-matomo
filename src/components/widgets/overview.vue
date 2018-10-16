@@ -41,7 +41,7 @@
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.bounce}}%</span>
 					</div>
-					<div class="details">visits have bounced (left the website after one page).</div>
+					<div class="details">visitors have bounced (left the website after one page).</div>
 				</div>
 				<div :class="['difference', bounceDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
