@@ -310,6 +310,10 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
 
 ## 8. To-do
 
+- [ ] Create a `matomo-page` widget to add on pages, displaying some simple page-related stats
+  - [ ] Use the `Actions.getPageUrls` method
+  - [ ] Don't filter directly the request with labels as Matomo can store one uri in multiple ways (`fr` or `/fr`, `page` / `/page` or `page?arg=string`)
+  - [ ] Propably pass a computed uri as a prop (recreate it from `url` to let custom Page Models do their magic and retrieve the uri matomo sees, when ignoring a subfolder for example)
 - [ ] Bulk request widgets
 - [ ] Make it responsive
 - [ ] Make it lighter
