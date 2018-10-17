@@ -17,7 +17,7 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
   * [5.2. Options](#52-options)
   * [5.3. Complete blueprint example](#53-complete-blueprint-example)
 - [6. License](#6-license)
-- [7. Credits](#7-credit)
+- [7. Credits](#7-credits)
 
 
 #### TLDR – Just get me started 👀
@@ -312,8 +312,10 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
 
 - [ ] Create a `matomo-page` widget to add on pages, displaying some simple page-related stats
   - [ ] Use the `Actions.getPageUrls` method
-  - [ ] Don't filter directly the request with labels as Matomo can store one uri in multiple ways (`fr` or `/fr`, `page` / `/page` or `page?arg=string`)
+  - [ ] Don't filter directly the request with labels as Matomo can store one uri in multiple ways (`fr` or `/fr`, `page` or `/page` or `page?arg=string`)
   - [ ] Filter the response's labels with a computed uri (recreate it from `url` to let custom Page Models do their magic and retrieve the uri matomo sees, when ignoring a subfolder for example)
+  - [ ] Fuzzy filter, eg. with or without DS, with or without query, etc.
+  - [ ] Multilanguage -> Check if the language code match is an array
 - [ ] Bulk request widgets
 - [ ] Make it responsive
 - [ ] Make it lighter
