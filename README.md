@@ -318,6 +318,6 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
   - [ ] Multilanguage -> Check if the language code match is an array
 - [ ] Bulk request widgets
 - [ ] Make it responsive
-- [ ] Make it lighter
+- [ ] Make it lighter (replace moment with [dayjs](https://github.com/iamkun/dayjs) to cut the size of the js bundle)
 - [ ] Handle API calls errors
 - [ ] Keep array maps out of the vue files -> js helper
