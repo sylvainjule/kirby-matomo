@@ -54,5 +54,7 @@ Kirby::plugin('sylvainjule/matomo', array(
         	)
         )
     ),
-    'routes' => require_once __DIR__ . '/lib/routes.php',
+    'api' => array(
+    	'routes' => require_once __DIR__ . '/lib/routes.php',
+    ),
 ));

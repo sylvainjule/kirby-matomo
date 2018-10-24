@@ -2,7 +2,7 @@
 
 return array(
     array(
-        'pattern' => 'api/matomo-panel/get-widget-content',
+        'pattern' => 'matomo-panel/get-widget-content',
         'action'  => function() {
         	$widget = get('widget');
         	$method = get('method');
@@ -27,7 +27,7 @@ return array(
         }
     ),
     array(
-        'pattern' => 'api/matomo-panel/get-realtime-number',
+        'pattern' => 'matomo-panel/get-realtime-number',
         'action'  => function() {
         	try {
         		$content = Matomo::apiRealtime();
@@ -46,7 +46,7 @@ return array(
         }
     ),
     array(
-        'pattern' => 'api/matomo-panel/get-chart-data',
+        'pattern' => 'matomo-panel/get-chart-data',
         'action'  => function() {
         	$method = get('method');
         	$period = get('period');
@@ -69,7 +69,7 @@ return array(
         }
     ),
     array(
-        'pattern' => 'api/matomo-panel/get-overview-content',
+        'pattern' => 'matomo-panel/get-overview-content',
         'action'  => function() {
         	$method = get('method');
         	$period = get('period');
@@ -92,7 +92,7 @@ return array(
         }
     ),
     array(
-        'pattern' => 'api/matomo-panel/get-bulk-summary',
+        'pattern' => 'matomo-panel/get-bulk-summary',
         'action'  => function() {
         	try {
         		$content = Matomo::apiBulkSummary();
