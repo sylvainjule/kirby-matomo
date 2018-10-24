@@ -12,7 +12,7 @@
 		<overview v-if="overview" :currentPeriod="currentPeriod" :defaults="defaults" @updateVisits="updateVisits" />
 
 		<div v-if="widgets" class="matomo-widgets">
-			<div class="matomo-overview-description">
+			<div class="matomo-widgets-description">
 				<h4>Details</h4>
 				<p>Top 5 – Ranked by visits count</p>
 			</div>
