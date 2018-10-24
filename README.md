@@ -135,7 +135,7 @@ If you want to always run the script (even on localhost or if you are logged in)
 
 ## 4. Template usage
 
-Including the script in your template is pretty straightforward:
+You only need to include the snippet in your code somewhere:
 
 ```php
 <?php snippet('matomo'); ?> 
@@ -194,7 +194,7 @@ columns:
         summary: false
 ```
 
-(Ok, there's nothing left to work with here, but you get the idea).
+(Ok, there would be nothing left to work with here, but you get the idea).
 
 ##### Hiding and sorting widgets
 
