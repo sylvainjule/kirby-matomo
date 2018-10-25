@@ -11,7 +11,8 @@ return array(
         	$limit  = get('limit');
 
         	try {
-        		$content = Matomo::apiWidget($widget, $method, $period, $date, $limit);
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiWidget($widget, $method, $period, $date, $limit);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
@@ -30,7 +31,8 @@ return array(
         'pattern' => 'matomo-panel/get-realtime-number',
         'action'  => function() {
         	try {
-        		$content = Matomo::apiRealtime();
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiRealtime();
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
@@ -53,7 +55,8 @@ return array(
         	$date   = get('date');
 
         	try {
-        		$content = Matomo::apiChart($method, $period, $date);
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiChart($method, $period, $date);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
@@ -76,7 +79,8 @@ return array(
         	$date   = get('date');
 
         	try {
-        		$content = Matomo::apiOverview($method, $period, $date);
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiOverview($method, $period, $date);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
@@ -95,7 +99,8 @@ return array(
         'pattern' => 'matomo-panel/get-bulk-summary',
         'action'  => function() {
         	try {
-        		$content = Matomo::apiBulkSummary();
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiBulkSummary();
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}

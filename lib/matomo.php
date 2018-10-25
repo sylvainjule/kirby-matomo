@@ -2,6 +2,9 @@
 
 class Matomo {
 
+	/* Should we load the snippet?
+	---------------------------------*/
+
 	public static function allowed() {
 		$visitor = new Kirby\Http\Visitor();
 
@@ -25,16 +28,27 @@ class Matomo {
 		return true;
 	}
 
-	public static function apiWidget($widget, $method, $period, $date, $limit) {
-		$url   = option('sylvainjule.matomo.url');
-	  	$id    = option('sylvainjule.matomo.id');
-	  	$token = option('sylvainjule.matomo.token');
 
+	/* Matomo API calls
+	---------------------------------*/
+
+	protected $url   = null;
+	protected $id    = null;
+	protected $token = null;
+
+	public function __construct() {
+    	$this->url   = option('sylvainjule.matomo.url');
+		$this->id    = option('sylvainjule.matomo.id');
+		$this->token = option('sylvainjule.matomo.token');
+    }
+
+	public function apiWidget($widget, $method, $period, $date, $limit) {
+		$url  = $this->url;
 		$url .= "?module=API&method=" . $method;
-		$url .= "&idSite=". $id ."&period=". $period ."&date=" . $date;
+		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
 		$url .= "&format=PHP";
 		$url .= $limit ? "&filter_limit=" . $limit : '';
-		$url .= "&token_auth=". $token;
+		$url .= "&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
 		$content = unserialize($fetched);
@@ -42,14 +56,11 @@ class Matomo {
 		return $content;
 	}
 
-	public static function apiChart($method, $period, $date) {
-		$url   = option('sylvainjule.matomo.url');
-	  	$id    = option('sylvainjule.matomo.id');
-	  	$token = option('sylvainjule.matomo.token');
-
+	public function apiChart($method, $period, $date) {
+		$url  = $this->url;
 		$url .= "?module=API&method=". $method;
-		$url .= "&idSite=". $id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=PHP&token_auth=". $token;
+		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
+		$url .= "&format=PHP&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
 		$content = unserialize($fetched);
@@ -57,14 +68,11 @@ class Matomo {
 		return $content;
 	}
 
-	public static function apiOverview($method, $period, $date) {
-		$url   = option('sylvainjule.matomo.url');
-	  	$id    = option('sylvainjule.matomo.id');
-	  	$token = option('sylvainjule.matomo.token');
-
+	public function apiOverview($method, $period, $date) {
+		$url  = $this->url;
 		$url .= "?module=API&method=". $method;
-		$url .= "&idSite=". $id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=PHP&token_auth=". $token;
+		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
+		$url .= "&format=PHP&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
 		$content = unserialize($fetched);
@@ -72,15 +80,13 @@ class Matomo {
 		return $content;
 	}
 
-	public static function apiRealtime() {
-		$url   = option('sylvainjule.matomo.url');
-	  	$id    = option('sylvainjule.matomo.id');
-	  	$token = option('sylvainjule.matomo.token');
-	  	$method = 'Live.getCounters';
+	public function apiRealtime() {
+		$url  = $this->url;
+		$method = 'Live.getCounters';
 
 		$url .= "?module=API&method=" . $method;
-		$url .= "&idSite=". $id ."&lastMinutes=3";
-		$url .= "&format=PHP&token_auth=". $token;
+		$url .= "&idSite=". $this->id ."&lastMinutes=3";
+		$url .= "&format=PHP&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
 		$content = unserialize($fetched);
@@ -88,26 +94,24 @@ class Matomo {
 		return $content;
 	}
 
-	public static function apiBulkSummary() {
-		$url   = option('sylvainjule.matomo.url');
-	  	$id    = option('sylvainjule.matomo.id');
-	  	$token = option('sylvainjule.matomo.token');
-	  	$method = 'Live.getCounters';
+	public function apiBulkSummary() {
+		$url  = $this->url;
+		$method = 'Live.getCounters';
 
 		$url .= "?module=API&method=API.getBulkRequest";
-		$url .= "&token_auth=". $token ."&format=PHP";
+		$url .= "&token_auth=". $this->token ."&format=PHP";
 
 		$url .= "&urls[0]=";
-		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $id ."&period=day&date=today");
+		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=day&date=today");
 
 		$url .= "&urls[1]=";
-		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $id ."&period=day&date=last7");
+		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=day&date=last7");
 
 		$url .= "&urls[2]=";
-		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $id ."&period=month&date=today");
+		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=month&date=today");
 
 		$url .= "&urls[3]=";
-		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $id ."&period=year&date=today");
+		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=year&date=today");
 
 		$fetched = file_get_contents($url);
 		$content = unserialize($fetched);
