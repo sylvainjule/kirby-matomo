@@ -1,0 +1,10 @@
+.matomo-main, .matomo-sidebar {
+	.empty {
+		color: lighten($grey, 20%);
+		font-size: 0.75rem;
+		text-align: center;
+		margin-top: 1rem;
+		padding: 1rem 0 1rem 0;
+		background: #fafafa;
+	}
+}

@@ -5,7 +5,7 @@
 			<p>+/- is based on {{periodString}}.</p>
 		</div>
 		<div class="matomo-overview-ctn">
-			<div class="matomo-overview-block">
+			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
 					<div class="title">Visits</div>
 					<div class="big-number">
@@ -20,7 +20,7 @@
 					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
 				</div>
 			</div>
-			<div class="matomo-overview-block">
+			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
 					<div class="title">Duration</div>
 					<div class="big-number">
@@ -34,7 +34,7 @@
 					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
 				</div>
 			</div>
-			<div class="matomo-overview-block">
+			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
 					<div class="title">Bounce</div>
 					<div class="big-number">
@@ -49,7 +49,7 @@
 					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
 				</div>
 			</div>
-			<div class="matomo-overview-block">
+			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
 					<div class="title">Actions</div>
 					<div class="big-number">
@@ -64,6 +64,7 @@
 					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
 				</div>
 			</div>
+			<div v-else class="empty">There is no data to diplay</div>
 		</div>
 	</div>
 </template>
@@ -73,6 +74,7 @@ export default {
 	data() { 
 		return {
 			loading: true,
+			status: 'loading',
 			widget: 'overview',
 			method: 'VisitsSummary.get',
 			date: 'today',
@@ -101,6 +103,9 @@ export default {
 		currentPeriod: String,
 	},
 	computed: {
+		isEmpty() {
+			return this.status == 'empty'
+		},
 		visitsDiff() {
 			let diff = this.diff(this.current.visits, this.prev.visits)
 			let status = diff > 0 ? 'positive' : 'negative'
@@ -248,7 +253,12 @@ export default {
 		        	this.prev.actions      = this.average(prev, 'nb_actions_per_visit').toFixed(1)
 
 		        	this.loading = false
+		        	this.status = response.status
 		        	this.$emit('updateVisits', this.current.visits)
+		        })
+		        .catch(error => {
+		        	this.loading = false
+		        	this.status = 'empty'
 		        })
 		},
 		formatTime(time) {

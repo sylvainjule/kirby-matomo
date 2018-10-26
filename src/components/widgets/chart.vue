@@ -239,6 +239,9 @@ export default {
 
                     this.$emit('chartIsLoaded')
                 })
+                .catch(error => {
+                    this.$emit('chartIsEmpty')
+                })
         },
     }
 }

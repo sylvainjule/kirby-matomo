@@ -3,7 +3,7 @@
 		<div class="title">Visits summary</div>
 
 		<div v-if="loading" class="loader"></div>
-		<ul v-else>
+		<ul v-else-if="!loading && !isEmpty">
 			<li>
 				<div class="icon"><svgicon icon="calendar" /></div>
 				<div class="text">Today</div>
@@ -25,6 +25,7 @@
 				<div class="number">{{ results.year }}</div>
 			</li>
 		</ul>
+		<div v-else class="empty">There is no data to diplay</div>
 	</div>
 </template>
 
@@ -34,6 +35,7 @@ export default {
 	data() { 
 		return {
 			loading: true,
+			status: 'loading',
 			results: {
 				day: Number,
 				week: Number,
@@ -45,6 +47,9 @@ export default {
 	props: {
 	},
 	computed: {
+		isEmpty() {
+			return this.status == 'empty'
+		},
 	},
 	created() {
 		this.syncContent()
@@ -63,6 +68,11 @@ export default {
 		        	this.results.year = response[3]
 
 		        	this.loading = false
+		        	this.status = response.status
+		        })
+		        .catch(error => {
+		        	this.loading = false
+		        	this.status = 'empty'
 		        })
 		},
 		getLast7Days(obj) {

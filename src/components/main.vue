@@ -4,9 +4,10 @@
 			<div v-for="(period, index) in periods" :class="['matomo-period-option', period, {active: period == currentPeriod}]" @click="setCurrentPeriod(period)">{{periodString(period)}}</div>
 		</div>
 		
-		<div v-if="chart" class="matomo-chart">
+		<div v-if="chart" :class="['matomo-chart', {'is-empty': chartEmpty}]">
 			<div v-if="chartLoading" class="overlay"><div class="loader"></div></div>
-			<chart class="chart" :currentPeriod="currentPeriod" @chartIsLoading="chartIsLoading" @chartIsLoaded="chartIsLoaded" />
+			<div v-if="chartEmpty" class="empty"><span>There is no data to diplay</span></div>
+			<chart class="chart" :currentPeriod="currentPeriod" @chartIsLoading="chartIsLoading" @chartIsLoaded="chartIsLoaded" @chartIsEmpty="chartIsEmpty" />
 		</div>
 
 		<overview v-if="overview" :currentPeriod="currentPeriod" :defaults="defaults" @updateVisits="updateVisits" />
@@ -43,6 +44,7 @@ export default {
 			overview: false,
 			widgets: Array,
 			chartLoading: true,
+			chartEmpty: false,
         	rangeStrings: {
 				year: 'This year',
 				month: 'This month',
@@ -78,6 +80,11 @@ export default {
 		},
 		chartIsLoaded() {
 			this.chartLoading = false
+			this.chartEmpty   = false
+		},
+		chartIsEmpty() {
+			this.chartLoading = false
+			this.chartEmpty   = true
 		},
 		periodString(period) {
 			return this.rangeStrings[period]

@@ -1,11 +1,14 @@
 <template>
 	<div class="matomo-block matomo-realtime">
-		<div v-if="!loading" class="refresh" @click="syncContent">Refresh</div>
+		<div v-if="!loading && !isEmpty" class="refresh" @click="syncContent">Refresh</div>
 
 		<div class="title">Realtime</div>
-		<span v-if="loading" class="loader"></span>
-		<div v-else class="big-number">{{ visitors }}</div>
-		<div v-if="!loading" class="details">{{ visitorsString }}</div>
+		<div v-if="!isEmpty">
+			<span v-if="loading" class="loader"></span>
+			<div v-else class="big-number">{{ visitors }}</div>
+			<div v-if="!loading" class="details">{{ visitorsString }}</div>
+		</div>
+		<div v-else class="empty">There is no data to diplay</div>
 	</div>
 </template>
 
@@ -14,12 +17,16 @@ export default {
 	data() { 
 		return {
 			loading: true,
+			status: 'loading',
 			visitors: Number,
 		}
 	},
 	props: {
 	},
 	computed: {
+		isEmpty() {
+			return this.status == 'empty'
+		},
 		visitorsString() {
 			if(this.visitors == 0) {
 				return "There are currently no visitors browsing the website."
@@ -45,6 +52,10 @@ export default {
 		        .then(response => {
 		        	this.visitors = response[0].visitors
 		        	this.loading = false
+		        })
+		        .catch(error => {
+		        	this.loading = false
+		        	this.status = 'empty'
 		        })
 		},
 	},

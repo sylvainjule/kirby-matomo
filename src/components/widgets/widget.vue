@@ -2,14 +2,14 @@
 	<div class="widget">
 		<div class="title">{{widgetTitle}}</div>
 		<div v-if="loading" class="loading"><div class="loader"></div></div>
-		<ul v-else-if="results.status != 'empty'">
+		<ul v-else-if="!loading && !isEmpty">
 			<li v-for="(result, index) in results">
 				<div class="icon"><svgicon :icon="findIcon(result)" :original="originalColor" /></div>
 				<div class="text" v-html="result.label"></div>
 				<div class="number">{{ result.nb_visits }} <span class="percent">{{ visitsPercent(result) }}%</span></div>
 			</li>
 		</ul>
-		<div v-else class="empty">There is no entry to diplay</div>
+		<div v-else class="empty">There is no data to diplay</div>
 	</div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
 	data() { 
 		return {
 			loading: true,
+			status: 'loading',
 			titlesMap: {
 				referrerType: 'Referrers type',
 				websites: 'Referrers websites',
@@ -81,6 +82,9 @@ export default {
 		totalVisits: Number,
 	},
 	computed: {
+		isEmpty() {
+			return this.status == 'empty'
+		},
 		originalColor() {
 			return this.widget == 'socials'
 		},
@@ -140,6 +144,11 @@ export default {
 		        })
 		        .then(response => {
 		        	this.results = response
+		        	this.status  = response.status
+		        	this.loading = false
+		        })
+		        .catch(error => {
+		        	this.status = 'empty'
 		        	this.loading = false
 		        })
 		},

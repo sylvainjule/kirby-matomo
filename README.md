@@ -318,5 +318,5 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
   - [ ] Multilanguage -> Check if the language code match is an array
 - [ ] Bulk request widgets
 - [ ] Make it responsive
-- [ ] Handle API calls errors
+- [X] Handle API calls errors
 - [ ] Keep array maps out of the vue files -> js helper
