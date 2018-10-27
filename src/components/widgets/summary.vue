@@ -1,6 +1,6 @@
 <template>
 	<div class="matomo-block matomo-visits-summary">
-		<div class="title">Visits summary</div>
+		<h5>Visits summary</h5>
 
 		<div v-if="loading" class="loader"></div>
 		<ul v-else-if="!loading && !isEmpty">
@@ -59,6 +59,7 @@ export default {
 	methods: {
 		syncContent() {
 			this.loading = true
+			this.status  = 'loading'
 			this.$api
 		        .get('matomo-panel/get-bulk-summary')
 		        .then(response => {

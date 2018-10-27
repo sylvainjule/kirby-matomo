@@ -7,7 +7,7 @@
 		<div class="matomo-overview-ctn">
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<div class="title">Visits</div>
+					<h5>Visits</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.visits}}</span>
@@ -22,7 +22,7 @@
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<div class="title">Duration</div>
+					<h5>Duration</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{durationString}}</span></div>
@@ -36,7 +36,7 @@
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<div class="title">Bounce</div>
+					<h5>Bounce</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.bounce}}%</span>
@@ -51,7 +51,7 @@
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<div class="title">Actions</div>
+					<h5>Actions</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.actions}}</span>
@@ -208,6 +208,7 @@ export default {
 	methods: {
 		syncContent() {
 			this.loading = true
+			this.status  = 'loading'
 		    // get metrics for the current [year, month, week, day]
 			this.$api
 		        .get('matomo-panel/get-overview-content', this.config)
@@ -238,7 +239,6 @@ export default {
 		        		prev = this.firstN(response, 1)
 		        		current = this.lastN(response, 1)
 		        	}
-
 
 		        	this.current.visits   = this.sum(current, 'nb_visits')
 		        	this.prev.visits      = this.sum(prev, 'nb_visits')

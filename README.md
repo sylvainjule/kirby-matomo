@@ -12,12 +12,16 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 - [2. Installation](#2-installation)
 - [3. Options](#3-options)
 - [4. Template usage](#4-template-usage)
-- [5. Panel setup](#5-panel-setup)
+- [5. Panel dashboard](#5-dashboard)
   * [5.1. Basic blueprint example](#51-basic-blueprint-example)
   * [5.2. Options](#52-options)
   * [5.3. Complete blueprint example](#53-complete-blueprint-example)
-- [6. License](#6-license)
-- [7. Credits](#7-credits)
+- [6. Panel page widget](#6-panel-page-widget)
+  * [6.1. Basic blueprint example](#61-basic-blueprint-example)
+  * [6.2. Options](#62-options)
+  * [6.3. Potential pitfalls](#63-potential-pitfalls)
+- [7. License](#7-license)
+- [8. Credits](#8-credits)
 
 
 #### TLDR – Just get me started 👀
@@ -143,14 +147,15 @@ You only need to include the snippet in your code somewhere:
 
 <br/>
 
-## 5. Panel setup
+## 5. Panel dashboard
 
+The panel dashboard (screenshot on top of this readme) displays metrics for the whole website.
 
 #### 5.1. Basic blueprint example
 
 > Please make sure that you have included your `token_auth` in your config.
 
-Adding the panel view is as staightforward as this: 
+Place this snippet in a dedicated tab / blueprint: 
 
 ```yaml
 columns:
@@ -289,13 +294,70 @@ columns:
 
 <br/>
 
-## 6. License
+## 6. Panel page widget
+
+The panel page widget displays metrics for a given page, both in single-language or multi-language websites.
+
+> Any feedback regarding this widget's behaviour is welcome. It might still need to be refined, inputs from a larger variety of live websites would be a great help. Check the [potential pitfalls](#63-potential-pitfalls) below.
+
+![page-widget](https://user-images.githubusercontent.com/14079751/47609905-6e6df300-da48-11e8-911a-096c4d8f0963.jpg)
+
+
+#### 6.1. Basic blueprint example
+
+> Please make sure that you have included your `token_auth` in your config.
+
+Place this snippet in your page blueprint: 
+
+```yaml
+columns:
+  - width: 1/3
+    sections:
+      matomo:
+        type: matomo-page
+```
+
+The section will automatically detect the page uri, and fetch its metrics for the given period.
+
+#### 6.2. Options
+
+##### Period
+
+You can choose the period displayed, which can either be `year`, `month`, `week` or `day`. Default is `month`.
+
+```yaml
+matomo:
+  type: matomo-page
+  period: month
+```
+
+##### Multi-language overview
+
+The plugin will automatically detect if multi-language is switched on, and fetch the metrics of the current language.
+
+Optionally, you can also display the metrics of all languages combined with the `overview` option. Default is `false`.
+
+```yaml
+matomo:
+  type: matomo-page
+  overview: false
+```
+
+#### 6.3. Potential pitfalls
+
+- Matomo receives public urls, which means that its URIs are etermined **once routes have been applied**. Therefore, the plugin filters Matomo's responses with an uri created from the public url of the page. If you have set up custom routes, to skip subfolders for example, please make sure to overwrite the `url` method for the template with a page model, otherwise the uri won't be correct.
+- The metrics shown might not be accurate / complete if you have changed the default language after Matomo started its data collection.
+
+
+<br/>
+
+## 7. License
 
 MIT
 
 <br/>
 
-## 7. Credits
+## 8. Credits
 
 Kirby 2 had some Piwik integration plugins:
 
@@ -304,19 +366,25 @@ Kirby 2 had some Piwik integration plugins:
 - [kirby-piwik-widget](https://github.com/mauricerenck/getkirby-piwik-widget) by [@mauricerenck](https://github.com/mauricerenck)
 - A promising [Piwik Suite](https://forum.getkirby.com/t/planning-comprehensive-piwik-plugin/954) that sadly has never been released, and was an inspiration to get started on a comprehensive and thorough plugin.
 
-The snippet integration has been shamelessly adapted from [@jenstornell](https://github.com/jenstornell/)'s [kirby-ga](https://github.com/jenstornell/kirby-ga/tree/kirby-3), which has always been a breeze to use 😉
+The snippet integration has been shamelessly adapted from [@jenstornell](https://github.com/jenstornell/)'s [kirby-ga](https://github.com/jenstornell/kirby-ga/tree/kirby-3). 👏
 
 <br/>
 
-## 8. To-do
+## 9. To-do
 
-- [ ] Create a `matomo-page` widget to add on pages, displaying some simple page-related stats
-  - [ ] Use the `Actions.getPageUrls` method
-  - [ ] Don't filter directly the request with labels as Matomo can store one uri in multiple ways (`fr` or `/fr`, `page` or `/page` or `page?arg=string`)
-  - [ ] Filter the response's labels with a computed uri (recreate it from `url` to let custom Page Models do their magic and retrieve the uri matomo sees, when ignoring a subfolder for example)
-  - [ ] Fuzzy filter, eg. with or without DS, with or without query, etc.
-  - [ ] Multilanguage -> Check if the language code match is an array
-- [ ] Bulk request widgets
-- [ ] Make it responsive
+- [X] `.title` => `h5`
 - [X] Handle API calls errors
+- [X] Create a `matomo-page` widget to add on pages, displaying some simple page-related stats
+  - [X] Use the `Actions.getPageUrls` method
+  - [X] Don't filter directly the request with labels as Matomo can store one uri in multiple ways (`fr` or `/fr`, `page` or `/page` or `page?arg=string`)
+  - [X] Filter the response's labels with a computed uri (recreate it from `url` to let custom Page Models do their magic and retrieve the uri matomo sees, when ignoring a subfolder for example)
+  - [X] Fuzzy filter, eg. with or without DS, with or without query, etc.
+  - [X] Multilanguage -> Check if the language code match is an array
+  - [X] Multilanguage -> display both the current language + the stats for all languages combined
+  - [X] Multilanguage -> update on language change
+  - [X] Update README
 - [ ] Keep array maps out of the vue files -> js helper
+- [ ] Make it translatable
+- [ ] Add french translation
+- [ ] Bulk request widgets
+- [ ] Responsiveness

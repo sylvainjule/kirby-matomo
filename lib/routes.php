@@ -114,5 +114,42 @@ return array(
 		        return $error;
         	}
         }
+    ),
+    array(
+        'pattern' => 'matomo-panel/get-page-metrics',
+        'action'  => function() {
+        	$period    = get('period');
+        	$uri       = get('uri');
+        	$lang      = array(
+        		'multilang' => get('multilang'),
+        		'overview'  => get('overview'),
+        		'default'   => get('default'),
+        		'current'   => get('current'),
+        	);
+
+        	try {
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiPageMetrics($period, $uri, $lang);
+        		if(empty($content)) {
+				    $content = array('status' => 'empty');
+				}
+        		return $content;
+        	}
+        	catch (Exception $e) {
+        		$error = array(
+		            'status' => 'error',
+		            'error'  => $e->getMessage()
+		        );
+		        return $error;
+        	}
+        }
+    ),
+    array(
+        'pattern' => 'test-site-visit',
+        'action'  => function() {
+			site()->visit(site()->homePage(), 'fr');
+
+			return site()->childrenAndDrafts()->find('lecteur'); 
+        }
     )
 );

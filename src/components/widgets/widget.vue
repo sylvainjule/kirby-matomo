@@ -1,6 +1,6 @@
 <template>
 	<div class="widget">
-		<div class="title">{{widgetTitle}}</div>
+		<h5>{{widgetTitle}}</h5>
 		<div v-if="loading" class="loading"><div class="loader"></div></div>
 		<ul v-else-if="!loading && !isEmpty">
 			<li v-for="(result, index) in results">
@@ -134,6 +134,7 @@ export default {
 		},
 		syncContent() {
 			this.loading = true
+			this.status  = 'loading'
 			this.$api
 		        .get('matomo-panel/get-widget-content', {
 		        	widget: this.widget,

@@ -52,6 +52,39 @@ Kirby::plugin('sylvainjule/matomo', array(
         			return option('sylvainjule.matomo.url');
         		}
         	)
+        ),
+        'matomo-page' => array(
+        	'props' => array(
+        		'overview' => function($overview = false) {
+        			return $overview;
+        		},
+        		'period' => function($period = 'month') {
+        			return $period;
+        		},
+        	),
+        	'computed' => array(
+        		'uri' => function() {
+        			if(kirby()->multilang()) {
+        				$uris = [];
+        				foreach(kirby()->languages() as $language) {
+        					$code = $language->code();
+        					$uris[$code] = $this->model()->uri($code);
+        				}
+        				return $uris;
+        			}
+        			else {
+        				return $this->model()->uri();
+        			}
+        		},
+        		'lang' => function() {
+        			return array(
+        				'multilang' => kirby()->multilang(),
+        				'default'   => kirby()->defaultLanguage() ? kirby()->defaultLanguage()->code() : false,
+        				'current'   => kirby()->languageCode() ?? false,
+        				'overview'  => $this->overview
+        			);
+        		}
+        	)
         )
     ),
     'api' => array(

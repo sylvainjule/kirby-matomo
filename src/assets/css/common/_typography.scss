@@ -1,4 +1,11 @@
-.matomo-main, .matomo-sidebar {
+.matomo-main, .matomo-sidebar, .matomo-page {
+	h5 {
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		letter-spacing: 0.15px;
+		color: lighten($grey, 10%);
+		font-weight: 400;
+	}
 	.empty {
 		color: lighten($grey, 20%);
 		font-size: 0.75rem;

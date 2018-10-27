@@ -29,6 +29,8 @@ import Chart from './widgets/chart.vue'
 import Overview from './widgets/overview.vue'
 import Widget from './widgets/widget.vue'
 
+import '../assets/svg/compiled'
+
 export default {
 	components: {Chart, Overview, Widget},
 	data() { 
