@@ -345,7 +345,7 @@ matomo:
 
 #### 6.3. Potential pitfalls
 
-- Matomo receives public urls, which means that its URIs are fetched **once routes have been applied**. Therefore, the plugin filters Matomo's responses with an uri created from the public url of the page. If you have set up custom routes, to skip subfolders for example, please make sure to overwrite the `url` method for the template with a page model, otherwise the uri won't be correct.
+- Matomo receives public urls, which means that its URIs are fetched **once routes have been applied**. Therefore, the plugin filters Matomo's responses with a uri created from the public url of the page. If you have set up custom routes, to skip subfolders for example, please make sure to overwrite the `url` method for the template with a page model, otherwise the uri won't be correct.
 - The metrics shown might not be accurate / complete if you have changed the default language after Matomo started its data collection.
 
 
