@@ -5,7 +5,7 @@
 			<p>{{ $t('matomo.subline.details', {limit: defaults.limit}) }}</p>
 		</div>
 		<div class="widgets">
-			<widget v-for="(widget, index) in widgets" :widget="widget" :currentPeriod="currentPeriod" :totalVisits="totalVisits" :lang="lang" :defaults="defaults" />
+			<widget v-for="(widget, index) in widgets" :widget="widget" :totalVisits="totalVisits" :lang="lang" :loading="loading" :status="status" :results="results[index]" />
 		</div>
 	</div>
 </template>
@@ -17,14 +17,50 @@ export default {
 	components: {Widget},
 	data() { 
 		return {
+			loading: true,
+			status: 'loading',
+			date: 'today',
+			results: [],
 		}
 	},
 	props: {
 		widgets: Array,
 		currentPeriod: '',
-		totalVisits: '',
+		totalVisits: Number,
 		lang: '',
 		defaults: Object,
-	}
+	},
+	watch: { 
+      	currentPeriod: {
+      		immediate: true,
+      		handler(newVal, oldVal) {
+	            if(newVal != '') this.syncContent()
+	        }
+	    },
+    },
+    methods: {
+		syncContent() {
+			this.loading = true
+			this.status  = 'loading'
+			this.$api
+		        .get('matomo-panel/get-bulk-widgets', {
+		        	widgets: JSON.stringify(this.widgets),
+		        	period: this.currentPeriod,
+		        	date: this.date,
+		        	lang: this.lang,
+		        	limit: this.defaults.limit,
+		        })
+		        .then(response => {
+		        	this.results = response
+		        	this.status  = response.status
+		        	this.loading = false
+		        })
+		        .catch(error => {
+		        	this.status = 'empty'
+		        	this.loading = false
+		        })
+		},
+    }
+
 }
 </script>

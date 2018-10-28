@@ -29,6 +29,33 @@ return array(
         }
     ),
     array(
+        'pattern' => 'matomo-panel/get-bulk-widgets',
+        'action'  => function() {
+        	$widgets = get('widgets');
+        	$period = get('period');
+        	$date   = get('date');
+        	$limit  = get('limit');
+        	$lang   = get('lang');
+
+        	try {
+        		$matomo  = new Matomo();
+        		$content = $matomo->apiBulkWidgets($widgets, $period, $date, $limit, $lang);
+
+        		if(empty($content)) {
+				    $content = array('status' => 'empty');
+				}
+        		return $content;
+        	}
+        	catch (Exception $e) {
+        		$error = array(
+		            'status' => 'error',
+		            'error'  => $e->getMessage()
+		        );
+		        return $error;
+        	}
+        }
+    ),
+    array(
         'pattern' => 'matomo-panel/get-realtime-number',
         'action'  => function() {
         	try {

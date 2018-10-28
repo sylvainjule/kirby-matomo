@@ -17,16 +17,6 @@
 export default {
 	data() { 
 		return {
-			loading: true,
-			status: 'loading',
-			methodsMap: {
-				referrerType: 'Referrers.getReferrerType',
-				websites: 'Referrers.getWebsites',
-				socials: 'Referrers.getSocials',
-				devicesType: 'DevicesDetection.getType',
-				keywords: 'Referrers.getKeywords',
-				popularPages: 'Actions.getPageUrls',
-			},
 			iconsMap: {
 				'referrerType==direct': 'arrow-right',
 				'referrerType==website': 'page',
@@ -63,16 +53,25 @@ export default {
 				'page': 'page',
 				'search': 'search',
 			},
-			date: 'today',
-	        results: Array,
 		}
 	},
 	props: {
 		currentPeriod: String,
 		widget: String,
-		defaults: Object,
 		totalVisits: Number,
 		lang: String,
+		loading: {
+			type: Boolean,
+			default: true
+		},
+		status: {
+			type: String,
+			default: 'loading'
+		},
+		results: {
+			type: Array,
+			default: []
+		},
 	},
 	computed: {
 		isEmpty() {
@@ -87,12 +86,6 @@ export default {
 	destroyed() {
 	},
 	watch: { 
-      	currentPeriod: {
-      		immediate: true,
-      		handler() {
-	            this.syncContent()
-	        }
-	    },
     },
 	methods: {
 		visitsPercent(result) {
@@ -121,28 +114,6 @@ export default {
 			}
 
 			return this.iconsMap['page']
-		},
-		syncContent() {
-			this.loading = true
-			this.status  = 'loading'
-			this.$api
-		        .get('matomo-panel/get-widget-content', {
-		        	widget: this.widget,
-		        	method: this.methodsMap[this.widget],
-		        	period: this.currentPeriod,
-		        	date: this.date,
-		        	lang: this.lang,
-		        	limit: this.defaults.limit,
-		        })
-		        .then(response => {
-		        	this.results = response
-		        	this.status  = response.status
-		        	this.loading = false
-		        })
-		        .catch(error => {
-		        	this.status = 'empty'
-		        	this.loading = false
-		        })
 		},
 	},
 }

@@ -35,6 +35,14 @@ class Matomo {
 	protected $url   = null;
 	protected $id    = null;
 	protected $token = null;
+	protected $methodsMap = array (
+		'referrerType' => 'Referrers.getReferrerType',
+		'websites'     => 'Referrers.getWebsites',
+		'socials'      => 'Referrers.getSocials',
+		'devicesType'  => 'DevicesDetection.getType',
+		'keywords'     => 'Referrers.getKeywords',
+		'popularPages' => 'Actions.getPageUrls',
+	);
 
 	public function __construct() {
     	$this->url   = option('sylvainjule.matomo.url');
@@ -49,6 +57,27 @@ class Matomo {
 		$url .= "&format=PHP&language=". $lang;
 		$url .= $limit ? "&filter_limit=" . $limit : '';
 		$url .= "&token_auth=". $this->token;
+
+		$fetched = file_get_contents($url);
+		$content = unserialize($fetched);
+
+		return $content;
+	}
+
+	public function apiBulkWidgets($widgets, $period, $date, $limit, $lang) {
+		$widgets = json_decode(stripslashes($widgets));
+
+		$url  = $this->url;
+
+		$url .= "?module=API&method=API.getBulkRequest";
+		$url .= "&token_auth=". $this->token ."&format=PHP";
+
+		$i = 0;
+		foreach($widgets as $widget) {
+			$url .= "&urls[". $i ."]=";
+			$url .= urlencode("method=". $this->methodsMap[$widget] ."&idSite=". $this->id ."&period=". $period ."&date=" . $date ."&language=". $lang ."&filter_limit=" . $limit);
+			$i++;
+		}
 
 		$fetched = file_get_contents($url);
 		$content = unserialize($fetched);
@@ -96,7 +125,6 @@ class Matomo {
 
 	public function apiBulkSummary() {
 		$url  = $this->url;
-		$method = 'Live.getCounters';
 
 		$url .= "?module=API&method=API.getBulkRequest";
 		$url .= "&token_auth=". $this->token ."&format=PHP";

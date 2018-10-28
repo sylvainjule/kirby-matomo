@@ -385,5 +385,5 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
   - [X] Update README
 - [X] Make it translatable
 - [X] Add french translation
-- [ ] Bulk request widgets
+- [X] Bulk request widgets
 - [ ] Responsiveness
