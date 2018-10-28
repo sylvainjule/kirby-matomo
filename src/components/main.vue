@@ -12,27 +12,19 @@
 
 		<overview v-if="overview" :currentPeriod="currentPeriod" :defaults="defaults" @updateVisits="updateVisits" />
 
-		<div v-if="widgets" class="matomo-widgets">
-			<div class="matomo-widgets-description">
-				<h4>{{ $t('matomo.title.details') }}</h4>
-				<p>{{ $t('matomo.subline.details', {limit: defaults.limit}) }}</p>
-			</div>
-			<div class="widgets">
-				<widget v-for="(widget, index) in widgets" :widget="widget" :currentPeriod="currentPeriod" :totalVisits="totalVisits" :lang="lang" :defaults="defaults" />
-			</div>
-		</div>
+		<widgets v-if="widgets" :widgets="widgets" :currentPeriod="currentPeriod" :defaults="defaults" :totalVisits="totalVisits" :lang="lang" />
 	</div>
 </template>
 
 <script>
 import Chart from './widgets/chart.vue'
 import Overview from './widgets/overview.vue'
-import Widget from './widgets/widget.vue'
+import Widgets from './widgets/widgets.vue'
 
 import '../assets/svg/compiled'
 
 export default {
-	components: {Chart, Overview, Widget},
+	components: {Chart, Overview, Widgets},
 	data() { 
 		return {
 			currentPeriod: '',
