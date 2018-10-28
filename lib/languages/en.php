@@ -43,9 +43,9 @@ return array(
 
 	'matomo.widgets.title.referrerType' => 'Referers type',
 	'matomo.widgets.title.websites'     => 'Referers websites',
-	'matomo.widgets.title.socials'      => 'Referers socials',
+	'matomo.widgets.title.socials'      => 'Social networks',
 	'matomo.widgets.title.devicesType'  => 'Devices type',
-	'matomo.widgets.title.keywords'     => 'Referers keywords',
+	'matomo.widgets.title.keywords'     => 'Keywords',
 	'matomo.widgets.title.popularPages' => 'Popular pages',
 
 
@@ -58,7 +58,7 @@ return array(
 	'matomo.visits'           => 'Visits',
 	'matomo.duration'         => 'Duration',
 	'matomo.duration.caption' => 'is the average visit duration',
-	'matomo.bounce'           => 'Bouce',
+	'matomo.bounce'           => 'Bounce',
 	'matomo.bounce.caption'   => 'visitors have bounced (left the website after one page)',
 	'matomo.bounce_rate'      => 'Bouce rate',
 	'matomo.exit_rate'        => 'Exit rate',
