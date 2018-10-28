@@ -34,6 +34,11 @@ Kirby::plugin('sylvainjule/matomo', array(
         			return $defaults;
         		},
         	),
+        	'computed' => array(
+        		'lang' => function() {
+        			return kirby()->user()->language();
+        		}
+        	)
         ),
         'matomo-sidebar' => array(
         	'props' => array(
@@ -86,6 +91,10 @@ Kirby::plugin('sylvainjule/matomo', array(
         		}
         	)
         )
+    ),
+    'translations' => array(
+        'en' => require_once __DIR__ . '/lib/languages/en.php',
+        'fr' => require_once __DIR__ . '/lib/languages/fr.php',
     ),
     'api' => array(
     	'routes' => require_once __DIR__ . '/lib/routes.php',

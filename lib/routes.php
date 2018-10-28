@@ -9,10 +9,11 @@ return array(
         	$period = get('period');
         	$date   = get('date');
         	$limit  = get('limit');
+        	$lang   = get('lang');
 
         	try {
         		$matomo  = new Matomo();
-        		$content = $matomo->apiWidget($widget, $method, $period, $date, $limit);
+        		$content = $matomo->apiWidget($widget, $method, $period, $date, $limit, $lang);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
@@ -144,12 +145,4 @@ return array(
         	}
         }
     ),
-    array(
-        'pattern' => 'test-site-visit',
-        'action'  => function() {
-			site()->visit(site()->homePage(), 'fr');
-
-			return site()->childrenAndDrafts()->find('lecteur'); 
-        }
-    )
 );

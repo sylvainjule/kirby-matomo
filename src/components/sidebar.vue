@@ -2,7 +2,7 @@
 	<div class="matomo-sidebar">
 		<a v-if="showLink" :href="url" class="matomo-dashboard-link" target="_blank" rel="noopener">
 			<span class="icon"><svgicon icon="external-link" /></span>
-			<span class="text"><em>Matomo dashboard</em></span>
+			<span class="text"><em>{{ $t('matomo.title.external_link') }}</em></span>
 		</a>
 
 		<realtime-widget v-if="realtime" />

@@ -1,6 +1,7 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
 import moment from 'moment'
+// import 'moment/locale/fr'
 
 export default {
     extends: Line,
@@ -74,7 +75,7 @@ export default {
                             return data['tooltipLabels'][tooltipItem[0]['index']]
                         },
                         label(tooltipItem, data) {
-                            return data['datasets'][0]['data'][tooltipItem['index']] + ' visits';
+                            return data['datasets'][0]['data'][tooltipItem['index']] + ' visits'
                         },
                     }
                 },
@@ -84,24 +85,11 @@ export default {
                 responsive: true,
                 maintainAspectRatio: false
             },
-            monthsMap: {
-                '01': 'January',
-                '02': 'February',
-                '03': 'March',
-                '04': 'April',
-                '05': 'May',
-                '06': 'June',
-                '07': 'July',
-                '08': 'August',
-                '09': 'September',
-                '10': 'October',
-                '11': 'November',
-                '12': 'December',
-            },
         }
     },
     props: {
         currentPeriod: String,
+        lang: String,
     },
     computed: {
         config() {
@@ -145,7 +133,13 @@ export default {
             handler(newVal, oldVal) {
                 this.syncContent()
             }
-        }
+        },
+        lang: {
+            immediate: true,
+            handler(newVal, oldVal) {
+                moment.locale(newVal)
+            }
+        },
     },
     methods: {
         syncContent() {
@@ -168,7 +162,7 @@ export default {
                         })
                         formatedLabels = labels.map(key => {
                             let date = key.split('-')
-                            return self.monthsMap[date[1]]
+                            return moment(date[1]).format('MMMM')
                         })
                         tooltipLabels = labels.map(key => {
                             return moment(key).format('MMMM YYYY')

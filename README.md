@@ -383,8 +383,7 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
   - [X] Multilanguage -> display both the current language + the stats for all languages combined
   - [X] Multilanguage -> update on language change
   - [X] Update README
-- [ ] Keep array maps out of the vue files -> js helper
-- [ ] Make it translatable
+- [X] Make it translatable
 - [ ] Add french translation
 - [ ] Bulk request widgets
 - [ ] Responsiveness

@@ -1,31 +1,31 @@
 <template>
 	<div class="matomo-block matomo-visits-summary">
-		<h5>Visits summary</h5>
+		<h5>{{ $t('matomo.title.summary') }}</h5>
 
 		<div v-if="loading" class="loader"></div>
 		<ul v-else-if="!loading && !isEmpty">
 			<li>
 				<div class="icon"><svgicon icon="calendar" /></div>
-				<div class="text">Today</div>
+				<div class="text">{{ $t('matomo.chart.day') }}</div>
 				<div class="number">{{ results.day }}</div>
 			</li>
 			<li>
 				<div class="icon"><svgicon icon="calendar" /></div>
-				<div class="text">Last 7 days</div>
+				<div class="text">{{ $t('matomo.chart.week') }}</div>
 				<div class="number">{{ results.week }}</div>
 			</li>
 			<li>
 				<div class="icon"><svgicon icon="calendar" /></div>
-				<div class="text">This month</div>
+				<div class="text">{{ $t('matomo.chart.month') }}</div>
 				<div class="number">{{ results.month }}</div>
 			</li>
 			<li>
 				<div class="icon"><svgicon icon="calendar" /></div>
-				<div class="text">This year</div>
+				<div class="text">{{ $t('matomo.chart.year') }}</div>
 				<div class="number">{{ results.year }}</div>
 			</li>
 		</ul>
-		<div v-else class="empty">There is no data to diplay</div>
+		<div v-else class="empty">{{ $t('matomo.empty') }}</div>
 	</div>
 </template>
 

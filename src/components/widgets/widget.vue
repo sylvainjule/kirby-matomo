@@ -1,6 +1,6 @@
 <template>
 	<div class="widget">
-		<h5>{{widgetTitle}}</h5>
+		<h5>{{ $t('matomo.widgets.title.'+ widget) }}</h5>
 		<div v-if="loading" class="loading"><div class="loader"></div></div>
 		<ul v-else-if="!loading && !isEmpty">
 			<li v-for="(result, index) in results">
@@ -9,7 +9,7 @@
 				<div class="number">{{ result.nb_visits }} <span class="percent">{{ visitsPercent(result) }}%</span></div>
 			</li>
 		</ul>
-		<div v-else class="empty">There is no data to diplay</div>
+		<div v-else class="empty">{{ $t('matomo.empty') }}</div>
 	</div>
 </template>
 
@@ -19,14 +19,6 @@ export default {
 		return {
 			loading: true,
 			status: 'loading',
-			titlesMap: {
-				referrerType: 'Referrers type',
-				websites: 'Referrers websites',
-				socials: 'Referrers socials',
-				devicesType: 'Devices type',
-				keywords: 'Referrers keywords',
-				popularPages: 'Popular pages',
-			},
 			methodsMap: {
 				referrerType: 'Referrers.getReferrerType',
 				websites: 'Referrers.getWebsites',
@@ -80,6 +72,7 @@ export default {
 		widget: String,
 		defaults: Object,
 		totalVisits: Number,
+		lang: String,
 	},
 	computed: {
 		isEmpty() {
@@ -87,9 +80,6 @@ export default {
 		},
 		originalColor() {
 			return this.widget == 'socials'
-		},
-		widgetTitle() {
-			return this.titlesMap[this.widget]
 		},
 	},
 	created() {
@@ -102,7 +92,7 @@ export default {
       		handler() {
 	            this.syncContent()
 	        }
-	    }
+	    },
     },
 	methods: {
 		visitsPercent(result) {
@@ -141,6 +131,7 @@ export default {
 		        	method: this.methodsMap[this.widget],
 		        	period: this.currentPeriod,
 		        	date: this.date,
+		        	lang: this.lang,
 		        	limit: this.defaults.limit,
 		        })
 		        .then(response => {

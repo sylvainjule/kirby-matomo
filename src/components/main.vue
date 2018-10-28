@@ -1,24 +1,24 @@
 <template>
 	<div class="matomo-main">
 		<div class="matomo-period-selector">
-			<div v-for="(period, index) in periods" :class="['matomo-period-option', period, {active: period == currentPeriod}]" @click="setCurrentPeriod(period)">{{periodString(period)}}</div>
+			<div v-for="(period, index) in periods" :class="['matomo-period-option', period, {active: period == currentPeriod}]" @click="setCurrentPeriod(period)">{{ $t('matomo.chart.'+ period) }}</div>
 		</div>
 		
 		<div v-if="chart" :class="['matomo-chart', {'is-empty': chartEmpty}]">
 			<div v-if="chartLoading" class="overlay"><div class="loader"></div></div>
-			<div v-if="chartEmpty" class="empty"><span>There is no data to diplay</span></div>
-			<chart class="chart" :currentPeriod="currentPeriod" @chartIsLoading="chartIsLoading" @chartIsLoaded="chartIsLoaded" @chartIsEmpty="chartIsEmpty" />
+			<div v-if="chartEmpty" class="empty"><span>{{ $t('matomo.empty') }}</span></div>
+			<chart class="chart" :currentPeriod="currentPeriod" :lang="lang" @chartIsLoading="chartIsLoading" @chartIsLoaded="chartIsLoaded" @chartIsEmpty="chartIsEmpty" />
 		</div>
 
 		<overview v-if="overview" :currentPeriod="currentPeriod" :defaults="defaults" @updateVisits="updateVisits" />
 
 		<div v-if="widgets" class="matomo-widgets">
 			<div class="matomo-widgets-description">
-				<h4>Details</h4>
-				<p>Top 5 – Ranked by visits count</p>
+				<h4>{{ $t('matomo.title.details') }}</h4>
+				<p>{{ $t('matomo.subline.details', {limit: defaults.limit}) }}</p>
 			</div>
 			<div class="widgets">
-				<widget v-for="(widget, index) in widgets" :widget="widget" :currentPeriod="currentPeriod" :totalVisits="totalVisits" :defaults="defaults" />
+				<widget v-for="(widget, index) in widgets" :widget="widget" :currentPeriod="currentPeriod" :totalVisits="totalVisits" :lang="lang" :defaults="defaults" />
 			</div>
 		</div>
 	</div>
@@ -42,17 +42,12 @@ export default {
 				limit: 5,
 			},
 			totalVisits: '',
+			lang: '',
 			chart: false,
 			overview: false,
 			widgets: Array,
 			chartLoading: true,
-			chartEmpty: false,
-        	rangeStrings: {
-				year: 'This year',
-				month: 'This month',
-				week: 'Last 7 days',
-				day: 'Today',
-			},
+			chartEmpty: false,		
 		}
 	},
 	props: {
@@ -70,6 +65,7 @@ export default {
 	        	this.widgets  = response.widgets
 	        	this.chart    = response.chart
 	        	this.overview = response.overview
+	        	this.lang     = response.lang
 
         		this.currentPeriod = response.defaults.period ? response.defaults.period : response.periods[0]
 	        })
@@ -87,9 +83,6 @@ export default {
 		chartIsEmpty() {
 			this.chartLoading = false
 			this.chartEmpty   = true
-		},
-		periodString(period) {
-			return this.rangeStrings[period]
 		},
 		setCurrentPeriod(period) {
 			this.currentPeriod = period

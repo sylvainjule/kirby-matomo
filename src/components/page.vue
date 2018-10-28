@@ -1,37 +1,37 @@
 <template>
 	<div class="matomo-page">
-		<h5>Page metrics <span v-if="showCode && inlineCode" class="code">{{ currentLanguage }}</span></h5>
+		<h5>{{ $t('matomo.title.page') }} <span v-if="showCode && inlineCode" class="code">{{ currentLanguage }}</span></h5>
 		<div v-if="!isEmpty">
 			<span v-if="loading" class="loader"></span>
 			<table v-else :class="[{'has-overview': showOverview}]">
 			   	<tr v-if="showCode && !inlineCode">
 			        <th></th>
 			        <th><span class="code">{{ currentLanguage }}</span></th>
-			        <th v-if="showOverview"><span>All</span></th>
+			        <th v-if="showOverview"><span>{{ $t('matomo.all') }}</span></th>
 			   	</tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="users" /></span> Visits</td>
+			    	<td><span class="icon"><svgicon icon="users" /></span> {{ $t('matomo.visits') }}</td>
 			    	<td>{{current.visits}}</td>
 			    	<td v-if="showOverview">{{all.visits}}</td>
 			   </tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="duration" /></span> Duration</td>
+			    	<td><span class="icon"><svgicon icon="duration" /></span> {{ $t('matomo.duration') }}</td>
 			    	<td>{{formatTime(current.duration)}}</td>
 			    	<td v-if="showOverview">{{formatTime(all.duration)}}</td>
 			   </tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="bounce" /></span> Bounce rate</td>
+			    	<td><span class="icon"><svgicon icon="bounce" /></span> {{ $t('matomo.bounce_rate') }}</td>
 			    	<td>{{current.bounce.toFixed()}}%</td>
 			    	<td v-if="showOverview">{{all.bounce.toFixed()}}%</td>
 			   </tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="exit" /></span> Exit rate</td>
+			    	<td><span class="icon"><svgicon icon="exit" /></span> {{ $t('matomo.exit_rate') }}</td>
 			    	<td>{{current.exit.toFixed()}}%</td>
 			    	<td v-if="showOverview">{{all.exit.toFixed()}}%</td>
 			   </tr>
 			</table>
 		</div>
-		<div v-else class="empty">There is no data to diplay</div>
+		<div v-else class="empty">{{ $t('matomo.empty') }}</div>
 	</div>
 </template>
 

@@ -42,11 +42,11 @@ class Matomo {
 		$this->token = option('sylvainjule.matomo.token');
     }
 
-	public function apiWidget($widget, $method, $period, $date, $limit) {
+	public function apiWidget($widget, $method, $period, $date, $limit, $lang) {
 		$url  = $this->url;
 		$url .= "?module=API&method=" . $method;
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=PHP";
+		$url .= "&format=PHP&language=". $lang;
 		$url .= $limit ? "&filter_limit=" . $limit : '';
 		$url .= "&token_auth=". $this->token;
 

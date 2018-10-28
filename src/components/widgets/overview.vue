@@ -1,18 +1,18 @@
 <template>
 	<div class="matomo-overview">
 		<div class="matomo-overview-description">
-			<h4>Overview</h4>
-			<p>+/- is based on {{periodString}}.</p>
+			<h4>{{ $t('matomo.title.overview') }}</h4>
+			<p>{{ $t('matomo.subline.overview') }} {{ $t('matomo.subline.overview.'+ currentPeriod) }}</p>
 		</div>
 		<div class="matomo-overview-ctn">
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<h5>Visits</h5>
+					<h5>{{ $t('matomo.visits') }}</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.visits}}</span>
 					</div>
-					<div class="details">visits this {{currentPeriod}}.</div>
+					<div class="details">{{ $t('matomo.visits').toLowerCase() }} {{ $t('matomo.period.'+currentPeriod) }}.</div>
 				</div>
 				<div :class="['difference', visitsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
@@ -22,11 +22,11 @@
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<h5>Duration</h5>
+					<h5>{{ $t('matomo.duration') }}</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{durationString}}</span></div>
-					<div class="details">is the average visit duration.</div>
+					<div class="details">{{ $t('matomo.duration.caption') }}.</div>
 				</div>
 				<div :class="['difference', durationDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
@@ -36,12 +36,12 @@
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<h5>Bounce</h5>
+					<h5>{{ $t('matomo.bounce') }}</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.bounce}}%</span>
 					</div>
-					<div class="details">visitors have bounced (left the website after one page).</div>
+					<div class="details">{{ $t('matomo.bounce.caption') }}.</div>
 				</div>
 				<div :class="['difference', bounceDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
@@ -51,12 +51,12 @@
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
 				<div class="top">
-					<h5>Actions</h5>
+					<h5>{{ $t('matomo.actions') }}</h5>
 					<div class="big-number">
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.actions}}</span>
 					</div>
-					<div class="details">per visit (page views, downloads, outlinks and internal site searches).</div>
+					<div class="details">{{ $t('matomo.actions.caption') }}.</div>
 				</div>
 				<div :class="['difference', actionsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
@@ -64,7 +64,7 @@
 					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
 				</div>
 			</div>
-			<div v-else class="empty">There is no data to diplay</div>
+			<div v-else class="empty">{{ $t('matomo.empty') }}</div>
 		</div>
 	</div>
 </template>
@@ -91,12 +91,6 @@ export default {
 	        	bounce: null,
 	        	actions: null,
 	        },
-	        periodsMap: {
-	        	'day': 'yesterday\'s metrics',
-	        	'week': 'the previous 7 days',
-	        	'month': 'the previous month, at the same period',
-	        	'year': 'the previous year, at the same period',
-	        }
 		}
 	},
 	props: {
@@ -148,9 +142,6 @@ export default {
 		},
 		durationString() {
 			return this.formatTime(this.current.duration)
-		},
-		periodString() {
-			return this.periodsMap[this.currentPeriod]
 		},
 		isPositive() {
 			return !this.loading
