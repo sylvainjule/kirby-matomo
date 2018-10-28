@@ -384,6 +384,6 @@ The snippet integration has been shamelessly adapted from [@jenstornell](https:/
   - [X] Multilanguage -> update on language change
   - [X] Update README
 - [X] Make it translatable
-- [ ] Add french translation
+- [X] Add french translation
 - [ ] Bulk request widgets
 - [ ] Responsiveness
