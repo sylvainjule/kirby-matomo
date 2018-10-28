@@ -1,7 +1,7 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
 import moment from 'moment'
-// import 'moment/locale/fr'
+import 'moment/locale/fr'
 
 export default {
     extends: Line,
