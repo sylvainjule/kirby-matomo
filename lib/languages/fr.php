@@ -5,7 +5,6 @@ return array(
 	/* Titles
 	---------------------------*/
 
-	'matomo.title.page'          => 'Statistiques de la page',
 	'matomo.title.external_link' => 'Ouvrir Matomo',
 	'matomo.title.overview'      => 'Récapitulatif',
 	'matomo.title.details'       => 'Détails',
@@ -47,6 +46,16 @@ return array(
 	'matomo.widgets.title.devicesType'  => 'Périphériques',
 	'matomo.widgets.title.keywords'     => 'Mots-clés',
 	'matomo.widgets.title.popularPages' => 'Pages populaires',
+
+
+	/* Page widget
+	---------------------------*/
+
+	'matomo.widgets.page.metrics' => 'Statistiques',
+	'matomo.widgets.page.year'    => 'de l’année',
+	'matomo.widgets.page.month'   => 'du mois',
+	'matomo.widgets.page.week'    => 'de la semaine',
+	'matomo.widgets.page.day'     => 'de la journée',
 
 
 	/* Misc. strings

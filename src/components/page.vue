@@ -1,9 +1,9 @@
 <template>
 	<div class="matomo-page">
-		<h5>{{ $t('matomo.title.page') }} <span v-if="showCode && inlineCode" class="code">{{ currentLanguage }}</span></h5>
+		<h5>{{ $t('matomo.widgets.page.metrics') }} {{ $t('matomo.widgets.page.'+ currentPeriod) }} <span v-if="showCode && inlineCode" class="code">{{ currentLanguage }}</span></h5>
 		<div v-if="!isEmpty">
 			<span v-if="loading" class="loader"></span>
-			<table v-else :class="[{'has-overview': showOverview}]">
+			<table v-else>
 			   	<tr v-if="showCode && !inlineCode">
 			        <th></th>
 			        <th><span class="code">{{ currentLanguage }}</span></th>
@@ -69,7 +69,11 @@ export default {
 			return !this.lang.overview
 		},
 		currentLanguage() {
-			return this.$store.state.languages.current.code
+			let current = this.$store.state.languages.current
+			return current ? current.code : false
+		},
+		currentUri() {
+			return this.uri.constructor == Object ? this.uri[this.currentLanguage] : this.uri
 		}
 	},
 	created() {
@@ -105,7 +109,7 @@ export default {
 		        	overview: this.lang.overview,
 		        	default: this.lang.default,
 		        	current: this.currentLanguage,
-		        	uri: this.uri[this.currentLanguage],
+		        	uri: this.currentUri,
 		        })
 		        .then(response => {
 		        	this.current = response.current

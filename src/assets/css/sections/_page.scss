@@ -18,9 +18,6 @@
 	table {
 		display: block;
 		width: 100%;
-		&.has-overview {
-			margin-top: calc(10px - 0.5rem);
-		}
 		tr {
 			display: flex;
 			justify-content: flex-end;

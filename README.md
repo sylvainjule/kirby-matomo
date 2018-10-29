@@ -300,7 +300,7 @@ The panel page widget displays metrics for a given page, both in single-language
 
 > Any feedback regarding this widget's behaviour is welcome. It might still need to be refined, inputs from a larger variety of live websites would be a great help. Check the [potential pitfalls](#63-potential-pitfalls) below.
 
-![page-widget](https://user-images.githubusercontent.com/14079751/47609905-6e6df300-da48-11e8-911a-096c4d8f0963.jpg)
+![screenshot-page](https://user-images.githubusercontent.com/14079751/47636477-b9772b80-db58-11e8-94d4-1f8fee8ad0aa.jpg)
 
 
 #### 6.1. Basic blueprint example

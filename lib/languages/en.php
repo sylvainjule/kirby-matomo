@@ -5,7 +5,6 @@ return array(
 	/* Titles
 	---------------------------*/
 
-	'matomo.title.page'          => 'Page metrics',
 	'matomo.title.external_link' => 'Matomo dashboard',
 	'matomo.title.overview'      => 'Overview',
 	'matomo.title.details'       => 'Details',
@@ -49,6 +48,16 @@ return array(
 	'matomo.widgets.title.popularPages' => 'Popular pages',
 
 
+	/* Page widget
+	---------------------------*/
+
+	'matomo.widgets.page.metrics' => 'Metrics',
+	'matomo.widgets.page.year'    => 'of the year',
+	'matomo.widgets.page.month'   => 'of the month',
+	'matomo.widgets.page.week'    => 'of the week',
+	'matomo.widgets.page.day'     => 'of the day',
+
+
 	/* Misc. strings
 	---------------------------*/
 
@@ -60,7 +69,7 @@ return array(
 	'matomo.duration.caption' => 'is the average visit duration',
 	'matomo.bounce'           => 'Bounce',
 	'matomo.bounce.caption'   => 'visitors have bounced (left the website after one page)',
-	'matomo.bounce_rate'      => 'Bouce rate',
+	'matomo.bounce_rate'      => 'Bounce rate',
 	'matomo.exit_rate'        => 'Exit rate',
 	'matomo.actions'          => 'Actions',
 	'matomo.actions.caption'  => 'per visit (page views, downloads, outlinks and internal site searches)',
