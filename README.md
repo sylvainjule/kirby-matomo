@@ -2,7 +2,7 @@
 
 This plugin helps you generate a tracking code for Matomo, and displays some useful metrics directly within the panel.
 
-![matomo-screenshot](https://user-images.githubusercontent.com/14079751/47005802-d5300a00-d134-11e8-8e8e-ed4525c94bb3.jpg)
+![screenshot-dashboard-faded](https://user-images.githubusercontent.com/14079751/47715079-f3226200-dc3e-11e8-80c6-933c9f3183d0.jpg)
 
 <br/>
 
