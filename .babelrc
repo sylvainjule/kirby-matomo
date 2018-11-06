@@ -1,5 +1,12 @@
 {
   "presets": [
     "env"
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "chart.js": "chart.js/dist/Chart.min.js",
+      }
+    }]
   ]
 }

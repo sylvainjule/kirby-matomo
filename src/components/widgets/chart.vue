@@ -1,7 +1,7 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
-import moment from 'moment'
-import 'moment/locale/fr'
+import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
 
 export default {
     extends: Line,
@@ -137,7 +137,7 @@ export default {
         lang: {
             immediate: true,
             handler(newVal, oldVal) {
-                moment.locale(newVal)
+                dayjs.locale(newVal)
             }
         },
     },
@@ -162,10 +162,10 @@ export default {
                         })
                         formatedLabels = labels.map(key => {
                             let date = key.split('-')
-                            return moment(date[1]).format('MMMM')
+                            return dayjs(date[1]).format('MMMM')
                         })
                         tooltipLabels = labels.map(key => {
-                            return moment(key).format('MMMM YYYY')
+                            return dayjs(key).format('MMMM YYYY')
                         })
                         dataset = labels.map(key => {
                             return response[key];
@@ -183,7 +183,7 @@ export default {
                             return date[2] +'/'+ date[1]
                         })
                         tooltipLabels = labels.map(key => {
-                            return moment(key).format('dddd, DD MMMM YYYY')
+                            return dayjs(key).format('dddd, DD MMMM YYYY')
                         })
                         dataset = labels.map(key => {
                             return response[key];
@@ -201,7 +201,7 @@ export default {
                             return date[2] +'/'+ date[1]
                         })
                         tooltipLabels = labels.map(key => {
-                            return moment(key).format('dddd, DD MMMM YYYY')
+                            return dayjs(key).format('dddd, DD MMMM YYYY')
                         })
                         dataset = labels.map(key => {
                             return response[key];
