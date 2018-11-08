@@ -1,6 +1,7 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
 import dayjs from 'dayjs'
+import 'dayjs/locale/de'
 import 'dayjs/locale/fr'
 
 export default {
