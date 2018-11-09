@@ -10,22 +10,22 @@
 			        <th v-if="showOverview"><span>{{ $t('matomo.all') }}</span></th>
 			   	</tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="users" /></span> {{ $t('matomo.visits') }}</td>
+			    	<td><span class="icon"><svg><use xlink:href="#icon-matomo-users" /></svg></span> {{ $t('matomo.visits') }}</td>
 			    	<td>{{current.visits}}</td>
 			    	<td v-if="showOverview">{{all.visits}}</td>
 			   </tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="duration" /></span> {{ $t('matomo.duration') }}</td>
+			    	<td><span class="icon"><svg><use xlink:href="#icon-matomo-duration" /></svg></span> {{ $t('matomo.duration') }}</td>
 			    	<td>{{formatTime(current.duration)}}</td>
 			    	<td v-if="showOverview">{{formatTime(all.duration)}}</td>
 			   </tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="bounce" /></span> {{ $t('matomo.bounce_rate') }}</td>
+			    	<td><span class="icon"><svg><use xlink:href="#icon-matomo-bounce" /></svg></span> {{ $t('matomo.bounce_rate') }}</td>
 			    	<td>{{current.bounce.toFixed()}}%</td>
 			    	<td v-if="showOverview">{{all.bounce.toFixed()}}%</td>
 			   </tr>
 			    <tr>
-			    	<td><span class="icon"><svgicon icon="exit" /></span> {{ $t('matomo.exit_rate') }}</td>
+			    	<td><span class="icon"><svg><use xlink:href="#icon-matomo-exit" /></svg></span> {{ $t('matomo.exit_rate') }}</td>
 			    	<td>{{current.exit.toFixed()}}%</td>
 			    	<td v-if="showOverview">{{all.exit.toFixed()}}%</td>
 			   </tr>
@@ -36,8 +36,6 @@
 </template>
 
 <script>
-import '../assets/svg/compiled'
-
 export default {
 	components: {},
 	data() { 

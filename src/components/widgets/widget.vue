@@ -4,7 +4,7 @@
 		<div v-if="loading" class="loading"><div class="loader"></div></div>
 		<ul v-else-if="!loading && !isEmpty">
 			<li v-for="(result, index) in results">
-				<div class="icon"><svgicon :icon="findIcon(result)" :original="originalColor" /></div>
+				<div class="icon"><svg><use :xlink:href="'#icon-matomo-' + findIcon(result)" /></svg></div>
 				<div class="text" v-html="result.label"></div>
 				<div class="number">{{ result.nb_visits }} <span class="percent">{{ visitsPercent(result) }}%</span></div>
 			</li>

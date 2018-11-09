@@ -17,7 +17,7 @@
 				<div :class="['difference', visitsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{visitsDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
+					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
@@ -31,7 +31,7 @@
 				<div :class="['difference', durationDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{durationDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
+					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
@@ -46,7 +46,7 @@
 				<div :class="['difference', bounceDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{bounceDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
+					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
@@ -61,7 +61,7 @@
 				<div :class="['difference', actionsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{actionsDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svgicon icon="arrow-up" /></div>
+					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-else class="empty">{{ $t('matomo.empty') }}</div>

@@ -5,22 +5,22 @@
 		<div v-if="loading" class="loader"></div>
 		<ul v-else-if="!loading && !isEmpty">
 			<li>
-				<div class="icon"><svgicon icon="calendar" /></div>
+				<div class="icon"><svg><use xlink:href="#icon-matomo-calendar" /></svg></div>
 				<div class="text">{{ $t('matomo.chart.day') }}</div>
 				<div class="number">{{ results.day }}</div>
 			</li>
 			<li>
-				<div class="icon"><svgicon icon="calendar" /></div>
+				<div class="icon"><svg><use xlink:href="#icon-matomo-calendar" /></svg></div>
 				<div class="text">{{ $t('matomo.chart.week') }}</div>
 				<div class="number">{{ results.week }}</div>
 			</li>
 			<li>
-				<div class="icon"><svgicon icon="calendar" /></div>
+				<div class="icon"><svg><use xlink:href="#icon-matomo-calendar" /></svg></div>
 				<div class="text">{{ $t('matomo.chart.month') }}</div>
 				<div class="number">{{ results.month }}</div>
 			</li>
 			<li>
-				<div class="icon"><svgicon icon="calendar" /></div>
+				<div class="icon"><svg><use xlink:href="#icon-matomo-calendar" /></svg></div>
 				<div class="text">{{ $t('matomo.chart.year') }}</div>
 				<div class="number">{{ results.year }}</div>
 			</li>

@@ -36,7 +36,6 @@
     "uglify-js": "^3.4.7",
     "vue": "^2.5.17",
     "vue-chartjs": "^3.4.0",
-    "vue-svgicon": "^3.2.0",
     "vueify": "^9.4.1",
     "watchify": "^3.11.0"
   }
