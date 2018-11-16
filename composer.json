@@ -1,7 +1,7 @@
 {
     "name": "sylvainjule/matomo",
     "description": "Matomo helpers and panel sections for Kirby",
-    "version": "0.1",
+    "version": "1.0.0",
     "type": "kirby-plugin",
     "license": "MIT",
     "autoload": {
@@ -12,5 +12,6 @@
             "name": "Sylvain Julé",
             "email": "contact@sylvain-jule.fr"
         }
-    ]
+    ],
+    "minimum-stability": "beta"
 }
