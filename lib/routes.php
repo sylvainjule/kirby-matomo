@@ -22,6 +22,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
@@ -49,6 +50,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
@@ -69,6 +71,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
@@ -93,6 +96,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
@@ -117,6 +121,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
@@ -137,6 +142,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
@@ -166,6 +172,7 @@ return array(
         	catch (Exception $e) {
         		$error = array(
 		            'status' => 'error',
+		            'plugin' => 'matomo',
 		            'error'  => $e->getMessage()
 		        );
 		        return $error;
