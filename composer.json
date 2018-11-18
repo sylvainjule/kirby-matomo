@@ -1,7 +1,6 @@
 {
     "name": "sylvainjule/matomo",
     "description": "Matomo helpers and panel sections for Kirby",
-    "version": "1.0.0",
     "type": "kirby-plugin",
     "license": "MIT",
     "autoload": {
