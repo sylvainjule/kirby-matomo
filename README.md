@@ -31,7 +31,7 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 3. Set the following values in your `config.php` :
 ```php
 return array(
-    'sylvainjule.matomo.url'        => 'http://yourmatomourl.com',
+    'sylvainjule.matomo.url'        => 'http://your-matomo.url',
     'sylvainjule.matomo.id'         => 'mywebsite',
     'sylvainjule.matomo.token'      => 'token_auth,
 );
