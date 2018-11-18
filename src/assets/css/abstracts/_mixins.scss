@@ -3,3 +3,32 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+
+/* Media queries
+----------------------*/
+
+$breakpoints: ( 
+	'smaller-480': (max-width: 30em),
+	'smaller-720': (max-width: 45em),
+	'smaller-1040': (max-width: 65em),
+	'smaller-1100': (max-width: 68.75em),
+	'smaller-1200': (max-width: 75em),
+);
+
+@mixin respond-to($breakpoint) {
+    $raw-query: map-get($breakpoints, $breakpoint);
+
+    @if $raw-query {
+        $query: if( type-of($raw-query)=='string',
+        unquote($raw-query),
+        inspect($raw-query));
+
+        @media #{$query} {
+            @content;
+        }
+    }
+    @else {
+        @error 'No value found for `#{$breakpoint}`. '+'Please make sure it is defined in `$breakpoints` map.';
+    }
+}

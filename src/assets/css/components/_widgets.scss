@@ -96,4 +96,12 @@
 			background: #fafafa;
 		}
 	}
+	@include respond-to('smaller-720') {
+		.widget {
+			width: 100%;
+			&:nth-child(odd) {
+				margin-right: 0;
+			}
+		}
+	}
 }

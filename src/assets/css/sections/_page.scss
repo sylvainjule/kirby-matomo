@@ -63,7 +63,7 @@
 			}
 			th, td {
 				&:first-child {
-					width: 100px;
+					min-width: 100px;
 					margin-right: auto;
 				}
 				&:nth-child(2),
@@ -94,6 +94,24 @@
 					&:nth-child(3) {
 						color: $grey;
 					}
+				}
+			}
+		}
+	}
+	@include respond-to('smaller-1200') {
+		table {
+			tr {
+				td .icon {
+					display: none;
+				}
+			}
+		}
+	}
+	@include respond-to('smaller-1040') {
+		table {
+			tr {
+				td .icon {
+					display: block;
 				}
 			}
 		}

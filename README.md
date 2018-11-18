@@ -367,23 +367,3 @@ Kirby 2 had some Piwik integration plugins:
 - A promising [Piwik Suite](https://forum.getkirby.com/t/planning-comprehensive-piwik-plugin/954) that sadly has never been released, and was an inspiration to get started on a comprehensive and thorough plugin.
 
 The snippet integration has been shamelessly adapted from [@jenstornell](https://github.com/jenstornell/)'s [kirby-ga](https://github.com/jenstornell/kirby-ga/tree/kirby-3). 👏
-
-<br/>
-
-## 9. To-do
-
-- [X] `.title` => `h5`
-- [X] Handle API calls errors
-- [X] Create a `matomo-page` widget to add on pages, displaying some simple page-related stats
-  - [X] Use the `Actions.getPageUrls` method
-  - [X] Don't filter directly the request with labels as Matomo can store one uri in multiple ways (`fr` or `/fr`, `page` or `/page` or `page?arg=string`)
-  - [X] Filter the response's labels with a computed uri (recreate it from `url` to let custom Page Models do their magic and retrieve the uri matomo sees, when ignoring a subfolder for example)
-  - [X] Fuzzy filter, eg. with or without DS, with or without query, etc.
-  - [X] Multilanguage -> Check if the language code match is an array
-  - [X] Multilanguage -> display both the current language + the stats for all languages combined
-  - [X] Multilanguage -> update on language change
-  - [X] Update README
-- [X] Make it translatable
-- [X] Add french translation
-- [X] Bulk request widgets
-- [ ] Responsiveness

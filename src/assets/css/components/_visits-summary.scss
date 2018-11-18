@@ -31,5 +31,15 @@
 				}
 			}
 		}
+		@include respond-to('smaller-1200') {
+			.icon {
+				display: none;
+			}
+		}
+		@include respond-to('smaller-1040') {
+			.icon {
+				display: block;
+			}
+		}
 	}
 }

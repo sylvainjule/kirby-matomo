@@ -17,4 +17,11 @@
 			border-bottom: 1px solid black;
 		}
 	}
+	@include respond-to('smaller-480') {
+		flex-wrap: wrap;
+		margin-bottom: -10px;
+		.matomo-period-option {
+			margin-bottom: 10px;
+		}
+	}
 }
