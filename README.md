@@ -27,8 +27,8 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 #### TLDR – Just get me started 👀
 
 1. Install Matomo on your server.
-2. Copy the content of this repo within the `site/plugins` folder.
-3. Set the following values in your `config.php` :
+2. Download and copy this repository to ```/site/plugins/matomo```
+3. Set the following values in `site/config/config.php` :
 ```php
 return array(
     'sylvainjule.matomo.url'        => 'http://your-matomo.url',
