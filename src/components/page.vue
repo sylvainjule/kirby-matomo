@@ -49,10 +49,6 @@ export default {
 			all: [],
 		}
 	},
-	props: {
-        parent: String,
-        name: String,
-	},
 	computed: {
 		isEmpty() {
 			return (this.status == 'empty' || !Object.keys(this.current).length) && !this.loading
@@ -88,8 +84,7 @@ export default {
 		init() {
 			this.loading = true
 			this.status  = 'loading'
-			this.$api
-		        .get(this.parent + "/sections/" + this.name)
+			this.load()
 		        .then(response => {
 		        	this.lang = response.lang
 		        	this.uri  = response.uri

@@ -25,18 +25,13 @@ export default {
 			summary: false,
 		}
 	},
-	props: {
-        parent: String,
-        name: String,
-	},
 	computed: {
 		showLink() {
 			return this.link && this.url
 		}
 	},
 	created() {
-		this.$api
-	        .get(this.parent + "/sections/" + this.name)
+		this.load()
 	        .then(response => {
 	        	this.url = response.url
 	        	this.link = response.link

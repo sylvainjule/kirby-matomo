@@ -40,15 +40,8 @@ export default {
 			chartEmpty: false,		
 		}
 	},
-	props: {
-        parent: String,
-        name: String,
-	},
-	computed: {
-	},
 	created() {
-		this.$api
-	        .get(this.parent + "/sections/" + this.name)
+		this.load()
 	        .then(response => {
 	        	this.periods  = response.periods
 	        	this.defaults = Object.assign(this.defaults, response.defaults)
