@@ -21,7 +21,7 @@ class Matomo {
 			return false;
 		}
 		// if users tracking is disabled and an I'm logged in
-		if(!option('sylvainjule.matomo.trackUsers') && site()->user()) {
+		if(!option('sylvainjule.matomo.trackUsers') && kirby()->user()) {
 			return false;
 		} 
 
