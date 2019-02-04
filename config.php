@@ -96,6 +96,7 @@ Kirby::plugin('sylvainjule/matomo', array(
         'en' => require_once __DIR__ . '/lib/languages/en.php',
         'de' => require_once __DIR__ . '/lib/languages/de.php',
         'fr' => require_once __DIR__ . '/lib/languages/fr.php',
+	'es' => require_once __DIR__ . '/lib/languages/es.php',
     ),
     'api' => array(
     	'routes' => require_once __DIR__ . '/lib/routes.php',
