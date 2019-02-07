@@ -16,5 +16,5 @@
 <?php else : ?>
 
 	<!-- Kirby Matomo -->
-	<?php echo rtrim(option('sylvainjule.matomo.url'), '/') . '/' ?>
+	
 <?php endif; ?>
