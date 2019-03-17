@@ -3,14 +3,17 @@
     "description": "Matomo helpers and panel sections for Kirby",
     "type": "kirby-plugin",
     "license": "MIT",
-    "autoload": {
-        "files": ["config.php"]
-    },
     "authors": [
         {
             "name": "Sylvain Julé",
             "email": "contact@sylvain-jule.fr"
         }
     ],
+    "require": {
+        "getkirby/composer-installer": "^1.1"
+    },
+    "extra": {
+        "installer-name": "superplugin"
+    },
     "minimum-stability": "beta"
 }
