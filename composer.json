@@ -13,7 +13,7 @@
         "getkirby/composer-installer": "^1.1"
     },
     "extra": {
-        "installer-name": "superplugin"
+        "installer-name": "matomo"
     },
     "minimum-stability": "beta"
 }
