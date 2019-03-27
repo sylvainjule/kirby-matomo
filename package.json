@@ -30,7 +30,7 @@
     "cross-env": "^5.2.0",
     "dayjs": "^1.7.7",
     "envify": "^4.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "node-sass": "^4.9.3",
     "uglify-js": "^3.4.7",
