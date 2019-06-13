@@ -35,7 +35,7 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 return array(
     'sylvainjule.matomo.url'        => 'http://your-matomo.url',
     'sylvainjule.matomo.id'         => 'mywebsite',
-    'sylvainjule.matomo.token'      => 'token_auth,
+    'sylvainjule.matomo.token'      => 'token_auth',
 );
 ```
 4. Add this code to your footer snippet: `<?php echo snippet('matomo') ?>`
@@ -89,7 +89,7 @@ Where your matomo install is:
 
 #### 3.2. `id` (required)
 
-A single Matomo install can host multiple websites. The plugin needs to know the `id` of the one to look for: 
+A single Matomo install can host multiple websites. The plugin needs to know the `id` of the one to look for:
 
 ```php
 'sylvainjule.matomo.id' => 'mywebsite'
@@ -144,7 +144,7 @@ If you want to always run the script (even on localhost or if you are logged in)
 You only need to include the snippet in your code somewhere:
 
 ```php
-<?php snippet('matomo'); ?> 
+<?php snippet('matomo'); ?>
 ```
 
 <br/>
@@ -157,7 +157,7 @@ The panel dashboard (screenshot on top of this readme) displays metrics for the 
 
 > Please make sure that you have included your `token_auth` in your config.
 
-Place this snippet in a dedicated tab / blueprint: 
+Place this snippet in a dedicated tab / blueprint:
 
 ```yaml
 columns:
@@ -175,7 +175,7 @@ columns:
 
 ##### Hiding components
 
-There are a bunch of options to help you adjust this default panel view. 
+There are a bunch of options to help you adjust this default panel view.
 Both sections have three components :
 
 - **The mainview** (`matomo-main`) includes `chart`, `overview` and `widgets`
@@ -213,7 +213,7 @@ columns:
     sections:
       main:
         type: matomo-main
-        widgets: 
+        widgets:
           - referrerType
           - websites
           - socials
@@ -233,7 +233,7 @@ columns:
     sections:
       main:
         type: matomo-main
-        periods: 
+        periods:
           - year
           - month
           - week
@@ -309,7 +309,7 @@ The panel page widget displays metrics for a given page, both in single-language
 
 > Please make sure that you have included your `token_auth` in your config.
 
-Place this snippet in your page blueprint: 
+Place this snippet in your page blueprint:
 
 ```yaml
 columns:
