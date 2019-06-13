@@ -17,7 +17,7 @@
 				<div :class="['difference', visitsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{visitsDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
+					<div v-if="!loading" class="icon"><svg><use href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
@@ -31,7 +31,7 @@
 				<div :class="['difference', durationDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{durationDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
+					<div v-if="!loading" class="icon"><svg><use href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
@@ -46,7 +46,7 @@
 				<div :class="['difference', bounceDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{bounceDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
+					<div v-if="!loading" class="icon"><svg><use href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-if="!isEmpty" class="matomo-overview-block">
@@ -61,7 +61,7 @@
 				<div :class="['difference', actionsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>
 					<span v-else>{{actionsDiff.string}}%</span>
-					<div v-if="!loading" class="icon"><svg><use xlink:href="#icon-matomo-arrow-up" /></svg></div>
+					<div v-if="!loading" class="icon"><svg><use href="#icon-matomo-arrow-up" /></svg></div>
 				</div>
 			</div>
 			<div v-else class="empty">{{ $t('matomo.empty') }}</div>
@@ -71,7 +71,7 @@
 
 <script>
 export default {
-	data() { 
+	data() {
 		return {
 			loading: true,
 			status: 'loading',
@@ -188,7 +188,7 @@ export default {
 	},
 	destroyed() {
 	},
-	watch: { 
+	watch: {
       	currentPeriod: {
       		immediate: true,
       		handler(newVal, oldVal) {
@@ -263,7 +263,7 @@ export default {
     		}, {})
   		},
 		lastN(obj, n) {
-  			return Object.keys(obj).slice(Object.keys(obj).length - n).reduce(function(el, index) { 
+  			return Object.keys(obj).slice(Object.keys(obj).length - n).reduce(function(el, index) {
       			el[index] = obj[index]
       			return el;
     		}, {})
@@ -301,7 +301,7 @@ export default {
             }).slice(0, length)
   		},
   		toObj(arr, obj) {
-  			return arr.reduce(function(el, index) { 
+  			return arr.reduce(function(el, index) {
       			el[index] = obj[index]
       			return el;
     		}, {})

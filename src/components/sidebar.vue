@@ -1,7 +1,7 @@
 <template>
 	<div class="matomo-sidebar">
 		<a v-if="showLink" :href="url" class="matomo-dashboard-link" target="_blank" rel="noopener">
-			<span class="icon"><svg><use xlink:href="#icon-matomo-external-link" /></svg></span>
+			<span class="icon"><svg><use href="#icon-matomo-external-link" /></svg></span>
 			<span class="text"><em>{{ $t('matomo.title.external_link') }}</em></span>
 		</a>
 
@@ -17,7 +17,7 @@ import SummaryWidget from './widgets/summary.vue'
 
 export default {
 	components: {RealtimeWidget, SummaryWidget},
-	data() { 
+	data() {
 		return {
 			url: String,
 			link: false,
