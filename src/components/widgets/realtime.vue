@@ -16,7 +16,7 @@
 
 <script>
 export default {
-	data() { 
+	data() {
 		return {
 			loading: true,
 			status: 'loading',
@@ -42,7 +42,7 @@ export default {
 			this.$api
 		        .get('matomo-panel/get-realtime-number')
 		        .then(response => {
-		        	this.visitors = response[0].visitors
+		        	this.visitors = parseFloat(response[0].visitors)
 		        	this.loading  = false
 					this.status   = response.status
 		        })
