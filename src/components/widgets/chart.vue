@@ -128,7 +128,7 @@ export default {
             return config
         }
     },
-    watch: { 
+    watch: {
         currentPeriod: {
             immediate: true,
             handler(newVal, oldVal) {
@@ -212,7 +212,8 @@ export default {
                     if(this.currentPeriod == 'day') {
                         let labels = Object.keys(response)
                         formatedLabels = labels.map(key => {
-                            return parseInt(key) + 1 + 'h'
+                            let label = parseInt(key) + 1 + 'h'
+                            return isFinite(label) ? label : ''
                         })
                         tooltipLabels = formatedLabels
                         dataset = labels.map(key => {
