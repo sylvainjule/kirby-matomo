@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./",
+    "parcel-build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting --no-minify -d ./",
+    "custom-minify": "minify index.js -d ./",
+    "build": "npm run parcel-build && npm run custom-minify",
     "svg": "vsvg -s ./src/assets/svg/export -t ./src/assets/svg/compiled"
   },
   "posthtml": {
@@ -15,6 +17,7 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.0",
+    "babel-minify": "^0.5.1",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-preset-env": "^1.7.0",
     "chart.js": "^2.7.2",

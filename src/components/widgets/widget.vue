@@ -4,7 +4,7 @@
 		<div v-if="loading" class="loading"><div class="loader"></div></div>
 		<ul v-else-if="!loading && !isEmpty">
 			<li v-for="(result, index) in results">
-				<div class="icon"><svg><use :href="'#icon-matomo-' + findIcon(result)" /></svg></div>
+				<div class="icon"><svg><use :href="findIcon(result)" /></svg></div>
 				<div class="text" v-html="result.label"></div>
 				<div class="number">{{ result.nb_visits }} <span class="percent">{{ visitsPercent(result) }}%</span></div>
 			</li>
@@ -95,25 +95,23 @@ export default {
 			return percent
 		},
 		findIcon(result) {
+            let icon = this.iconsMap['page']
+
 			if(result.label) {
 				let fromLabel = this.iconsMap[result.label.toLowerCase()]
-				if(fromLabel) return fromLabel
-			}
-
-			if(this.widget == 'websites' || this.widget == 'popularPages') {
-				return this.iconsMap['page']
+				if(fromLabel) icon = fromLabel
 			}
 
 			if(this.widget == 'keywords') {
-				return this.iconsMap['search']
+				icon = this.iconsMap['search']
 			}
 
 			if(result.segment) {
 				let fromSegment = this.iconsMap[result.segment]
-				if(fromSegment) return fromSegment
+				if(fromSegment) icon = fromSegment
 			}
 
-			return this.iconsMap['page']
+			return '#icon-matomo-'+ icon
 		},
 	},
 }
