@@ -69,13 +69,14 @@ Here is an overview of the available options with their default values:
 
 ```php
 return array(
-    'sylvainjule.matomo.url'        => false, #required
-    'sylvainjule.matomo.id'         => false, #required
-    'sylvainjule.matomo.token'      => false, #required for the panel integration
-    'sylvainjule.matomo.active'     => true,
-    'sylvainjule.matomo.debug'      => false,
-    'sylvainjule.matomo.trackUsers' => false,
-    'sylvainjule.matomo.blacklist'  => ['127.0.0.1', '::1'],
+    'sylvainjule.matomo.url'            => false, #required
+    'sylvainjule.matomo.id'             => false, #required
+    'sylvainjule.matomo.token'          => false, #required for the panel integration
+    'sylvainjule.matomo.active'         => true,
+    'sylvainjule.matomo.debug'          => false,
+    'sylvainjule.matomo.trackUsers'     => false,
+    'sylvainjule.matomo.disableCookies' => false,
+    'sylvainjule.matomo.blacklist'      => ['127.0.0.1', '::1'],
 );
 ```
 
@@ -132,6 +133,14 @@ The script is only active for not logged in users by default. If you want to cha
 #### 3.7. `debug`
 
 If you want to always run the script (even on localhost or if you are logged in), set this option to `true`.
+
+```php
+'sylvainjule.matomo.debug' => false
+```
+
+#### 3.8. `disableCookies`
+
+If you want to use Matomo without any tracking cookies on the user side, set this option to `true`. You can read more about this setting in the [Matomo FAQ](https://matomo.org/faq/general/faq_157/).
 
 ```php
 'sylvainjule.matomo.debug' => false

@@ -2,6 +2,9 @@
 
 	<script type="text/javascript">
 	  	var _paq = window._paq || [];
+        <?php if(option('sylvainjule.matomo.disableCookies')) :?>
+            _paq.push(['disableCookies']);
+        <?php endif; ?>
 		_paq.push(['trackPageView']);
 	  	_paq.push(['enableLinkTracking']);
 	    (function() {
@@ -16,5 +19,5 @@
 <?php else : ?>
 
 	<!-- Kirby Matomo -->
-	
+
 <?php endif; ?>
