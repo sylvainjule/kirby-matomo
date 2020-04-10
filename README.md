@@ -143,7 +143,7 @@ If you want to always run the script (even on localhost or if you are logged in)
 If you want to use Matomo without any tracking cookies on the user side, set this option to `true`. You can read more about this setting in the [Matomo FAQ](https://matomo.org/faq/general/faq_157/).
 
 ```php
-'sylvainjule.matomo.debug' => false
+'sylvainjule.matomo.disableCookies' => false
 ```
 
 <br/>
