@@ -1,6 +1,6 @@
 <?php if(Matomo::allowed()) : ?>
 
-	<script type="text/javascript">
+	<script>
 	  	var _paq = window._paq || [];
         <?php if(option('sylvainjule.matomo.disableCookies')) :?>
             _paq.push(['disableCookies']);
