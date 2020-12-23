@@ -54,12 +54,12 @@ class Matomo {
 		$url  = $this->url;
 		$url .= "?module=API&method=" . $method;
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=PHP&language=". $lang;
+		$url .= "&format=JSON&language=". $lang;
 		$url .= $limit ? "&filter_limit=" . $limit : '';
 		$url .= "&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 
 		return $content;
 	}
@@ -70,7 +70,7 @@ class Matomo {
 		$url  = $this->url;
 
 		$url .= "?module=API&method=API.getBulkRequest";
-		$url .= "&token_auth=". $this->token ."&format=PHP";
+		$url .= "&token_auth=". $this->token ."&format=JSON";
 
 		$i = 0;
 		foreach($widgets as $widget) {
@@ -80,7 +80,7 @@ class Matomo {
 		}
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 
 		return $content;
 	}
@@ -89,10 +89,10 @@ class Matomo {
 		$url  = $this->url;
 		$url .= "?module=API&method=". $method;
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=PHP&token_auth=". $this->token;
+		$url .= "&format=JSON&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 
 		return $content;
 	}
@@ -101,10 +101,10 @@ class Matomo {
 		$url  = $this->url;
 		$url .= "?module=API&method=". $method;
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=PHP&token_auth=". $this->token;
+		$url .= "&format=JSON&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 
 		return $content;
 	}
@@ -115,10 +115,10 @@ class Matomo {
 
 		$url .= "?module=API&method=" . $method;
 		$url .= "&idSite=". $this->id ."&lastMinutes=3";
-		$url .= "&format=PHP&token_auth=". $this->token;
+		$url .= "&format=JSON&token_auth=". $this->token;
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 
 		return $content;
 	}
@@ -127,7 +127,7 @@ class Matomo {
 		$url  = $this->url;
 
 		$url .= "?module=API&method=API.getBulkRequest";
-		$url .= "&token_auth=". $this->token ."&format=PHP";
+		$url .= "&token_auth=". $this->token ."&format=JSON";
 
 		$url .= "&urls[0]=";
 		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=day&date=today");
@@ -142,7 +142,7 @@ class Matomo {
 		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=year&date=today");
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 
 		return $content;
 	}
@@ -151,11 +151,11 @@ class Matomo {
 		$url  = $this->url;
 		$url .= "?module=API&method=Actions.getPageUrls";
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=today";
-		$url .= "&format=PHP&token_auth=". $this->token;
+		$url .= "&format=JSON&token_auth=". $this->token;
 		$url .= $lang['multilang'] ? '&expanded=1' : '';
 
 		$fetched = file_get_contents($url);
-		$content = unserialize($fetched);
+		$content = json_decode($fetched,true);
 		$content = $this->filterPageMetrics($content, $uri, $lang);
 		return $content;
 	}
