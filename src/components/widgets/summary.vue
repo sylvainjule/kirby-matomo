@@ -63,10 +63,10 @@ export default {
 			this.$api
 		        .get('matomo-panel/get-bulk-summary')
 		        .then(response => {
-		        	this.results.day = response[0]
+		        	this.results.day = response[0].value
 		        	this.results.week = this.getLast7Days(response[1])
-		        	this.results.month = response[2]
-		        	this.results.year = response[3]
+		        	this.results.month = response[2].value
+		        	this.results.year = response[3].value
 
 		        	this.loading = false
 		        	this.status = response.status
