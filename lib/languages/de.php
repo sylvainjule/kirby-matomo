@@ -41,7 +41,7 @@ return array(
 	---------------------------*/
 
 	'matomo.widgets.title.referrerType' => 'Referrer-Typ',
-	'matomo.widgets.title.websites'     => 'Referrer-Websites',
+	'matomo.widgets.title.websites'     => 'Referrer-Webseiten',
 	'matomo.widgets.title.socials'      => 'Soziale Netzwerke',
 	'matomo.widgets.title.devicesType'  => 'Gerätetyp',
 	'matomo.widgets.title.keywords'     => 'Schlüsselwörter',
@@ -52,10 +52,10 @@ return array(
 	---------------------------*/
 
 	'matomo.widgets.page.metrics' => 'Metriken',
-	'matomo.widgets.page.year'    => 'of the year',
-	'matomo.widgets.page.month'   => 'of the month',
-	'matomo.widgets.page.week'    => 'of the week',
-	'matomo.widgets.page.day'     => 'of the day',
+	'matomo.widgets.page.year'    => 'von diesem Jahr',
+	'matomo.widgets.page.month'   => 'von diesem Monat',
+	'matomo.widgets.page.week'    => 'von dieser Woche',
+	'matomo.widgets.page.day'     => 'von heute',
 
 
 	/* Misc. strings
@@ -68,12 +68,12 @@ return array(
 	'matomo.duration'         => 'Dauer',
 	'matomo.duration.caption' => 'ist die durchschnittliche Besuchsdauer',
 	'matomo.bounce'           => 'Absprung',
-	'matomo.bounce.caption'   => 'Besucher sind abgesprungen (nach einer Seite die Website verlassen)',
+	'matomo.bounce.caption'   => 'Besucher sind abgesprungen (haben nach einer Seite die Webseite verlassen)',
 	'matomo.bounce_rate'      => 'Absprungrate',
 	'matomo.exit_rate'        => 'Ausstiegsrate',
 	'matomo.actions'          => 'Aktionen',
-	'matomo.actions.caption'  => 'per visit (page views, downloads, outlinks and internal site searches)',
-	'matomo.visitors.caption' => ['Besucher surft derzeit auf der Website', 'Besucher surfen derzeit auf der Website.'],
-	'matomo.novisitors'       => 'Momentan sind keine Besucher auf der Website',
+	'matomo.actions.caption'  => 'pro Besuch (Seitenansicht, Download, Ausgehende Verweise and interne Suchen)',
+	'matomo.visitors.caption' => ['Besucher surft derzeit auf der Webseite', 'Besucher surfen derzeit auf der Webseite.'],
+	'matomo.novisitors'       => 'Momentan sind keine Besucher auf der Webseite',
 
 );
