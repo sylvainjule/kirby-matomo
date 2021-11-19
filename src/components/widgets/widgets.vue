@@ -5,7 +5,7 @@
 			<p>{{ $t('matomo.subline.details', {limit: defaults.limit}) }}</p>
 		</div>
 		<div class="widgets">
-			<widget v-for="(widget, index) in widgets" :widget="widget" :totalVisits="totalVisits" :lang="lang" :loading="loading" :status="status" :results="results[index]" />
+			<widget v-for="(widget, index) in widgets" :key="'widget-'+ index" :widget="widget" :totalVisits="totalVisits" :lang="lang" :loading="loading" :status="status" :results="results[index]" />
 		</div>
 	</div>
 </template>

@@ -5,33 +5,28 @@
   "main": "index.js",
   "author": "Sylvain Julé",
   "license": "MIT",
+  "private": true,
   "scripts": {
-    "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "parcel-build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting --no-minify -d ./",
-    "custom-minify": "minify index.js -d ./",
-    "build": "npm run parcel-build && npm run custom-minify",
-    "svg": "vsvg -s ./src/assets/svg/export -t ./src/assets/svg/compiled"
+    "dev": "kirbyup src/index.js --watch",
+    "build": "kirbyup src/index.js",
+    "lint": "eslint \"src/**/*.{js,vue}\"",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write \"src/**/*.{css,js,vue}\""
   },
   "posthtml": {
     "recognizeSelfClosing": true
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^3.0.0",
-    "babel-minify": "^0.5.1",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "babel-preset-env": "^1.7.0",
     "chart.js": "^2.7.2",
-    "cssnano": "^4.1.10",
     "dayjs": "^1.7.7",
-    "sass": "^1.21.0",
     "vue-chartjs": "^3.4.0",
-    "vue-template-compiler": "^2.6.10"
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "kirbyup": "^0.21.0",
+    "prettier": "^2.4.1"
   },
   "alias": {
     "chart.js": "chart.js/dist/Chart.min.js"
-  },
-  "dependencies": {
-    "vue": "^2.6.10",
-    "vue-hot-reload-api": "^2.3.3"
   }
 }

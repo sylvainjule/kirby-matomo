@@ -58,10 +58,8 @@ class Matomo {
 		$url .= $limit ? "&filter_limit=" . $limit : '';
 		$url .= "&token_auth=". $this->token;
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
-
-		return $content;
+        $content = Remote::get($url)->json();
+        return $content;
 	}
 
 	public function apiBulkWidgets($widgets, $period, $date, $limit, $lang) {
@@ -79,10 +77,8 @@ class Matomo {
 			$i++;
 		}
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
-
-		return $content;
+        $content = Remote::get($url)->json();
+        return $content;
 	}
 
 	public function apiChart($method, $period, $date) {
@@ -91,10 +87,8 @@ class Matomo {
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
 		$url .= "&format=JSON&token_auth=". $this->token;
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
-
-		return $content;
+        $content = Remote::get($url)->json();
+        return $content;
 	}
 
 	public function apiOverview($method, $period, $date) {
@@ -103,10 +97,8 @@ class Matomo {
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
 		$url .= "&format=JSON&token_auth=". $this->token;
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
-
-		return $content;
+        $content = Remote::get($url)->json();
+        return $content;
 	}
 
 	public function apiRealtime() {
@@ -117,9 +109,7 @@ class Matomo {
 		$url .= "&idSite=". $this->id ."&lastMinutes=3";
 		$url .= "&format=JSON&token_auth=". $this->token;
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
-
+        $content = Remote::get($url)->json();
 		return $content;
 	}
 
@@ -141,10 +131,8 @@ class Matomo {
 		$url .= "&urls[3]=";
 		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=year&date=today");
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
-
-		return $content;
+        $content = Remote::get($url)->json();
+        return $content;
 	}
 
 	public function apiPageMetrics($period, $uri, $lang) {
@@ -154,8 +142,7 @@ class Matomo {
 		$url .= "&format=JSON&token_auth=". $this->token;
 		$url .= $lang['multilang'] ? '&expanded=1' : '';
 
-		$fetched = file_get_contents($url);
-		$content = json_decode($fetched,true);
+        $content = Remote::get($url)->json();
 		$content = $this->filterPageMetrics($content, $uri, $lang);
 		return $content;
 	}
