@@ -77,7 +77,7 @@ class Matomo {
 			$i++;
 		}
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url)->content();
         return $content;
 	}
 

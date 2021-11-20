@@ -7,7 +7,7 @@
 			<span v-if="loading" class="loader"></span>
 			<div v-else class="big-number">{{ visitors }}</div>
 			<div v-if="!loading" class="details">
-				<span v-if="visitors">{{ $t('matomo.visitors.caption', {}, visitors) }}.</span>
+				<span v-if="visitors">{{ visitorsString }}.</span>
 				<span v-else>{{ $t('matomo.novisitors') }}.</span></div>
 		</div>
 		<div v-else class="empty">{{ $t('matomo.empty') }}</div>
@@ -29,6 +29,10 @@ export default {
 		isEmpty() {
 			return this.status == 'empty'
 		},
+        visitorsString() {
+            let t = this.$t('matomo.visitors.caption')
+            return this.visitors == 1 ? t[0] : t[1]
+        }
 	},
 	created() {
 		this.syncContent()
