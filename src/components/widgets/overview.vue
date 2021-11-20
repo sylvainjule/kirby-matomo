@@ -12,7 +12,7 @@
 						<span v-if="loading"><span class="loader"></span></span>
 						<span v-else>{{current.visits}}</span>
 					</div>
-					<div class="details">{{ $t('matomo.visits').toLowerCase() }} {{ $t('matomo.period.'+currentPeriod) }}.</div>
+					<div class="details">{{ $t('matomo.visitsLower') }} {{ $t('matomo.period.'+currentPeriod) }}.</div>
 				</div>
 				<div v-if="isFinite(visitsDiff.diff)" :class="['difference', visitsDiff.status, {grey: loading}]">
 					<span v-if="loading"><span class="loader"></span></span>

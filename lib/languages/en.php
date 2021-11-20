@@ -65,6 +65,7 @@ return array(
 	'matomo.all'              => 'All',
 	'matomo.refresh'          => 'Refresh',
 	'matomo.visits'           => 'Visits',
+    'matomo.visitsLower'      => 'visits',
 	'matomo.duration'         => 'Duration',
 	'matomo.duration.caption' => 'is the average visit duration',
 	'matomo.bounce'           => 'Bounce',
