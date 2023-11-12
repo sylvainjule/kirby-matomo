@@ -77,6 +77,8 @@ return array(
     'sylvainjule.matomo.trackUsers'     => false,
     'sylvainjule.matomo.disableCookies' => false,
     'sylvainjule.matomo.blacklist'      => ['127.0.0.1', '::1'],
+    'sylvainjule.matomo.basicAuth'      => null,
+
 );
 ```
 
@@ -144,6 +146,14 @@ If you want to use Matomo without any tracking cookies on the user side, set thi
 
 ```php
 'sylvainjule.matomo.disableCookies' => false
+```
+
+#### 3.9. `basicAuth`
+
+If your Matomo instance is additionally secured by Basic Authentication, you can configure these credentials in the format `USERNAME:PASSWORD`.
+
+```php
+'sylvainjule.matomo.basicAuth' => null
 ```
 
 <br/>

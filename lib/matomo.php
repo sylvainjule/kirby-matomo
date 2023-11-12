@@ -35,6 +35,7 @@ class Matomo {
 	protected $url   = null;
 	protected $id    = null;
 	protected $token = null;
+	protected $requestParams = [];
 	protected $methodsMap = array (
 		'referrerType' => 'Referrers.getReferrerType',
 		'websites'     => 'Referrers.getWebsites',
@@ -48,6 +49,9 @@ class Matomo {
     	$this->url   = option('sylvainjule.matomo.url');
 		$this->id    = option('sylvainjule.matomo.id');
 		$this->token = is_callable($this->token) ? $this->token() : option('sylvainjule.matomo.token');
+		if (option('sylvainjule.matomo.basicAuth') !== null) {
+			$this->requestParams['basicAuth'] = option('sylvainjule.matomo.basicAuth');
+		}
     }
 
 	public function apiWidget($widget, $method, $period, $date, $limit, $lang) {
@@ -58,12 +62,11 @@ class Matomo {
 		$url .= $limit ? "&filter_limit=" . $limit : '';
 		$url .= "&token_auth=". $this->token;
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
         return $content;
 	}
 
 	public function apiBulkWidgets($widgets, $period, $date, $limit, $lang) {
-		//$widgets = json_decode(stripslashes($widgets));
         $widgets = json_decode($widgets);
 
 		$url  = $this->url;
@@ -78,8 +81,7 @@ class Matomo {
 			$i++;
 		}
 
-        //$content = Remote::get($url)->content();
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
         return $content;
 	}
 
@@ -89,7 +91,7 @@ class Matomo {
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
 		$url .= "&format=JSON&token_auth=". $this->token;
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
         return $content;
 	}
 
@@ -99,7 +101,7 @@ class Matomo {
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
 		$url .= "&format=JSON&token_auth=". $this->token;
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
         return $content;
 	}
 
@@ -111,7 +113,7 @@ class Matomo {
 		$url .= "&idSite=". $this->id ."&lastMinutes=3";
 		$url .= "&format=JSON&token_auth=". $this->token;
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
 		return $content;
 	}
 
@@ -133,7 +135,7 @@ class Matomo {
 		$url .= "&urls[3]=";
 		$url .= urlencode("method=VisitsSummary.getVisits&idSite=". $this->id ."&period=year&date=today");
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
         return $content;
 	}
 
@@ -144,7 +146,7 @@ class Matomo {
 		$url .= "&format=JSON&token_auth=". $this->token;
 		$url .= $lang['multilang'] ? '&expanded=1' : '';
 
-        $content = Remote::get($url)->json();
+        $content = Remote::get($url, $this->requestParams)->json();
 		$content = $this->filterPageMetrics($content, $uri, $lang);
 		return $content;
 	}
