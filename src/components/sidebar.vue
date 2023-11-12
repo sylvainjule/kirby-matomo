@@ -17,12 +17,27 @@ import SummaryWidget from './widgets/summary.vue'
 
 export default {
 	components: {RealtimeWidget, SummaryWidget},
+    props: {
+        link: {
+            type: Boolean,
+            default: true
+        },
+		realtime: {
+            type: Boolean,
+            default: true
+        },
+		summary: {
+            type: Boolean,
+            default: true
+        },
+        url: String,
+    },
 	data() {
 		return {
-			url: String,
-			link: false,
-			realtime: false,
-			summary: false,
+			url: '',
+			link: true,
+			realtime: true,
+			summary: true,
 		}
 	},
 	computed: {
