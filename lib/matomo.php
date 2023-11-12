@@ -63,7 +63,8 @@ class Matomo {
 	}
 
 	public function apiBulkWidgets($widgets, $period, $date, $limit, $lang) {
-		$widgets = json_decode(stripslashes($widgets));
+		//$widgets = json_decode(stripslashes($widgets));
+        $widgets = json_decode($widgets);
 
 		$url  = $this->url;
 
@@ -77,7 +78,8 @@ class Matomo {
 			$i++;
 		}
 
-        $content = Remote::get($url)->content();
+        //$content = Remote::get($url)->content();
+        $content = Remote::get($url)->json();
         return $content;
 	}
 
