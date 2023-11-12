@@ -1,9 +1,15 @@
 <template>
 	<div class="matomo-main">
 		<div class="matomo-period-selector">
-			<div v-for="(period, index) in periods" :class="['matomo-period-option', period, {active: period == currentPeriod}]" @click="setCurrentPeriod(period)">{{ $t('matomo.chart.'+ period) }}</div>
+			<div
+                v-for="(period) in periods"
+                :class="['matomo-period-option', period, {active: period == currentPeriod}]"
+                @click="setCurrentPeriod(period)"
+                v-bind:key="period">
+                {{ $t('matomo.chart.'+ period) }}
+            </div>
 		</div>
-		
+
 		<div v-if="chart" :class="['matomo-chart', {'is-empty': chartEmpty}]">
 			<div v-if="chartLoading" class="overlay"><div class="loader"></div></div>
 			<div v-if="chartEmpty" class="empty"><span>{{ $t('matomo.empty') }}</span></div>
@@ -23,21 +29,44 @@ import Widgets from './widgets/widgets.vue'
 
 export default {
 	components: {Chart, Overview, Widgets},
-	data() { 
+    props: {
+        periods: {
+            type: Array,
+            default: []
+        },
+        chart: {
+            type: Boolean,
+            default: true
+        },
+		overview: {
+            type: Boolean,
+            default: true
+        },
+        currentPeriod: {
+            type: String,
+            default: 'week'
+        },
+        lang: {
+            type: String,
+            default: ''
+        },
+        widgets: {
+            type: Array,
+            default: []
+        }
+    },
+	data() {
 		return {
-			currentPeriod: '',
-        	periods: Array,
+            periods: [],
 			defaults: {
 				period: 'month',
 				limit: 5,
 			},
 			totalVisits: '',
-			lang: '',
-			chart: false,
-			overview: false,
-			widgets: Array,
+            chart: true,
 			chartLoading: true,
-			chartEmpty: false,		
+			chartEmpty: false,
+            widgets: []
 		}
 	},
 	created() {
