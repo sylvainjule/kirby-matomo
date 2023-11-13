@@ -39,7 +39,7 @@ return array(
 );
 ```
 4. Add this code to your footer snippet: `<?php echo snippet('matomo') ?>`
-5. Copy [this blueprint](#51-basic-blueprint-example) under a dedicated tab / page in the panel.
+5. Visit the Matomo panel area or copy [this blueprint](#51-basic-blueprint-example) under a dedicated tab / page in the panel.
 
 You're all set.
 
@@ -51,7 +51,7 @@ You're all set.
 - It's free (like, really free. You don't pay with your data)
 - It's self-hosted (which means more control for you over your data)
 - It respects your visitors privacy (IP Anonymization, automated logs deletion, data ownership)
-- It now integrates smoothly with Kirby 3 ✌️
+- It now integrates smoothly with Kirby 4 ✌️
 
 <br/>
 
@@ -78,6 +78,8 @@ return array(
     'sylvainjule.matomo.disableCookies' => false,
     'sylvainjule.matomo.blacklist'      => ['127.0.0.1', '::1'],
     'sylvainjule.matomo.basicAuth'      => null,
+    'sylvainjule.matomo.label'          => 'Matomo',
+    'sylvainjule.matomo.menu'           => true
 
 );
 ```
@@ -156,6 +158,22 @@ If your Matomo instance is additionally secured by Basic Authentication, you can
 'sylvainjule.matomo.basicAuth' => null
 ```
 
+#### 3.10. `label`
+
+If you want to change the label for the Matomo Panel area, you can configure it in the options.
+
+```php
+'sylvainjule.matomo.label' => 'Matomo'
+```
+
+#### 3.11. `menu`
+
+If you want to hide the Matomo Panel area, set this option to `false`.
+
+```php
+'sylvainjule.matomo.menu' => true
+```
+
 <br/>
 
 ## 4. Template usage
@@ -170,7 +188,7 @@ You only need to include the snippet in your code somewhere:
 
 ## 5. Panel dashboard
 
-The panel dashboard (screenshot on top of this readme) displays metrics for the whole website.
+The panel dashboard (screenshot on top of this readme) displays metrics for the whole website. It is usually available as panel area (at the `{ site.url }/panel/matomo` route), but you can also configure it in a custom tab / blueprint.
 
 #### 5.1. Basic blueprint example
 
