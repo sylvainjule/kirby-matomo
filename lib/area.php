@@ -7,7 +7,7 @@ return [
             'label' => $label,
             'icon' => 'line-chart',
             'link' => 'matomo',
-            'menu' => true,
+            'menu' => $kirby->option('sylvainjule.matomo.menu'),
             'views' => [
                 [
                     'pattern' => 'matomo',
