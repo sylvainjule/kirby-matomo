@@ -75,7 +75,7 @@ export default {
 	},
 	computed: {
 		isEmpty() {
-			return this.status == 'empty'
+			return this.results.length === 0
 		},
 		originalColor() {
 			return this.widget == 'socials'
