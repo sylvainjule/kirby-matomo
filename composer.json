@@ -7,6 +7,14 @@
         {
             "name": "Sylvain Julé",
             "email": "contact@sylvain-jule.fr"
+        },
+        {
+            "name": "Sören Engels",
+            "email": ""
+        },
+        {
+            "name": "Philipp Trenz",
+            "email": "mail@philipptrenz.de"
         }
     ],
     "require": {
