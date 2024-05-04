@@ -58,6 +58,8 @@ You're all set.
 
 ## 2. Installation
 
+> Kirby 3: up to 1.0.7 Kirby 4: 2.0.0+
+
 Download and copy this repository to ```/site/plugins/matomo```
 
 Alternatively, you can install it with composer: ```composer require sylvainjule/matomo```
