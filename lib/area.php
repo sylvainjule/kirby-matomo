@@ -2,23 +2,24 @@
 
 return [
     'matomo' => function ($kirby) {
-        $label = $kirby->option('sylvainjule.matomo.label');
+        $label = $kirby->option('sylvainjule.matomo.area.label');
         return [
             'label' => $label,
-            'icon' => 'line-chart',
-            'link' => 'matomo',
-            'menu' => $kirby->option('sylvainjule.matomo.menu'),
+            'icon'  => 'line-chart',
+            'link'  => 'matomo',
+            'menu'  => $kirby->option('sylvainjule.matomo.area'),
             'views' => [
                 [
                     'pattern' => 'matomo',
-                    'action' => function () use ($label) {
+                    'action' => function() use($label) {
                         $lang = kirby()->user()->language();
                         $periods = ['year', 'month', 'week', 'day'];
                         $url = option('sylvainjule.matomo.url');
-                        $widgets = ["referrerType", "websites", "socials", "devicesType", "keywords", "popularPages"];
+                        $widgets = ['referrerType', 'websites', 'socials', 'devicesType', 'keywords', 'popularPages'];
+
                         return [
-                            'component' => 'matomo',
-                            'title' => $label . ': ' . t('matomo.title.overview'),
+                            'component'  => 'matomo',
+                            'title'      => $label . ': ' . t('matomo.title.overview'),
                             'breadcrumb' => [
                                 [
                                     'label' => t('matomo.title.overview'),

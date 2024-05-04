@@ -12,8 +12,8 @@ Kirby::plugin('sylvainjule/matomo', array(
 		'debug'      => false,
         'blacklist'  => ['127.0.0.1', '::1'],
         'trackUsers' => false,
-        'label'      => 'Matomo',
-        'menu'       => true
+        'area'       => true,
+        'area.label' => 'Matomo',
 	),
 	'snippets' => array(
         'matomo' => __DIR__ . '/lib/snippets/matomo.php'

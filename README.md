@@ -8,22 +8,23 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 
 ## Overview
 
-> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/sylvainjl) or purchasing your license(s) through [my affiliate link](https://a.paddle.com/v2/click/1129/36369?link=1170).
+> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/sylvainjl).
 
 - [1. Why Matomo?](#1-why-matomo)
 - [2. Installation](#2-installation)
 - [3. Options](#3-options)
 - [4. Template usage](#4-template-usage)
-- [5. Panel dashboard](#5-dashboard)
-  * [5.1. Basic blueprint example](#51-basic-blueprint-example)
-  * [5.2. Options](#52-options)
-  * [5.3. Complete blueprint example](#53-complete-blueprint-example)
-- [6. Panel page widget](#6-panel-page-widget)
+- [5. Panel display: Area](#5-panel-display-area)
+- [6. Panel display: Sections](#6-panel-display-sections)
   * [6.1. Basic blueprint example](#61-basic-blueprint-example)
   * [6.2. Options](#62-options)
-  * [6.3. Potential pitfalls](#63-potential-pitfalls)
-- [7. License](#7-license)
-- [8. Credits](#8-credits)
+  * [6.3. Complete blueprint example](#63-complete-blueprint-example)
+- [7. Panel page widget](#6-panel-page-widget)
+  * [7.1. Basic blueprint example](#71-basic-blueprint-example)
+  * [7.2. Options](#72-options)
+  * [7.3. Potential pitfalls](#73-potential-pitfalls)
+- [8. License](#8-license)
+- [9. Credits](#9-credits)
 
 
 #### TLDR – Just get me started 👀
@@ -78,8 +79,8 @@ return array(
     'sylvainjule.matomo.disableCookies' => false,
     'sylvainjule.matomo.blacklist'      => ['127.0.0.1', '::1'],
     'sylvainjule.matomo.basicAuth'      => null,
-    'sylvainjule.matomo.label'          => 'Matomo',
-    'sylvainjule.matomo.menu'           => true
+    'sylvainjule.matomo.area'           => true
+    'sylvainjule.matomo.area.label'     => 'Matomo',
 
 );
 ```
@@ -166,12 +167,12 @@ If you want to change the label for the Matomo Panel area, you can configure it 
 'sylvainjule.matomo.label' => 'Matomo'
 ```
 
-#### 3.11. `menu`
+#### 3.11. `area`
 
 If you want to hide the Matomo Panel area, set this option to `false`.
 
 ```php
-'sylvainjule.matomo.menu' => true
+'sylvainjule.matomo.area' => true
 ```
 
 <br/>
@@ -186,11 +187,28 @@ You only need to include the snippet in your code somewhere:
 
 <br/>
 
-## 5. Panel dashboard
+## 5. Panel display: Area
 
-The panel dashboard (screenshot on top of this readme) displays metrics for the whole website. It is usually available as panel area (at the `{ site.url }/panel/matomo` route), but you can also configure it in a custom tab / blueprint.
+The panel area displays metrics for the whole website. It is available at the `{ site.url }/panel/matomo` route.
+Alternatively, you can configure it in a custom tab / blueprint (see below). In such a case, you might want to disable the area completely:
 
-#### 5.1. Basic blueprint example
+```php
+'sylvainjule.matomo.area' => false
+```
+
+You can also customize its title with the `area.label` option:
+
+```php
+'sylvainjule.matomo.area.label' => 'Analytics'
+```
+
+<br/>
+
+## 6. Panel display: Sections
+
+The panel dashboard can be configured in a custom tab / blueprint with sections.
+
+#### 6.1. Basic blueprint example
 
 > Please make sure that you have included your `token_auth` in your config.
 
@@ -208,7 +226,7 @@ columns:
         type: matomo-sidebar
 ```
 
-#### 5.2. Options
+#### 6.2. Options
 
 ##### Hiding components
 
@@ -295,7 +313,7 @@ columns:
           limit: 5
 ```
 
-#### 5.3. Complete blueprint example
+#### 6.3. Complete blueprint example
 
 Here's a glimpse of how the blueprint might look with all options explicitely set:
 
@@ -333,7 +351,7 @@ columns:
 
 <br/>
 
-## 6. Panel page widget
+## 7. Panel page widget
 
 The panel page widget displays metrics for a given page, both in single-language or multi-language websites.
 
@@ -342,7 +360,7 @@ The panel page widget displays metrics for a given page, both in single-language
 ![screenshot-page](https://user-images.githubusercontent.com/14079751/47636477-b9772b80-db58-11e8-94d4-1f8fee8ad0aa.jpg)
 
 
-#### 6.1. Basic blueprint example
+#### 7.1. Basic blueprint example
 
 > Please make sure that you have included your `token_auth` in your config.
 
@@ -358,7 +376,7 @@ columns:
 
 The section will automatically detect the page uri, and fetch its metrics for the given period.
 
-#### 6.2. Options
+#### 7.2. Options
 
 ##### Period
 
@@ -382,7 +400,7 @@ matomo:
   overview: false
 ```
 
-#### 6.3. Potential pitfalls
+#### 7.3. Potential pitfalls
 
 - Matomo receives public urls, which means that its URIs are fetched **once routes have been applied**. Therefore, the plugin filters Matomo's responses with a uri created from the public url of the page. If you have set up custom routes, to skip subfolders for example, please make sure to overwrite the `url` method for the template with a page model, otherwise the uri won't be correct.
 - The metrics shown might not be accurate / complete if you have changed the default language after Matomo started its data collection.
@@ -390,13 +408,13 @@ matomo:
 
 <br/>
 
-## 7. License
+## 8. License
 
 MIT
 
 <br/>
 
-## 8. Credits
+## 9. Credits
 
 Kirby 2 had some Piwik integration plugins:
 
