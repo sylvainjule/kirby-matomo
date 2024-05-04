@@ -3,6 +3,7 @@
 require_once __DIR__ . '/lib/matomo.php';
 
 Kirby::plugin('sylvainjule/matomo', array(
+    'areas' => require_once __DIR__ . '/lib/area.php',
 	'options' => array(
 		'token'      => false,
 		'url'        => false,
@@ -11,6 +12,8 @@ Kirby::plugin('sylvainjule/matomo', array(
 		'debug'      => false,
         'blacklist'  => ['127.0.0.1', '::1'],
         'trackUsers' => false,
+        'label'      => 'Matomo',
+        'menu'       => true
 	),
 	'snippets' => array(
         'matomo' => __DIR__ . '/lib/snippets/matomo.php'

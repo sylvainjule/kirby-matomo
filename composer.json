@@ -1,6 +1,6 @@
 {
     "name": "sylvainjule/matomo",
-    "description": "Matomo helpers and panel sections for Kirby",
+    "description": "Matomo helpers, panel area and sections for Kirby",
     "type": "kirby-plugin",
     "license": "MIT",
     "authors": [
