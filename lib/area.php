@@ -2,12 +2,12 @@
 
 return [
     'matomo' => function ($kirby) {
-        $label = $kirby->option('sylvainjule.matomo.area.label');
+        $label = option('sylvainjule.matomo.area.label');
         return [
             'label' => $label,
             'icon'  => 'line-chart',
             'link'  => 'matomo',
-            'menu'  => $kirby->option('sylvainjule.matomo.area'),
+            'menu'  => option('sylvainjule.matomo.area'),
             'views' => [
                 [
                     'pattern' => 'matomo',
@@ -21,7 +21,7 @@ return [
                             'component'  => 'matomo',
                             'title'      => $label,
                             'props' => [
-                                'title' => kirby()->option('sylvainjule.matomo.area.label'),
+                                'title' => option('sylvainjule.matomo.area.headline') ?? option('sylvainjule.matomo.area.label'),
                                 'main'  => [
                                     'periods' => $periods,
                                     'lang'    => $lang,

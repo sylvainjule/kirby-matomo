@@ -81,6 +81,7 @@ return array(
     'sylvainjule.matomo.basicAuth'      => null,
     'sylvainjule.matomo.area'           => true
     'sylvainjule.matomo.area.label'     => 'Matomo',
+    'sylvainjule.matomo.area.headline'  => null,
 
 );
 ```
@@ -159,14 +160,6 @@ If your Matomo instance is additionally secured by Basic Authentication, you can
 'sylvainjule.matomo.basicAuth' => null
 ```
 
-#### 3.10. `label`
-
-If you want to change the label for the Matomo Panel area, you can configure it in the options.
-
-```php
-'sylvainjule.matomo.label' => 'Matomo'
-```
-
 #### 3.11. `area`
 
 If you want to hide the Matomo Panel area, set this option to `false`.
@@ -174,6 +167,23 @@ If you want to hide the Matomo Panel area, set this option to `false`.
 ```php
 'sylvainjule.matomo.area' => true
 ```
+
+#### 3.11. `area.label`
+
+If you want to change the label for the Matomo Panel area (displayed in the menu and the breacrumb), you can configure it:
+
+```php
+'sylvainjule.matomo.area.label' => 'Matomo'
+```
+
+#### 3.12. `label`
+
+If you also want to change the headline for the Matomo Panel area, you can set it with the `area.headline` option. If not specified, the label will be used as fallback.
+
+```php
+'sylvainjule.matomo.area.headline' => 'Custom area headline'
+```
+
 
 <br/>
 
