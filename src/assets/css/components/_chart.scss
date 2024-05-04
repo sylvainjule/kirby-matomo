@@ -20,14 +20,16 @@
 	}
 	.empty {
 		margin-top: 0;
+		padding: 1rem;
+		background: white;
 		span {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 100%;
 			height: 100%;
-			background: darken(#efefef, 2%);
-			color: lighten(black, 60%);
+			background: #fafafa;
+			color: #b3b3b3;
 		}
 	}
 
