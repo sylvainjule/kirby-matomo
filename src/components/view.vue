@@ -1,7 +1,7 @@
 <template>
     <k-inside>
-        <k-view class="k-matomo">
-            <k-header> {{ $t('matomo.title.overview') }} </k-header>
+        <k-view class="k-matomo-view">
+            <k-header> {{ title }} </k-header>
             <k-grid variant="columns">
                 <k-column width="3/4">
                     <matomo-main
@@ -25,7 +25,8 @@
 export default {
     props: {
         main: Array,
-        sidebar: Array
+        sidebar: Array,
+        title: String
     },
 };
 </script>

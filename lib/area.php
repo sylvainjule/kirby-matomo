@@ -11,32 +11,27 @@ return [
             'views' => [
                 [
                     'pattern' => 'matomo',
-                    'action' => function() use($label) {
-                        $lang = kirby()->user()->language();
+                    'action'  => function() use($label) {
+                        $lang    = kirby()->user()->language();
                         $periods = ['year', 'month', 'week', 'day'];
-                        $url = option('sylvainjule.matomo.url');
+                        $url     = option('sylvainjule.matomo.url');
                         $widgets = ['referrerType', 'websites', 'socials', 'devicesType', 'keywords', 'popularPages'];
 
                         return [
                             'component'  => 'matomo',
-                            'title'      => $label . ': ' . t('matomo.title.overview'),
-                            'breadcrumb' => [
-                                [
-                                    'label' => t('matomo.title.overview'),
-                                    'link' => 'matomo'
-                                ]
-                            ],
+                            'title'      => $label,
                             'props' => [
-                                'main' => [
+                                'title' => kirby()->option('sylvainjule.matomo.area.label'),
+                                'main'  => [
                                     'periods' => $periods,
-                                    'lang' => $lang,
+                                    'lang'    => $lang,
                                     'widgets' => $widgets
                                 ],
                                 'sidebar' => [
-                                    'link' => true,
+                                    'link'     => true,
                                     'realtime' => true,
-                                    'summary' => true,
-                                    'url' => $url,
+                                    'summary'  => true,
+                                    'url'      => $url,
                                 ]
                             ]
                         ];
