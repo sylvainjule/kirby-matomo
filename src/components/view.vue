@@ -1,5 +1,5 @@
 <template>
-    <k-inside>
+    <k-panel-inside>
         <k-view class="k-matomo">
             <k-header> {{ $t('matomo.title.overview') }} </k-header>
             <k-grid variant="columns">
@@ -18,7 +18,7 @@
                 </k-column>
             </k-grid>
         </k-view>
-    </k-inside>
+    </k-panel-inside>
 </template>
 
 <script>
