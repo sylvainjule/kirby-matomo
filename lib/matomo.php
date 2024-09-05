@@ -144,6 +144,7 @@ class Matomo {
 		$url .= "?module=API&method=Actions.getPageUrls";
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=today";
 		$url .= "&format=JSON&token_auth=". $this->token;
+        $url .= "&flat=1";
 		$url .= $lang['multilang'] ? '&expanded=1' : '';
 
         $content = Remote::get($url, $this->requestParams)->json();
