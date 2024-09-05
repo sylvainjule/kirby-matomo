@@ -166,7 +166,7 @@ class Matomo {
 
 		// set the correct language and find the page
 		if($multilang) $site->visit($site->homePage(), $currentLang);
-		$page   = $site->childrenAndDrafts()->find($uri);
+		$page   = $site->index()->find($uri);
 
 		// re-create the uri from the public url
 		$currentUrl  = $page->url(); // get the page url
