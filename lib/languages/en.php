@@ -77,4 +77,11 @@ return array(
 	'matomo.visitors.caption' => ['visitor is currently browsing the website', 'visitors are currently browsing the website'],
 	'matomo.novisitors'       => 'There are currently no visitors browsing the website',
 
+	/* Opt-out
+	---------------------------*/
+    'matomo.blocks.opt-out.name' => 'Matomo opt-out',
+	'matomo.optout.description' => 'You may choose not to have a unique web analytics cookie identification number assigned to your computer to avoid the aggregation and analysis of data collected on this website.',
+	'matomo.optout.instructions' => 'To make that choice, please click below to receive an opt-out cookie.',
+	'matomo.optout.optin' => 'You are currently opted out. Click here to opt in.',
+	'matomo.optout.optout' => 'You are currently opted in. Click here to opt out.',
 );
