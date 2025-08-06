@@ -81,6 +81,7 @@ return array(
     'sylvainjule.matomo.debug'          => false,
     'sylvainjule.matomo.trackUsers'     => false,
     'sylvainjule.matomo.disableCookies' => false,
+    'sylvainjule.matomo.setDoNotTrack'  => false,
     'sylvainjule.matomo.blacklist'      => ['127.0.0.1', '::1'],
     'sylvainjule.matomo.basicAuth'      => null,
     'sylvainjule.matomo.area'           => true
@@ -159,7 +160,7 @@ If you want to use Matomo without any tracking cookies on the user side, set thi
 
 #### 3.9. `setDoNotTrack`
 
-If you want to add the `_paq.push(["setDoNotTrack", true])` option in your traching code, set this option to `true`. You can read more about this setting in the [Matomo FAQ](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/#step-4-respect-donottrack-preference).
+If you want to add the `_paq.push(["setDoNotTrack", true])` option in your tracking code, set this option to `true`. You can read more about this setting in the [Matomo FAQ](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/#step-4-respect-donottrack-preference).
 
 ```php
 'sylvainjule.matomo.setDoNotTrack' => false
