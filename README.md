@@ -14,6 +14,8 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 - [2. Installation](#2-installation)
 - [3. Options](#3-options)
 - [4. Template usage](#4-template-usage)
+  * [4.1. Tracking code](#41-tracking-code)
+  * [4.2. Opt-out snippet](#42-opt-out-snippet)
 - [5. Panel display: Area](#5-panel-display-area)
 - [6. Panel display: Sections](#6-panel-display-sections)
   * [6.1. Basic blueprint example](#61-basic-blueprint-example)
@@ -191,17 +193,24 @@ If you also want to change the headline for the Matomo Panel area, you can set i
 
 ## 4. Template usage
 
+#### 4.1. Tracking code
+
 You only need to include the snippet in your code somewhere:
 
 ```php
 <?php snippet('matomo'); ?>
 ```
 
-<br/>
+#### 4.2. Opt-out snippet
 
-### 4.1 Opt-out block
+The plugin provides a Matomo opt-out snippet that allows visitors to control their tracking preferences. 
+You can call include it manually:
 
-The plugin provides a Matomo opt-out block that allows visitors to control their tracking preferences. To use it in your Kirby blocks field:
+```php
+<?php snippet('blocks/matomo-opt-out'); ?>
+```
+
+Or use it in a Kirby blocks field:
 
 ```yaml
 fields:
