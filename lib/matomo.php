@@ -144,6 +144,7 @@ class Matomo {
 		$url .= "?module=API&method=Actions.getPageUrls";
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=today";
 		$url .= "&format=JSON&token_auth=". $this->token;
+        $url .= "&flat=1";
 		$url .= $lang['multilang'] ? '&expanded=1' : '';
 
         $content = Remote::get($url, $this->requestParams)->json();
@@ -165,7 +166,7 @@ class Matomo {
 
 		// set the correct language and find the page
 		if($multilang) $site->visit($site->homePage(), $currentLang);
-		$page   = $site->childrenAndDrafts()->find($uri);
+		$page   = $site->index()->find($uri);
 
 		// re-create the uri from the public url
 		$currentUrl  = $page->url(); // get the page url
