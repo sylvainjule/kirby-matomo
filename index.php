@@ -81,20 +81,12 @@ Kirby::plugin('sylvainjule/matomo', array(
         				$uris = [];
         				foreach(kirby()->languages() as $language) {
         					$code = $language->code();
-                            // re-create the uri from the public url
-                            $currentUrl  = $this->model()->url($code); // get the page url
-                            $currentUri  = str_replace(site()->url(), '', $currentUrl); // substract the site url to get the uri
-                            $currentUri  = '/' . ltrim($currentUri, '/'); // make sure it starts by a single forward slash
-        					$uris[$code] = $currentUri;
+        					$uris[$code] = $this->model()->uri($code);
         				}
         				return $uris;
         			}
         			else {
-        				// re-create the uri from the public url
-                        $currentUrl  = $this->model()->url(); // get the page url
-                        $currentUri  = str_replace(site()->url(), '', $currentUrl); // substract the site url to get the uri
-                        $currentUri  = '/' . ltrim($currentUri, '/'); // make sure it starts by a single forward slash
-                        return $currentUri;
+                        return $this->model()->uri();
         			}
         		},
         		'lang' => function() {

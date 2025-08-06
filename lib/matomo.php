@@ -144,7 +144,7 @@ class Matomo {
 		$url .= "?module=API&method=Actions.getPageUrls";
 		$url .= "&idSite=". $this->id ."&period=". $period ."&date=today";
 		$url .= "&format=JSON&token_auth=". $this->token;
-        $url .= "&flat=1";
+		$url .= '&flat=1';
 		$url .= $lang['multilang'] ? '&expanded=1' : '';
 
         $content = Remote::get($url, $this->requestParams)->json();
@@ -158,23 +158,18 @@ class Matomo {
 	public function filterPageMetrics($content, $uri, $lang) {
 		$site  = site();
 		$kirby = kirby();
-		$multilang   = $lang['multilang'];
-		$overview    = $lang['overview'];
+		$multilang   = $lang['multilang'] == 'false' ? false : true;
+		$overview    = $lang['overview']  == 'false' ? false : true;
 		$currentLang = $lang['current'];
 		$defaultLang = $lang['default'];
 		$isDefault   = $currentLang == $defaultLang;
 
 		// set the correct language and find the page
 		if($multilang) $site->visit($site->homePage(), $currentLang);
-		$page   = $site->index()->find($uri);
-
-		// re-create the uri from the public url
-		$currentUrl  = $page->url(); // get the page url
-		$currentUri  = str_replace(site()->url(), '', $currentUrl); // substract the site url to get the uri
-		$currentUri  = '/' . ltrim($currentUri, '/'); // make sure it starts by a single forward slash
+		$page = $site->index()->findBy('uri', $uri);
 
 		// get the current page stats
-		$current = $this->filterWithUri($content, $currentUri, $currentLang, $isDefault);
+		$current = $this->filterWithUri($content, $uri, $currentLang, $isDefault);
 
 		// return it if there's no other language or if they don't need to be displayed
 		if(!$multilang || !$overview) {
@@ -191,14 +186,12 @@ class Matomo {
 			foreach($kirby->languages() as $language) {
 				if($language->code() == $currentLang) continue;
 
-				$tempCode    = $language->code();
-				$tempDefault = $tempCode == $defaultLang;
-				$tempUrl     = $page->url($tempCode);
-				$tempUri     = str_replace(site()->url($tempCode), '', $tempUrl);
-				$tempUri     = '/' . ltrim($tempUri, '/');
+				$languageCode = $language->code();
+				$isDefault    = $languageCode == $defaultLang;
+				$languageUri  = $page->uri($languageCode);
 
-				$tempMetrics = $this->filterWithUri($content, $tempUri, $tempCode, $tempDefault);
-				array_push($metrics, $tempMetrics);
+				$languageMetrics = $this->filterWithUri($content, $languageUri, $languageCode, $isDefault);
+				array_push($metrics, $languageMetrics);
 			}
 
 			// filter out empty languages
@@ -237,6 +230,8 @@ class Matomo {
 				);
 			}
 
+			$current = empty($current) && !empty($all) ? ['visits' => 0, 'duration' => 0, 'bounce' => 0, 'exit' => 0] : $current;
+
 			// return the array
 			return array(
 				'current' => $current,
@@ -247,27 +242,17 @@ class Matomo {
 	}
 
 	public function filterWithUri($content, $uri, $lang, $isDefault) {
-	    $possibleLabels = ($uri == '/' || $uri == '/' . site()->homePage()->uri()) ? array('/', '/index', '/home') : array($uri);
-
-	    // check if an array exists for the given language
-	    if($lang && !$isDefault) {
-	    	$langArray = array_filter($content, function($entry) use($lang) {
-				return $entry['label'] == $lang;
-			});
-	    	// if the array exists, make it the new $content
-			if(count($langArray)) {
-				$content = reset($langArray)['subtable'] ?? array();
-			}
-			// if the array isn't found, but the language isn't the default one
-			else {
-				return array();
-			}
+	    if($uri == '/' || $uri == '/' . site()->homePage()->uri()) {
+	    	$possibleLabels = ['/', '/index', '/home'];
+	    }
+	    else {
+	    	$possibleLabels = kirby()->multilang() ? ['/'. $lang .'/'. $uri, '/'. $uri, $uri] : ['/'. $uri, $uri];
 	    }
 
 		// check if the $content contains one of the possible labels
 		$filteredContent = array_filter($content, function($entry) use($possibleLabels) {
 			$label = preg_replace('/\?.*/', '', $entry['label']);
-			return in_array($label, $possibleLabels) ? true : false;
+			return in_array($label, $possibleLabels);
 		});
 
 		// filter out empty keys, just in case

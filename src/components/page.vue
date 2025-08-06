@@ -63,8 +63,7 @@ export default {
 			return !this.lang.overview
 		},
 		currentLanguage() {
-            let _l = this.$store.state.languages ? this.$store.state.languages.current : this.$language;
-			return _l ? _l.code : false
+			return this.$panel.language.code
 		},
 		currentUri() {
 			return this.uri.constructor == Object ? this.uri[this.currentLanguage] : this.uri
@@ -72,8 +71,6 @@ export default {
 	},
 	created() {
 		this.init()
-	},
-	destroyed() {
 	},
 	watch: {
 	    currentLanguage() {
