@@ -8,7 +8,7 @@ This plugin helps you generate a tracking code for Matomo, and displays some use
 
 ## Overview
 
-> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/sylvainjl).
+> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, you can consider [making a donation of your choice](https://www.paypal.me/sylvainjl).
 
 - [1. Why Matomo?](#1-why-matomo)
 - [2. Installation](#2-installation)
@@ -54,13 +54,13 @@ You're all set.
 - It's free (like, really free. You don't pay with your data)
 - It's self-hosted (which means more control for you over your data)
 - It respects your visitors privacy (IP Anonymization, automated logs deletion, data ownership)
-- It now integrates smoothly with Kirby 4 ✌️
+- It now integrates smoothly with Kirby 5 ✌️
 
 <br/>
 
 ## 2. Installation
 
-> Kirby 3: up to 1.0.7 Kirby 4: 2.0.0+
+> Kirby 3: up to 1.0.7 Kirby 4: up to 2.0.1. Kirby 5: 2.1.0+.
 
 Download and copy this repository to ```/site/plugins/matomo```
 
@@ -108,7 +108,8 @@ A single Matomo install can host multiple websites. The plugin needs to know the
 
 #### 3.3. `token` (required for the panel integration)
 
-The panel sections will need to make calls to your Matomo API. A `token_auth` is required, you will find it in `Settings > API` in the control panel. Copy-paste the string without the `&token_auth=` prefix.
+The panel sections will need to make calls to your Matomo API. A `token_auth` is required, you can generate it in your Matomo dashboard under `Settings > Personal > Security ↓ Auth tokens`. 
+Copy-paste the token string generated.
 
 > Below is an example token. Please note that this token is private and shouldn't be made public. Once added, if you need to publish your code please create something like a duplicated `config.github.php` which will contain the non-sensitive informations, and add your real `config.php` to your `.gitignore`.
 
