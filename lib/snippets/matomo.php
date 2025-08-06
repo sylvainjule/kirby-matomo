@@ -2,8 +2,11 @@
 
 	<script>
 	  	var _paq = window._paq || [];
-        <?php if(option('sylvainjule.matomo.disableCookies')) :?>
+        <?php if(option('sylvainjule.matomo.disableCookies')): ?>
             _paq.push(['disableCookies']);
+        <?php endif; ?>
+        <?php if(option('sylvainjule.matomo.setDoNotTrack')): ?>
+        	_paq.push(['setDoNotTrack', true]);
         <?php endif; ?>
 		_paq.push(['trackPageView']);
 	  	_paq.push(['enableLinkTracking']);

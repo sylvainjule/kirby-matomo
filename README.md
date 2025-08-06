@@ -157,7 +157,15 @@ If you want to use Matomo without any tracking cookies on the user side, set thi
 'sylvainjule.matomo.disableCookies' => false
 ```
 
-#### 3.9. `basicAuth`
+#### 3.9. `setDoNotTrack`
+
+If you want to add the `_paq.push(["setDoNotTrack", true])` option in your traching code, set this option to `true`. You can read more about this setting in the [Matomo FAQ](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/#step-4-respect-donottrack-preference).
+
+```php
+'sylvainjule.matomo.setDoNotTrack' => false
+```
+
+#### 3.10. `basicAuth`
 
 If your Matomo instance is additionally secured by Basic Authentication, you can configure these credentials in the format `USERNAME:PASSWORD`.
 
@@ -173,7 +181,7 @@ If you want to hide the Matomo Panel area, set this option to `false`.
 'sylvainjule.matomo.area' => true
 ```
 
-#### 3.11. `area.label`
+#### 3.12. `area.label`
 
 If you want to change the label for the Matomo Panel area (displayed in the menu and the breacrumb), you can configure it:
 
@@ -181,7 +189,7 @@ If you want to change the label for the Matomo Panel area (displayed in the menu
 'sylvainjule.matomo.area.label' => 'Matomo'
 ```
 
-#### 3.12. `label`
+#### 3.13. `label`
 
 If you also want to change the headline for the Matomo Panel area, you can set it with the `area.headline` option. If not specified, the label will be used as fallback.
 
