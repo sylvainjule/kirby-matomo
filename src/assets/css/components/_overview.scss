@@ -8,7 +8,8 @@
 		margin-top: 1.5rem;
 		padding: 1.5rem;
 		padding-right: 1rem;
-		background: white;
+		background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
+		border-radius: var(--rounded);
 		min-height: 150px;
 		display: flex;
 		box-shadow: 0 2px 5px rgba(22,23,26,.05);
@@ -20,7 +21,7 @@
 		justify-content: space-between;
 		align-items: flex-start;
 		&:not(:last-child) {
-			border-right: 1px solid lighten(#d9d9d9, 7%);
+			border-right: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(255, 255, 255, .2));
 			padding-right: 1rem;
 			margin-right: 1.5rem;
 		}
@@ -41,7 +42,7 @@
 				content: '';
 				width: 15px;
 				height: 1px;
-				background: lighten($grey, 20%);
+				background: light-dark(lighten($grey, 20%), rgba(255, 255, 255, .3));
 				top: 0;
 			}
 		}
@@ -63,7 +64,7 @@
 				} 
 			}
 			&.positive {
-				background: #f1faed;
+				background: light-dark(#f1faed, rgba(#405b34, .4));
 				color: #7aba4c;
 				.icon {
 					svg {
@@ -72,8 +73,8 @@
 				}
 			}
 			&.negative {
-				background: #feeaee;
-				color: #f93048;
+				background: light-dark(#feeaee, rgba(#963a4c, .3));
+				color: light-dark(#f93048, #eb475b);
 				.icon {
 					transform: rotate(90deg);
 					svg {
@@ -82,8 +83,8 @@
 				}
 			}
 			&.grey {
-				background: lighten(#efefef, 3%);
-				color: #9a9a9a;
+				background: light-dark(lighten(#efefef, 3%), rgba(255, 255, 255, .07));
+				color: light-dark(#9a9a9a, rgba(255, 255, 255, .6));
 			}
 		}
 	}
@@ -112,14 +113,14 @@
 				border-right: none;
 			}
 			&:nth-child(odd) {
-				border-right: 1px solid lighten(#d9d9d9, 7%);
+				border-right: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(255, 255, 255, .2));
 			}
 			&:nth-child(even) {
 				padding-left: 1.5rem;
 			}
 			&:first-child, &:nth-child(2) {
 				padding-bottom: 1.5rem;
-				border-bottom: 1px solid lighten(#d9d9d9, 7%);
+				border-bottom: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(255, 255, 255, .2));
 			}
 			&:nth-child(3), &:nth-child(4) {
 				padding-top: 1.5rem;
@@ -137,7 +138,7 @@
 			}
 			&:not(:last-child) {
 				padding-bottom: 1.5rem;
-				border-bottom: 1px solid lighten(#d9d9d9, 7%);
+				border-bottom: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(255, 255, 255, .2));
 			}
 			&:not(:first-child) {
 				padding-top: 1.5rem;

@@ -14,7 +14,8 @@
 		margin-top: 1.5rem;
 		padding: 1.5rem;
 		padding-bottom: 1.25rem;
-		background: white;
+		background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
+		border-radius: var(--rounded);
 		box-shadow: 0 2px 5px rgba(22,23,26,.05);
 		&:nth-child(odd) {
 			margin-right: 1.5rem;
@@ -27,22 +28,7 @@
 			font-size: 30px;
 			margin-top: 5px;
 		}
-		.details {
-			position: relative;
-			font-size: 0.875rem;
-			color: lighten($grey, 10%);
-			margin-top: 20px;
-			padding-top: 15px;
-			line-height: 1.5;
-			&:before {
-				position: absolute;
-				content: '';
-				width: 15px;
-				height: 1px;
-				background: lighten($grey, 20%);
-				top: 0;
-			}
-		}
+
 		ul {
 			margin-top: calc(20px - 0.5rem);
 			li {
@@ -58,7 +44,7 @@
 					svg {
 						width: 100%;
 						height: 100%;
-						fill: lighten($grey, 20%);
+						fill: light-dark(lighten($grey, 20%), rgba(255, 255, 255, .5));
 					}
 				}
 				.text {
@@ -76,25 +62,26 @@
 					}
 				}
 				&:not(:last-child) {
-					border-bottom: 1px solid lighten(#d9d9d9, 7%);
+					border-bottom: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(255, 255, 255, .2));
 				}
 				&:hover {
-					background: #fafafa;
+					background: light-dark(#fafafa, hsl(0, 0%, calc(15% + 0%)));
 					.icon {
 						svg {
-							fill: $grey;
+							fill: light-dark($grey, rgba(255, 255, 255, .8));
 						}
 					}
 				}
 			}
 		}
 		.empty {
-			color: lighten($grey, 20%);
+			color: light-dark(lighten($grey, 20%), rgba(255, 255, 255, .6));
 			font-size: 0.75rem;
 			text-align: center;
 			margin-top: 1rem;
 			padding: 1rem 0 1rem 0;
-			background: #fafafa;
+			background: light-dark(#fafafa, hsl(0, 0%, calc(15% + 0%)));
+			border-radius: var(--rounded-sm);
 		}
 	}
 	@include respond-to('smaller-720') {

@@ -3,7 +3,7 @@
     "description": "Matomo helpers, panel area and sections for Kirby",
     "type": "kirby-plugin",
     "license": "MIT",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "authors": [
         {
             "name": "Sylvain Julé",

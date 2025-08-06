@@ -14,7 +14,7 @@
 			opacity: 1;
 		}
 		&.active {
-			border-bottom: 1px solid black;
+			border-bottom: 1px solid light-dark(black, white);
 		}
 	}
 	@include respond-to('smaller-480') {

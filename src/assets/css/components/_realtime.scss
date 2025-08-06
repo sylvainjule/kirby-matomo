@@ -6,13 +6,13 @@
 		font-size: 0.75rem;
 		padding: 0.25rem 0.5rem;
 		border-radius: 4px;
-		background: darken(#fafafa, 3%);
+		background: light-dark(darken(#fafafa, 3%), hsl(0, 0%, calc(15% + 0%)));
 		letter-spacing: 0.15px;
-		color: lighten($grey, 5%);
+		color: light-dark(lighten($grey, 5%), rgba(255, 255, 255, .6));
 		cursor: pointer;
 		transition: color 0.2s ease-out;
 		&:hover {
-			color: black;
+			color: light-dark(black, white);
 		}
 	}
 	.big-number {
@@ -32,7 +32,7 @@
 			content: '';
 			width: 15px;
 			height: 1px;
-			background: lighten($grey, 20%);
+			background: light-dark(lighten($grey, 20%), rgba(255, 255, 255, .3));
 			top: 0;
 		}
 	}

@@ -1,16 +1,17 @@
 .matomo-page {
 	padding: 1.5rem;
 	padding-bottom: 1.25rem;
-	background: white;
+	background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
 	box-shadow: 0 2px 5px rgba(22,23,26,.05);
+	border-radius: var(--rounded);
 	margin-bottom: 3rem;
 	.code {
 		text-transform: uppercase;
 		padding: 2px 4px;
 		border-radius: 3px;
 		margin-left: 5px;
-		background: #f2f2f2;
-        color: #919191;
+		background: light-dark(#f2f2f2, rgba(white, .2));
+        color: light-dark(#919191, rgba(white, .8));
 	}
 	.loader, table {
 		margin-top: calc(20px - 0.5rem);
@@ -34,8 +35,8 @@
 						padding: 2px 4px;
 						border-radius: 3px;
 						margin-right: -4px;
-						border: 1px solid lighten(#d9d9d9, 7%);
-				        color: #919191;
+						border: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(white, .3));
+        				color: light-dark(#919191, rgba(white, .7));
 					}
 				}
 			}
@@ -51,7 +52,7 @@
 					svg {
 						width: 100%;
 						height: 100%;
-						fill: lighten($grey, 20%);
+						fill: light-dark(lighten($grey, 20%), rgba(255, 255, 255, .5));
 					}
 				}
 				&:first-child {
@@ -82,18 +83,20 @@
 				margin-left: auto;
 			}
 			&:not(:last-child) {
-				border-bottom: 1px solid lighten(#d9d9d9, 7%);
+				border-bottom: 1px solid light-dark(lighten(#d9d9d9, 7%), rgba(255, 255, 255, .2));
 			}
 			&:hover {
-				background: #fafafa;
-				.icon {
-					svg {
-						fill: $grey;
+				&:not(:first-child) {
+					background: light-dark(#fafafa, hsl(0, 0%, calc(15% + 0%)));
+					.icon {
+						svg {
+							fill: light-dark($grey, rgba(255, 255, 255, .8));
+						}
 					}
-				}
-				td {
-					&:nth-child(3) {
-						color: $grey;
+					td {
+						&:nth-child(3) {
+							color: light-dark($grey, rgba(255, 255, 255, .8));
+						}
 					}
 				}
 			}

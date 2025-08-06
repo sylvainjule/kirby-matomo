@@ -8,7 +8,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(239, 239, 239, 0.85);
+		background: light-dark(rgba(239, 239, 239, 0.85), rgba(31, 31, 31, .85));
 		z-index: 1000;
 		display: flex;
 		justify-content: center;
@@ -21,14 +21,14 @@
 	.empty {
 		margin-top: 0;
 		padding: 1rem;
-		background: white;
+		background: light-dark(white, black);
 		span {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 100%;
 			height: 100%;
-			background: #fafafa;
+			background: light-dark(#fafafa, hsl(0, 0%, calc(19% + 0%)));
 			color: #b3b3b3;
 		}
 	}

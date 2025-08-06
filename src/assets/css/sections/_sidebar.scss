@@ -2,9 +2,11 @@
     position: relative;
     display: flex;
     align-items: center;
-    background: white;
+	background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
     border-radius: 1px;
     margin-bottom: 2px;
+	border-radius: var(--rounded);
+	overflow: hidden;
     box-shadow: 0 2px 5px rgba(22,23,26,.05);
     .icon {
     	width: 38px;
@@ -32,20 +34,21 @@
 		    margin-right: 1rem;
 		    flex-grow: 1;
 		    font-size: .875rem;
-		    color: #16171a;
+		    color: light-dark(#16171a, rgba(255, 255, 255, .9));
 	    }
 	}
 }
 
 .matomo-block {
 	position: relative;
+	border-radius: var(--rounded);
 	&:not(:first-child) {
 		margin-top: 1.5rem;
 	}
 	padding: 1rem;
 	padding-bottom: 0.75em;
 	padding-top: 1.25em;
-	background: white;
+	background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
 	box-shadow: 0 2px 5px rgba(22,23,26,.05);
 	.loader {
 		font-size: 16px;
