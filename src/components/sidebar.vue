@@ -54,10 +54,6 @@ export default {
 	        	this.summary = response.summary
 	        })
 	},
-	destroyed() {
-	},
-	methods: {
-	},
 }
 </script>
 

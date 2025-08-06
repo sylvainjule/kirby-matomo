@@ -148,9 +148,6 @@ export default {
             return this.theme == 'light' ? '#282c34' : '#0f0f0f'
         },
     },
-    mounted() {
-        console.log(this.theme)
-    },
     watch: {
         currentPeriod: {
             immediate: true,

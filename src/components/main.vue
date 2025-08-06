@@ -82,8 +82,6 @@ export default {
         		this.currentPeriod = response.defaults.period ? response.defaults.period : response.periods[0]
 	        })
 	},
-	destroyed() {
-	},
 	methods: {
 		chartIsLoading() {
 			this.chartLoading = true

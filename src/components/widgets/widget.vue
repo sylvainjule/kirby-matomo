@@ -81,12 +81,6 @@ export default {
 			return this.widget == 'socials'
 		},
 	},
-	created() {
-	},
-	destroyed() {
-	},
-	watch: {
-    },
 	methods: {
 		visitsPercent(result) {
 			let percent = result.nb_visits / this.totalVisits * 100

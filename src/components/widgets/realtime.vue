@@ -23,8 +23,6 @@ export default {
 			visitors: Number,
 		}
 	},
-	props: {
-	},
 	computed: {
 		isEmpty() {
 			return this.status == 'empty'
@@ -36,8 +34,6 @@ export default {
 	},
 	created() {
 		this.syncContent()
-	},
-	destroyed() {
 	},
 	methods: {
 		syncContent() {
