@@ -1,5 +1,6 @@
 <?php
 
+@include_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/lib/matomo.php';
 
 Kirby::plugin('sylvainjule/matomo', array(
