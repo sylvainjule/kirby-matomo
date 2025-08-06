@@ -1,6 +1,5 @@
 {
   "name": "kirby-matomo",
-  "version": "0.0.1",
   "description": "Matomo helpers and panel sections for Kirby",
   "main": "index.js",
   "author": "Sylvain Julé",
