@@ -77,4 +77,11 @@ return array(
 	'matomo.visitors.caption' => ['Besucher surft derzeit auf der Webseite', 'Besucher surfen derzeit auf der Webseite.'],
 	'matomo.novisitors'       => 'Momentan sind keine Besucher auf der Webseite',
 
+    	/* Opt-out
+	---------------------------*/
+    'matomo.blocks.opt-out.name' => 'Matomo deaktivieren',
+    "matomo.optout.description" => "Sie können wählen, dass in Ihrem Browser ein eindeutiger Webanalyse-Cookie abgelegt wird, um dem Betreiber der Website die Erfassung und Analyse verschiedener statistischer Daten zu ermöglichen.",
+    "matomo.optout.instructions" => "Um diese Entscheidung zu treffen, wird ein Opt-Out-Cookie gesetzt, um zu verhindern, dass Matomo Nutzungsdaten speichert.",
+    'matomo.optout.optin' => 'Sie sind derzeit deaktiviert. Klicken Sie hier, um zu aktivieren.',
+    'matomo.optout.optout' => 'Sie sind derzeit aktiviert. Klicken Sie hier, um zu deaktivieren.',
 );

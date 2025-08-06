@@ -199,6 +199,33 @@ You only need to include the snippet in your code somewhere:
 
 <br/>
 
+### 4.1 Opt-out block
+
+The plugin provides a Matomo opt-out block that allows visitors to control their tracking preferences. To use it in your Kirby blocks field:
+
+```yaml
+fields:
+  blocks:
+    type: blocks # or layout
+    fieldsets:
+      - matomo-opt-out
+```
+
+The opt-out block will display a checkbox that allows visitors to opt-out of Matomo tracking. The block includes:
+- A description of Matomo tracking
+- Instructions for using the opt-out feature
+- A toggle button to opt-out/opt-in
+
+You can customize the text through Kirby's language files using these translation keys:
+- `matomo.optout.description`
+- `matomo.optout.instructions`
+- `matomo.optout.optin`
+- `matomo.optout.optout`
+
+You can also replace the default block snippet by creating a snippet named `blocks/matomo-opt-out.php` in your site's `snippets` folder or in a plugin.
+
+<br/>
+
 ## 5. Panel display: Area
 
 The panel area displays metrics for the whole website. It is available at the `{ site.url }/panel/matomo` route.

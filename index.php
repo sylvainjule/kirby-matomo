@@ -16,8 +16,12 @@ Kirby::plugin('sylvainjule/matomo', array(
         'area.label'    => 'Matomo',
         'area.headline' => null,
 	),
+    'blueprints' => array(
+        'blocks/matomo-opt-out' => __DIR__ . '/lib/blueprints/blocks/matomo-opt-out.yml'
+    ),
 	'snippets' => array(
-        'matomo' => __DIR__ . '/lib/snippets/matomo.php'
+        'matomo' => __DIR__ . '/lib/snippets/matomo.php',
+        'blocks/matomo-opt-out' => __DIR__ . '/lib/snippets/blocks/matomo-opt-out.php'
     ),
 	'sections' => array(
         'matomo-main' => array(
