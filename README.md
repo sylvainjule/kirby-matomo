@@ -84,7 +84,7 @@ return array(
     'sylvainjule.matomo.setDoNotTrack'  => false,
     'sylvainjule.matomo.blacklist'      => ['127.0.0.1', '::1'],
     'sylvainjule.matomo.basicAuth'      => null,
-    'sylvainjule.matomo.area'           => true
+    'sylvainjule.matomo.area'           => true,
     'sylvainjule.matomo.area.label'     => 'Matomo',
     'sylvainjule.matomo.area.headline'  => null,
 
