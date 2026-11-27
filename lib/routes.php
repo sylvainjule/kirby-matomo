@@ -13,13 +13,16 @@ return array(
 
         	try {
         		$matomo  = new Matomo();
-        		$content = $matomo->apiWidget($widget, $method, $period, $date, $limit, $lang);
+                if(!in_array($method, ['Referrers.getReferrerType', 'Referrers.getWebsites', 'Referrers.getSocials', 'DevicesDetection.getType', 'Referrers.getKeywords', 'Actions.getPageUrls'], true)) {
+                    throw new \InvalidArgumentException('Unsupported Matomo widget method');
+                }
+                $content = $matomo->apiWidget($widget, $method, $period, $date, $limit, $lang);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',
@@ -47,7 +50,7 @@ return array(
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',
@@ -68,7 +71,7 @@ return array(
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',
@@ -87,13 +90,16 @@ return array(
 
         	try {
         		$matomo  = new Matomo();
-        		$content = $matomo->apiChart($method, $period, $date);
+                if(!in_array($method, ['VisitsSummary.getUniqueVisitors', 'VisitTime.getVisitInformationPerServerTime'], true)) {
+                    throw new \InvalidArgumentException('Unsupported Matomo chart method');
+                }
+                $content = $matomo->apiChart($method, $period, $date);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',
@@ -112,13 +118,16 @@ return array(
 
         	try {
         		$matomo  = new Matomo();
-        		$content = $matomo->apiOverview($method, $period, $date);
+                if($method !== 'VisitsSummary.get') {
+                    throw new \InvalidArgumentException('Unsupported Matomo overview method');
+                }
+                $content = $matomo->apiOverview($method, $period, $date);
         		if(empty($content)) {
 				    $content = array('status' => 'empty');
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',
@@ -139,7 +148,7 @@ return array(
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',
@@ -169,7 +178,7 @@ return array(
 				}
         		return $content;
         	}
-        	catch (Exception $e) {
+            catch (\Throwable $e) {
         		$error = array(
 		            'status' => 'error',
 		            'plugin' => 'matomo',

@@ -2,6 +2,20 @@
 
 require_once __DIR__ . '/lib/matomo.php';
 
+load([
+    'SylvainJule\\Matomo\\MainField'    => 'lib/fields/MainField.php',
+    'SylvainJule\\Matomo\\SidebarField' => 'lib/fields/SidebarField.php',
+    'SylvainJule\\Matomo\\PageField'    => 'lib/fields/PageField.php',
+], __DIR__);
+
+if (property_exists(\Kirby\Blueprint\Normalizer::class, 'sectionFields')) {
+    \Kirby\Blueprint\Normalizer::$sectionFields += [
+        'matomo-main'    => 'matomo-main',
+        'matomo-sidebar' => 'matomo-sidebar',
+        'matomo-page'    => 'matomo-page',
+    ];
+}
+
 Kirby::plugin('sylvainjule/matomo', array(
     'areas' => require_once __DIR__ . '/lib/area.php',
 	'options' => array(
@@ -26,83 +40,11 @@ Kirby::plugin('sylvainjule/matomo', array(
         'matomo' => __DIR__ . '/lib/snippets/matomo.php',
         'blocks/matomo-opt-out' => __DIR__ . '/lib/snippets/blocks/matomo-opt-out.php'
     ),
-	'sections' => array(
-        'matomo-main' => array(
-        	'props' => array(
-        		'chart' => function($chart = true) {
-        			return $chart;
-        		},
-        		'overview' => function($overview = true) {
-        			return $overview;
-        		},
-        		'periods' => function($periods = ['year', 'month', 'week', 'day']) {
-        			return $periods;
-        		},
-        		'widgets' => function($widgets = ['referrerType', 'websites', 'socials', 'devicesType', 'keywords', 'popularPages']) {
-        			return $widgets;
-        		},
-        		'defaults' => function($defaults = ['period' => 'month', 'limit' => 5]) {
-        			return $defaults;
-        		},
-        	),
-        	'computed' => array(
-        		'lang' => function() {
-        			return kirby()->user()->language();
-        		}
-        	)
-        ),
-        'matomo-sidebar' => array(
-        	'props' => array(
-        		'link' => function($link = true) {
-        			return $link;
-        		},
-        		'realtime' => function($realtime = true) {
-        			return $realtime;
-        		},
-        		'summary' => function($summary = true) {
-        			return $summary;
-        		},
-        	),
-        	'computed' => array(
-        		'url' => function() {
-        			return option('sylvainjule.matomo.url');
-        		}
-        	)
-        ),
-        'matomo-page' => array(
-        	'props' => array(
-        		'overview' => function($overview = false) {
-        			return $overview;
-        		},
-        		'period' => function($period = 'month') {
-        			return $period;
-        		},
-        	),
-        	'computed' => array(
-        		'uri' => function() {
-        			if(kirby()->multilang()) {
-        				$uris = [];
-        				foreach(kirby()->languages() as $language) {
-        					$code = $language->code();
-        					$uris[$code] = $this->model()->uri($code);
-        				}
-        				return $uris;
-        			}
-        			else {
-                        return $this->model()->uri();
-        			}
-        		},
-        		'lang' => function() {
-        			return array(
-        				'multilang' => kirby()->multilang(),
-        				'default'   => kirby()->defaultLanguage() ? kirby()->defaultLanguage()->code() : false,
-        				'current'   => kirby()->languageCode() ?? false,
-        				'overview'  => $this->overview
-        			);
-        		}
-        	)
-        )
-    ),
+    'fields' => [
+        'matomo-main'    => \SylvainJule\Matomo\MainField::class,
+        'matomo-sidebar' => \SylvainJule\Matomo\SidebarField::class,
+        'matomo-page'    => \SylvainJule\Matomo\PageField::class,
+    ],
     'translations' => array(
         'en' => require_once __DIR__ . '/lib/languages/en.php',
         'de' => require_once __DIR__ . '/lib/languages/de.php',

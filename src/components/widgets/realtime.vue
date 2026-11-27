@@ -19,6 +19,7 @@ export default {
 	data() {
 		return {
 			loading: true,
+            requestId: 0,
 			status: 'loading',
 			visitors: Number,
 		}
@@ -35,18 +36,28 @@ export default {
 	created() {
 		this.syncContent()
 	},
+    beforeUnmount() { 
+    	this.requestId++ 
+    },
 	methods: {
 		syncContent() {
+            const id = ++this.requestId
 			this.loading = true
 			this.status  = 'loading'
+
 			this.$api
 		        .get('matomo-panel/get-realtime-number')
 		        .then(response => {
+                    if(id !== this.requestId) return
+                    if(!response || response.status === 'error' || response.status === 'empty') throw new Error('No metrics')
+
 		        	this.visitors = parseFloat(response[0].visitors)
 		        	this.loading  = false
 					this.status   = response.status
 		        })
 		        .catch(error => {
+                    if(id !== this.requestId) return
+                    	
 		        	this.loading = false
 		        	this.status  = 'empty'
 		        })

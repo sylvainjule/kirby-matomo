@@ -3,10 +3,10 @@
 		<h5>{{ $t('matomo.widgets.title.'+ widget) }}</h5>
 		<div v-if="loading" class="loading"><div class="loader"></div></div>
 		<ul v-else-if="!loading && !isEmpty">
-			<li v-for="(result, index) in results">
+			<li v-for="(result, index) in results" :key="index">
 				<div class="icon"><svg><use :href="findIcon(result)" /></svg></div>
-				<div class="text" v-html="result.label"></div>
-				<div class="number">{{ result.nb_visits }} <span class="percent">{{ visitsPercent(result) }}%</span></div>
+				<div class="text">{{ result.label }}</div>
+				<div class="number">{{ result.nb_visits }} <span class="percent">{{ visitsPercent(result) }}</span></div>
 			</li>
 		</ul>
 		<div v-else class="empty">{{ $t('matomo.empty') }}</div>
@@ -70,7 +70,7 @@ export default {
 		},
 		results: {
 			type: Array,
-			default: []
+			default: () => []
 		},
 	},
 	computed: {
@@ -83,10 +83,12 @@ export default {
 	},
 	methods: {
 		visitsPercent(result) {
+			if(!this.totalVisits) return '–'
+				
 			let percent = result.nb_visits / this.totalVisits * 100
 			percent = percent < 1 ? percent.toFixed(2) : percent.toFixed(1)
 
-			return percent
+			return percent + '%'
 		},
 		findIcon(result) {
             let icon = this.iconsMap['page']

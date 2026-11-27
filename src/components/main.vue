@@ -1,13 +1,12 @@
 <template>
     <div class="matomo-main">
-        <template v-if="isReady">
             <div class="matomo-period-selector">
-                <div v-for="period in settings.periods" :class="['matomo-period-option', period, {active: period == activePeriod}]" @click="setCurrentPeriod(period)" :key="period">
+                <div v-for="period in periods" :class="['matomo-period-option', period, {active: period == activePeriod}]" @click="setCurrentPeriod(period)" :key="period">
                     {{ $t('matomo.chart.' + period) }}
                 </div>
             </div>
 
-            <div v-if="settings.chart" :class="['matomo-chart', {'is-empty': chartEmpty}]">
+            <div v-if="chart" :class="['matomo-chart', {'is-empty': chartEmpty}]">
 
                 <div v-if="chartLoading" class="overlay">
                     <div class="loader"></div>
@@ -15,21 +14,20 @@
                 <div v-if="chartEmpty" class="empty">
                     <span>{{ $t('matomo.empty') }}</span>
                 </div>
-                <chart class="chart" :currentPeriod="activePeriod" :lang="settings.lang" @chartIsLoading="chartIsLoading" @chartIsLoaded="chartIsLoaded" @chartIsEmpty="chartIsEmpty"/>
+                <chart class="chart" :currentPeriod="activePeriod" :lang="lang" @chartIsLoading="chartIsLoading" @chartIsLoaded="chartIsLoaded" @chartIsEmpty="chartIsEmpty"/>
             </div>
 
-            <overview v-if="settings.overview" :currentPeriod="activePeriod" :defaults="defaults" @updateVisits="updateVisits" />
+            <overview v-if="overview" :currentPeriod="activePeriod" :defaults="widgetDefaults" @updateVisits="updateVisits" />
 
-            <widgets v-if="settings.widgets" :widgets="settings.widgets" :currentPeriod="activePeriod" :defaults="defaults" :totalVisits="totalVisits" :lang="settings.lang" />
+            <widgets v-if="activeWidgets" :widgets="activeWidgets" :currentPeriod="activePeriod" :defaults="widgetDefaults" :totalVisits="totalVisits" :lang="lang" />
 
-        </template>
     </div>
 </template>
 
 <script>
-import Chart from './widgets/chart.vue'
+import Chart    from './widgets/chart.vue'
 import Overview from './widgets/overview.vue'
-import Widgets from './widgets/widgets.vue'
+import Widgets  from './widgets/widgets.vue'
 
 export default {
 	components: {Chart, Overview, Widgets},
@@ -54,6 +52,10 @@ export default {
 	        type: String,
 	        default: ''
 	    },
+	    defaults: {
+	        type: Object,
+	        default: () => ({ period: 'month', limit: 5 })
+	    },
 	    widgets: {
 	        type: [Array, Boolean],
 	        default: () => []
@@ -61,49 +63,31 @@ export default {
 	},
 	data() {
 	    return {
-	        sectionOptions: null,
 	        selectedPeriod: null,
-	        totalVisits: '',
+	        totalVisits: 0,
 	        chartLoading: true,
 	        chartEmpty: false
 	    }
 	},
 	computed: {
-	    isSection() {
-	        return typeof this.load === 'function' && !!this.parent && !!this.name
-	    },
-	    isReady() {
-	        return !this.isSection || this.sectionOptions !== null
-	    },
-	    settings() {
-	        return this.sectionOptions ?? this.$props
-	    },
-	    defaults() {
-	        return {
-	            period: 'month',
-	            limit: 5,
-	            ...this.settings.defaults
-	        }
-	    },
+        activeWidgets() {
+            return this.widgets === true ? ['referrerType', 'websites', 'socials', 'devicesType', 'keywords', 'popularPages'] : this.widgets
+        },
+        widgetDefaults() {
+            return { period: 'month', limit: 5, ...this.defaults }
+        },
 	    initialPeriod() {
-	        const periods = this.settings.periods
-	        const period  = this.isSection ? this.settings.defaults?.period : this.currentPeriod
+	        const periods = this.periods
+	        const period = this.currentPeriod
 
 	        if(periods.length) {
 	            return periods.includes(period) ? period : periods[0]
 	        }
 
-	        return period || this.defaults.period
+	        return period || this.widgetDefaults.period
 	    },
 	    activePeriod() {
-	        return this.selectedPeriod ?? this.initialPeriod
-	    }
-	},
-	created() {
-	    if(this.isSection) {
-	        this.load().then(response => {
-	            this.sectionOptions = response
-	        })
+	        return this.selectedPeriod && (!this.periods.length || this.periods.includes(this.selectedPeriod)) ? this.selectedPeriod : this.initialPeriod
 	    }
 	},
 	methods: {
@@ -127,7 +111,3 @@ export default {
 	},
 }
 </script>
-
-<style lang="scss">
-	@import '../assets/css/styles.scss'
-</style>

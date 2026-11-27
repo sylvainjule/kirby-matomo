@@ -9,11 +9,11 @@
 ----------------------*/
 
 $breakpoints: ( 
-	'smaller-480': (max-width: 30em),
-	'smaller-720': (max-width: 45em),
-	'smaller-1040': (max-width: 65em),
-	'smaller-1100': (max-width: 68.75em),
-	'smaller-1200': (max-width: 75em),
+    'smaller-480': (max-width: 30em),
+    'smaller-720': (max-width: 45em),
+    'smaller-1040': (max-width: 65em),
+    'smaller-1100': (max-width: 68.75em),
+    'smaller-1200': (max-width: 75em),
 );
 
 @mixin respond-to($breakpoint) {

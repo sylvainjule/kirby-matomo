@@ -5,7 +5,7 @@
 	background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
     border-radius: 1px;
     margin-bottom: 2px;
-	border-radius: var(--rounded);
+	border-radius: var(--rounded, 4px);
 	overflow: hidden;
     box-shadow: 0 2px 5px rgba(22,23,26,.05);
     .icon {
@@ -41,7 +41,7 @@
 
 .matomo-block {
 	position: relative;
-	border-radius: var(--rounded);
+	border-radius: var(--rounded, 4px);
 	&:not(:first-child) {
 		margin-top: 1.5rem;
 	}

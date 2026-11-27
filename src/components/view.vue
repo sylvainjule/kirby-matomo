@@ -24,8 +24,8 @@
 <script>
 export default {
     props: {
-        main: Array,
-        sidebar: Array,
+        main: Object,
+        sidebar: Object,
         title: String
     },
 };

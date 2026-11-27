@@ -3,7 +3,7 @@
     "description": "Matomo helpers, panel area and sections for Kirby",
     "type": "kirby-plugin",
     "license": "MIT",
-    "version": "2.1.2",
+    "version": "3.0.0",
     "authors": [
         {
             "name": "Sylvain Julé",
@@ -18,10 +18,13 @@
         }
     ],
     "require": {
-        "getkirby/composer-installer": "^1.1"
+        "getkirby/composer-installer": "^1.2"
     },
     "extra": {
-        "installer-name": "matomo"
+        "installer-name": "matomo",
+        "kirby": {
+            "compatible": "^6.0"
+        }
     },
     "minimum-stability": "beta",
     "config": {

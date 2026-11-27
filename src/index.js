@@ -1,19 +1,22 @@
-import Main from './components/main.vue'
-import Sidebar from './components/sidebar.vue'
-import Page from './components/page.vue'
-import View from './components/view.vue'
+import Main         from './components/main.vue'
+import Sidebar      from './components/sidebar.vue'
+import Page         from './components/page.vue'
+import MainField    from './components/fields/main.vue'
+import SidebarField from './components/fields/sidebar.vue'
+import View         from './components/view.vue'
 
 import './assets/svg/icons.js'
+import './assets/css/styles.scss'
 
-panel.plugin('sylvainjule/matomo', {
+window.panel.plugin('sylvainjule/matomo', {
     components: {
         'matomo': View,
         'matomo-main': Main,
         'matomo-sidebar': Sidebar,
     },
-    sections: {
-        'matomo-main': Main,
-        'matomo-sidebar': Sidebar,
+    fields: {
+        'matomo-main': MainField,
+        'matomo-sidebar': SidebarField,
         'matomo-page': Page,
     },
     icons: {

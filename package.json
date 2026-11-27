@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "kirbyup serve src/index.js",
+    "dev": "kirbyup dev src/index.js",
     "build": "kirbyup src/index.js",
     "lint": "eslint \"src/**/*.{js,vue}\"",
     "lint:fix": "npm run lint -- --fix",
@@ -16,16 +16,16 @@
     "recognizeSelfClosing": true
   },
   "devDependencies": {
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "dayjs": "^1.7.7",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^8.0.3",
-    "kirbyup": "^3.1.4",
+    "kirbyup": "^4.0.0",
     "prettier": "^2.4.1",
-    "vue-chartjs": "^3.4.0"
+    "sass": "^1.80.0"
   },
-  "alias": {
-    "chart.js": "chart.js/dist/Chart.min.js"
+  "engines": {
+    "node": ">=24"
   }
 }

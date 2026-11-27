@@ -1,22 +1,21 @@
+<template>
+    <div class="matomo-chart-canvas"><canvas ref="canvas"></canvas></div>
+</template>
+
 <script>
-import { Line, mixins } from 'vue-chartjs'
+import Chart from 'chart.js'
+import { markRaw } from 'vue'
 import dayjs from 'dayjs'
 import 'dayjs/locale/de'
 import 'dayjs/locale/fr'
+import 'dayjs/locale/es'
 
 export default {
-    extends: Line,
-    mixins: [mixins.reactiveData],
+    emits: ['chartIsLoading', 'chartIsLoaded', 'chartIsEmpty'],
     data() {
         return {
-            rendered: false,
-            chartData: {
-                labels: [],
-                tooltipLabels: [],
-                datasets: [{
-                    data: []
-                }]
-            },
+            chartInstance: null,
+            requestId: 0,
         }
     },
     props: {
@@ -150,25 +149,38 @@ export default {
     },
     watch: {
         currentPeriod: {
-            immediate: true,
-            handler(newVal, oldVal) {
+            handler() {
                 this.syncContent()
             }
         },
-        lang: {
-            immediate: true,
-            handler(newVal, oldVal) {
-                dayjs.locale(newVal)
-            }
+        lang() { 
+            this.syncContent() 
         },
+        theme() {
+            if(this.chartInstance) {
+                this.chartInstance.options = this.options
+                this.chartInstance.update()
+            }
+        }
+    },
+    mounted() { 
+        this.syncContent() 
+    },
+    beforeUnmount() {
+        this.requestId++
+        this.chartInstance?.destroy()
+        this.chartInstance = null
     },
     methods: {
         syncContent() {
+            const id = ++this.requestId
             this.$emit('chartIsLoading')
-            this.$api
+
+            return this.$api
                 .get('matomo-panel/get-chart-data', this.config)
                 .then(response => {
-                    let self = this
+                    if(id !== this.requestId) return
+                    if(!response || response.status === 'empty' || response.status === 'error' || !Object.keys(response).length) throw new Error('No chart data')
                     let formatedLabels
                     let tooltipLabels
                     let dataset
@@ -182,10 +194,10 @@ export default {
                             return key.split('-')[0] == currentYear;
                         })
                         formatedLabels = labels.map(key => {
-                            return dayjs(key).format('MMMM')
+                            return dayjs(key).locale(this.lang || 'en').format('MMMM')
                         })
                         tooltipLabels = labels.map(key => {
-                            return dayjs(key).format('MMMM YYYY')
+                            return dayjs(key).locale(this.lang || 'en').format('MMMM YYYY')
                         })
                         dataset = labels.map(key => {
                             return response[key];
@@ -203,7 +215,7 @@ export default {
                             return date[2] +'/'+ date[1]
                         })
                         tooltipLabels = labels.map(key => {
-                            return dayjs(key).format('dddd, DD MMMM YYYY')
+                            return dayjs(key).locale(this.lang || 'en').format('dddd, DD MMMM YYYY')
                         })
                         dataset = labels.map(key => {
                             return response[key];
@@ -219,7 +231,7 @@ export default {
                             return date[2] +'/'+ date[1]
                         })
                         tooltipLabels = labels.map(key => {
-                            return dayjs(key).format('dddd, DD MMMM YYYY')
+                            return dayjs(key).locale(this.lang || 'en').format('dddd, DD MMMM YYYY')
                         })
                         dataset = labels.map(key => {
                             return response[key];
@@ -229,8 +241,8 @@ export default {
                     if(this.currentPeriod == 'day') {
                         let labels = Object.keys(response)
                         formatedLabels = labels.map(key => {
-                            let label = parseInt(key) + 1 + 'h'
-                            return isFinite(label) ? label : ''
+                            let hour = parseInt(key)
+                            return Number.isFinite(hour) ? (hour + 1) + 'h' : ''
                         })
                         tooltipLabels = formatedLabels
                         dataset = labels.map(key => {
@@ -238,22 +250,23 @@ export default {
                         })
                     }
 
-                    this.chartData.tooltipLabels = tooltipLabels
-                    this.chartData.labels = formatedLabels
-                    this.chartData.datasets[0].data = dataset
-
-                    if(!this.rendered) {
-                        this.renderChart(this.chartData, this.options)
-                        this.rendered = true
-                    }
+                    if(!dataset?.length) throw new Error('No chart data')
+                    const data = { labels: formatedLabels, tooltipLabels, datasets: [{ data: dataset }] }
+                
+                    if(!this.chartInstance) {
+                        this.chartInstance = markRaw(new Chart(this.$refs.canvas, {
+                            type: 'line', data, options: this.options
+                        }))
+                    } 
                     else {
-                        this.$data._chart.update()
+                        this.chartInstance.data = data
+                        this.chartInstance.update()
                     }
 
                     this.$emit('chartIsLoaded')
                 })
                 .catch(error => {
-                    this.$emit('chartIsEmpty')
+                    if(id === this.requestId) this.$emit('chartIsEmpty')
                 })
         },
     }

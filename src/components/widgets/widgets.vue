@@ -18,6 +18,7 @@ export default {
 	data() { 
 		return {
 			loading: true,
+            requestId: 0,
 			status: 'loading',
 			date: 'today',
 			results: [],
@@ -25,9 +26,9 @@ export default {
 	},
 	props: {
 		widgets: Array,
-		currentPeriod: '',
+		currentPeriod: String,
 		totalVisits: Number,
-		lang: '',
+		lang: String,
 		defaults: Object,
 	},
 	watch: { 
@@ -37,9 +38,22 @@ export default {
 	            if(newVal != '') this.syncContent()
 	        }
 	    },
+        widgets() { 
+        	this.syncContent() 
+        },
+        lang() { 
+        	this.syncContent() 
+        },
+        'defaults.limit'() { 
+        	this.syncContent() 
+        },
+    },
+    beforeUnmount() { 
+    	this.requestId++ 
     },
     methods: {
 		syncContent() {
+            const id = ++this.requestId
 			this.loading = true
 			this.status  = 'loading'
 			this.$api
@@ -51,12 +65,16 @@ export default {
 		        	limit: this.defaults.limit,
 		        })
 		        .then(response => {
-		        	this.results = response
+                    if (id !== this.requestId) return
+                    if (!response || response.status === 'error' || response.status === 'empty') throw new Error('No metrics')
+                    this.results = Array.isArray(response) ? response.map(item => Array.isArray(item) ? item : []) : []
 		        	this.status  = response.status
 		        	this.loading = false
 		        })
 		        .catch(error => {
-		        	this.status = 'empty'
+                    if (id !== this.requestId) return
+                    this.results = []
+                    this.status = 'empty'
 		        	this.loading = false
 		        })
 		},

@@ -3,7 +3,7 @@
 	padding-bottom: 1.25rem;
 	background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
 	box-shadow: 0 2px 5px rgba(22,23,26,.05);
-	border-radius: var(--rounded);
+	border-radius: var(--rounded, 4px);
 	margin-bottom: 3rem;
 	.code {
 		text-transform: uppercase;

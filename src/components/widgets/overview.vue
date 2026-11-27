@@ -71,9 +71,11 @@
 
 <script>
 export default {
+    emits: ['updateVisits'],
 	data() {
 		return {
 			loading: true,
+            requestId: 0,
 			status: 'loading',
 			widget: 'overview',
 			method: 'VisitsSummary.get',
@@ -101,7 +103,7 @@ export default {
 			return this.status == 'empty'
 		},
 		visitsDiff() {
-			let diff = this.diff(this.current.visits, this.prev.visits)
+			let diff   = this.diff(this.current.visits, this.prev.visits)
 			let status = diff > 0 ? 'positive' : 'negative'
 			let prefix = diff > 0 ? '+ ' : '- '
 			let string = prefix + Math.abs(diff)
@@ -112,7 +114,7 @@ export default {
 			}
 		},
 		durationDiff() {
-			let diff = this.diff(this.current.duration, this.prev.duration)
+			let diff   = this.diff(this.current.duration, this.prev.duration)
 			let status = diff > 0 ? 'positive' : 'negative'
 			let prefix = diff > 0 ? '+ ' : '- '
 			let string = prefix + Math.abs(diff)
@@ -123,7 +125,7 @@ export default {
 			}
 		},
 		bounceDiff() {
-			let diff = this.diff(this.current.bounce, this.prev.bounce)
+			let diff   = this.diff(this.current.bounce, this.prev.bounce)
 			let status = diff > 0 ? 'positive' : 'negative'
 			let prefix = diff > 0 ? '+ ' : '- '
 			let string = prefix + Math.abs(diff)
@@ -134,7 +136,7 @@ export default {
 			}
 		},
 		actionsDiff() {
-			let diff = this.diff(this.current.actions, this.prev.actions)
+			let diff   = this.diff(this.current.actions, this.prev.actions)
 			let status = diff > 0 ? 'positive' : 'negative'
 			let prefix = diff > 0 ? '+ ' : '- '
 			let string = prefix + Math.abs(diff)
@@ -194,10 +196,6 @@ export default {
 			return config
 		}
 	},
-	created() {
-	},
-	destroyed() {
-	},
 	watch: {
       	currentPeriod: {
       		immediate: true,
@@ -206,14 +204,21 @@ export default {
 	        }
 	    }
     },
+    beforeUnmount() { this.requestId++ },
 	methods: {
 		syncContent() {
+            const id = ++this.requestId
+            
 			this.loading = true
 			this.status  = 'loading'
+
 		    // get metrics for the current [year, month, week, day]
 			this.$api
 		        .get('matomo-panel/get-overview-content', this.config)
 		        .then(response => {
+                    if(id !== this.requestId) return
+                    if(!response || response.status === 'error' || response.status === 'empty' || !Object.keys(response).length) throw new Error('No metrics')
+
 		        	let current = {}
 		        	let prev = {}
 		        	let length = response.length
@@ -258,8 +263,10 @@ export default {
 		        	this.$emit('updateVisits', this.current.visits)
 		        })
 		        .catch(error => {
+                    if(id !== this.requestId) return
 		        	this.loading = false
 		        	this.status = 'empty'
+                    this.$emit('updateVisits', 0)
 		        })
 		},
 		formatTime(time) {

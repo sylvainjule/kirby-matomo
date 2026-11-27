@@ -60,17 +60,26 @@ class Matomo {
 
 	public function apiWidget($widget, $method, $period, $date, $limit, $lang) {
 		$url  = $this->url;
-		$url .= "?module=API&method=" . $method;
-		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
-		$url .= "&format=JSON&language=". $lang;
-		$url .= $limit ? "&filter_limit=" . $limit : '';
+		$url .= "?module=API&method=" . rawurlencode((string) $method);
+		$url .= "&idSite=". $this->id ."&period=". rawurlencode((string) $period) ."&date=" . rawurlencode((string) $date);
+		$url .= "&format=JSON&language=". rawurlencode((string) $lang);
+		$url .= $limit ? "&filter_limit=" . rawurlencode((string) $limit) : '';
 
         $content = $this->sendRequest($url);
         return $content;
 	}
 
 	public function apiBulkWidgets($widgets, $period, $date, $limit, $lang) {
-        $widgets = json_decode($widgets);
+        $widgets = json_decode($widgets, true);
+        if(!is_array($widgets)) {
+            throw new \InvalidArgumentException('Invalid Matomo widgets list');
+        }
+        foreach ($widgets as $widget) {
+            if(!is_string($widget) || !isset($this->methodsMap[$widget])) {
+                throw new \InvalidArgumentException('Unknown Matomo widget');
+            }
+        }
+        if($widgets === []) return [];
 
 		$url  = $this->url;
 
@@ -80,7 +89,7 @@ class Matomo {
 		$i = 0;
 		foreach($widgets as $widget) {
 			$url .= "&urls[". $i ."]=";
-			$url .= urlencode("method=". $this->methodsMap[$widget] ."&idSite=". $this->id ."&period=". $period ."&date=" . $date ."&language=". $lang ."&filter_limit=" . $limit);
+			$url .= urlencode("method=". $this->methodsMap[$widget] ."&idSite=". $this->id ."&period=". rawurlencode((string) $period) ."&date=" . rawurlencode((string) $date) ."&language=". rawurlencode((string) $lang) ."&filter_limit=" . rawurlencode((string) $limit));
 			$i++;
 		}
 
@@ -90,8 +99,8 @@ class Matomo {
 
 	public function apiChart($method, $period, $date) {
 		$url  = $this->url;
-		$url .= "?module=API&method=". $method;
-		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
+		$url .= "?module=API&method=". rawurlencode((string) $method);
+		$url .= "&idSite=". $this->id ."&period=". rawurlencode((string) $period) ."&date=" . rawurlencode((string) $date);
 		$url .= "&format=JSON";
 
         $content = $this->sendRequest($url);
@@ -100,8 +109,8 @@ class Matomo {
 
 	public function apiOverview($method, $period, $date) {
 		$url  = $this->url;
-		$url .= "?module=API&method=". $method;
-		$url .= "&idSite=". $this->id ."&period=". $period ."&date=" . $date;
+		$url .= "?module=API&method=". rawurlencode((string) $method);
+		$url .= "&idSite=". $this->id ."&period=". rawurlencode((string) $period) ."&date=" . rawurlencode((string) $date);
 		$url .= "&format=JSON";
 
         $content = $this->sendRequest($url);
@@ -112,7 +121,7 @@ class Matomo {
 		$url  = $this->url;
 		$method = 'Live.getCounters';
 
-		$url .= "?module=API&method=" . $method;
+		$url .= "?module=API&method=" . rawurlencode((string) $method);
 		$url .= "&idSite=". $this->id ."&lastMinutes=3";
 		$url .= "&format=JSON";
 
@@ -145,10 +154,10 @@ class Matomo {
 	public function apiPageMetrics($period, $uri, $lang) {
 		$url  = $this->url;
 		$url .= "?module=API&method=Actions.getPageUrls";
-		$url .= "&idSite=". $this->id ."&period=". $period ."&date=today";
+		$url .= "&idSite=". $this->id ."&period=". rawurlencode((string) $period) ."&date=today";
 		$url .= "&format=JSON";
 		$url .= '&flat=1';
-		$url .= $lang['multilang'] ? '&expanded=1' : '';
+		$url .= filter_var($lang['multilang'], FILTER_VALIDATE_BOOLEAN) ? '&expanded=1' : '';
 
         $content = $this->sendRequest($url);
 		$content = $this->filterPageMetrics($content, $uri, $lang);
@@ -162,21 +171,21 @@ class Matomo {
 	public function filterPageMetrics($content, $uri, $lang) {
 		$site  = site();
 		$kirby = kirby();
-		$multilang   = $lang['multilang'] == 'false' ? false : true;
-		$overview    = $lang['overview']  == 'false' ? false : true;
+		$multilang   = filter_var($lang['multilang'], FILTER_VALIDATE_BOOLEAN);
+		$overview    = filter_var($lang['overview'], FILTER_VALIDATE_BOOLEAN);
 		$currentLang = $lang['current'];
 		$defaultLang = $lang['default'];
 		$isDefault   = $currentLang == $defaultLang;
 
 		// set the correct language and find the page
-		if($multilang) $site->visit($site->homePage(), $currentLang);
-		$page = $site->index()->findBy('uri', $uri);
+		if($multilang && $overview) $site->visit($site->homePage(), $currentLang);
+		$page = $multilang && $overview ? $site->index()->findBy('uri', $uri) : null;
 
 		// get the current page stats
 		$current = $this->filterWithUri($content, $uri, $currentLang, $isDefault);
 
 		// return it if there's no other language or if they don't need to be displayed
-		if(!$multilang || !$overview) {
+		if(!$multilang || !$overview || !$page) {
 			return array('current' => $current);
 		}
 		// else, check all other languages and merge their metrics
@@ -216,15 +225,15 @@ class Matomo {
 
 				// find the average duration
 				$totalDurations = $this->multiplyArraysByKey($visits, $durations);
-				$duration = $totalDurations / $totalVisits;
+				$duration = $totalVisits > 0 ? $totalDurations / $totalVisits : 0;
 
 				// find the average bounce %
 				$totalBounces = $this->multiplyArraysByKey($visits, $bounces);
-				$bounce = $totalBounces / $totalVisits;
+				$bounce = $totalVisits > 0 ? $totalBounces / $totalVisits : 0;
 
 				// find the average exit %
 				$totalExits = $this->multiplyArraysByKey($visits, $exits);
-				$exit = $totalExits / $totalVisits;
+				$exit = $totalVisits > 0 ? $totalExits / $totalVisits : 0;
 
 				$all = array(
 					'visits'   => $totalVisits,
@@ -255,6 +264,7 @@ class Matomo {
 
 		// check if the $content contains one of the possible labels
 		$filteredContent = array_filter($content, function($entry) use($possibleLabels) {
+			if(!is_array($entry) || !isset($entry['label'])) return false;
 			$label = preg_replace('/\?.*/', '', $entry['label']);
 			return in_array($label, $possibleLabels);
 		});
@@ -276,15 +286,15 @@ class Matomo {
 
 		// find the average duration
 		$totalDurations = $this->multiplyArraysByKey($visits, $durations);
-		$duration = $totalDurations / $totalVisits;
+		$duration = $totalVisits > 0 ? $totalDurations / $totalVisits : 0;
 
 		// find the average bounce %
 		$totalBounces = $this->multiplyArraysByKey($visits, $bounces);
-		$bounce = $totalBounces / $totalVisits;
+		$bounce = $totalVisits > 0 ? $totalBounces / $totalVisits : 0;
 
 		// find the average exit %
 		$totalExits = $this->multiplyArraysByKey($visits, $exits);
-		$exit = $totalExits / $totalVisits;
+		$exit = $totalVisits > 0 ? $totalExits / $totalVisits : 0;
 
 		return array(
 			'visits'   => $totalVisits,
@@ -315,13 +325,20 @@ class Matomo {
 	        'timeout'   => 30,
 	    ]);
 
-	    if ($response->code() < 200 || $response->code() >= 300) {
+	    if($response->code() < 200 || $response->code() >= 300) {
 	        throw new \RuntimeException(
 	            'Matomo API returned HTTP ' . $response->code()
 	        );
 	    }
 
-	    return json_decode($response->content(), true);
+	    $data = json_decode($response->content() ?? '', true, 512, JSON_THROW_ON_ERROR);
+        if(!is_array($data)) {
+            throw new \RuntimeException('Unexpected Matomo API response');
+        }
+        if(($data['result'] ?? null) === 'error') {
+            throw new \RuntimeException('Matomo API returned an error');
+        }
+        return $data;
 	}
 
 }

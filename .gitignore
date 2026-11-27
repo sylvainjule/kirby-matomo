@@ -1,5 +1,6 @@
 .cache
 .DS_Store
+index.dev.*
 node_modules
 package-lock.json
 composer.lock

@@ -15,7 +15,7 @@
 		padding: 1.5rem;
 		padding-bottom: 1.25rem;
 		background: light-dark(white, hsl(0, 0%, calc(19% + 0%)));
-		border-radius: var(--rounded);
+		border-radius: var(--rounded, 4px);
 		box-shadow: 0 2px 5px rgba(22,23,26,.05);
 		&:nth-child(odd) {
 			margin-right: 1.5rem;
@@ -81,7 +81,7 @@
 			margin-top: 1rem;
 			padding: 1rem 0 1rem 0;
 			background: light-dark(#fafafa, hsl(0, 0%, calc(15% + 0%)));
-			border-radius: var(--rounded-sm);
+			border-radius: var(--rounded-sm, 2px);
 		}
 	}
 	@include respond-to('smaller-720') {

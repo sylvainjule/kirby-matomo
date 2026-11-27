@@ -35,6 +35,7 @@ export default {
 	data() {
 		return {
 			loading: true,
+            requestId: 0,
 			status: 'loading',
 			results: {
 				day: Number,
@@ -52,13 +53,21 @@ export default {
 	created() {
 		this.syncContent()
 	},
+    beforeUnmount() { 
+    	this.requestId++ 
+    },
 	methods: {
 		syncContent() {
+            const id = ++this.requestId
 			this.loading = true
 			this.status  = 'loading'
+
 			this.$api
 		        .get('matomo-panel/get-bulk-summary')
 		        .then(response => {
+                    if(id !== this.requestId) return
+                    if(!response || response.status === 'error' || response.status === 'empty') throw new Error('No metrics')
+                    	
 		        	this.results.day = response[0].value
 		        	this.results.week = this.getLast7Days(response[1])
 		        	this.results.month = response[2].value
@@ -68,6 +77,7 @@ export default {
 		        	this.status = response.status
 		        })
 		        .catch(error => {
+                    if (id !== this.requestId) return
 		        	this.loading = false
 		        	this.status = 'empty'
 		        })

@@ -41,41 +41,19 @@ export default {
             default: null
         }
     },
-    data() {
-        return {
-            sectionOptions: null
-        }
-    },
     computed: {
-        isSection() {
-            return typeof this.load === 'function' && !!this.parent && !!this.name
-        },
-        settings() {
-            return this.sectionOptions ?? this.$props
-        },
         dashboardUrl() {
-            return this.settings.url
+            return this.url
         },
         showLink() {
-            return !!(this.settings.link && this.dashboardUrl)
+            return !!(this.link && this.dashboardUrl)
         },
         showRealtime() {
-            return this.settings.realtime
+            return this.realtime
         },
         showSummary() {
-            return this.settings.summary
+            return this.summary
         }
     },
-    created() {
-        if (this.isSection) {
-            this.load().then(response => {
-                this.sectionOptions = response
-            })
-        }
-    }
 }
 </script>
-
-<style lang="scss">
-    @import '../assets/css/styles.scss'
-</style>
