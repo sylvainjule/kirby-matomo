@@ -18,8 +18,7 @@
         }
     ],
     "require": {
-        "getkirby/composer-installer": "^1.1",
-        "guzzlehttp/guzzle": "^7.9"
+        "getkirby/composer-installer": "^1.1"
     },
     "extra": {
         "installer-name": "matomo"

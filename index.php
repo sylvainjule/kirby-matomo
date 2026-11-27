@@ -1,21 +1,23 @@
 <?php
 
-@include_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/lib/matomo.php';
 
 Kirby::plugin('sylvainjule/matomo', array(
     'areas' => require_once __DIR__ . '/lib/area.php',
 	'options' => array(
-		'token'         => false,
-		'url'           => false,
-		'id'            => false,
-		'active'        => true,
-		'debug'         => false,
-        'blacklist'     => ['127.0.0.1', '::1'],
-        'trackUsers'    => false,
-        'area'          => true,
-        'area.label'    => 'Matomo',
-        'area.headline' => null,
+		'token'          => false,
+		'url'            => false,
+		'id'             => false,
+		'active'         => true,
+		'debug'          => false,
+        'blacklist'      => ['127.0.0.1', '::1'],
+        'trackUsers'     => false,
+        'area'           => true,
+        'area.label'     => 'Matomo',
+        'area.headline'  => null,
+        'basicAuth'      => null,
+        'disableCookies' => false,
+        'setDoNotTrack'  => false,
 	),
     'blueprints' => array(
         'blocks/matomo-opt-out' => __DIR__ . '/lib/blueprints/blocks/matomo-opt-out.yml'

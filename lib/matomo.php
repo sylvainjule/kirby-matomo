@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Http\Remote;
+
 class Matomo {
 
 	/* Should we load the snippet?
@@ -35,7 +37,7 @@ class Matomo {
 	protected $url    = null;
 	protected $id     = null;
 	protected $token  = null;
-	protected $client = null;
+	protected $basicAuth     = null;
 	protected $requestParams = [];
 
 	protected $methodsMap = array (
@@ -47,17 +49,14 @@ class Matomo {
 		'popularPages' => 'Actions.getPageUrls',
 	);
 
-	public function __construct() {
-    	$this->url    = option('sylvainjule.matomo.url');
-		$this->id     = option('sylvainjule.matomo.id');
-		$this->token  = is_callable($this->token) ? $this->token() : option('sylvainjule.matomo.token');
-		$this->client = new GuzzleHttp\Client();
+    public function __construct() {
+	    $this->url = option('sylvainjule.matomo.url');
+	    $this->id = option('sylvainjule.matomo.id');
+	    $this->token = option('sylvainjule.matomo.token');
+	    $this->basicAuth = option('sylvainjule.matomo.basicAuth');
 
-		$this->requestParams['token_auth'] = $this->token;
-		if (option('sylvainjule.matomo.basicAuth') !== null) {
-			$this->requestParams['basicAuth'] = option('sylvainjule.matomo.basicAuth');
-		}
-    }
+	    $this->requestParams['token_auth'] = $this->token;
+	}
 
 	public function apiWidget($widget, $method, $period, $date, $limit, $lang) {
 		$url  = $this->url;
@@ -306,9 +305,23 @@ class Matomo {
 	}
 
 	private function sendRequest($url) {
-		$response = $this->client->request('POST', $url, ['form_params' => $this->requestParams]);
-        $response = json_decode($response->getBody()->getContents(), true);
-        return $response;
+	    $response = Remote::request($url, [
+	        'method'    => 'POST',
+	        'data'      => $this->requestParams,
+	        'basicAuth' => $this->basicAuth,
+	        'headers'   => [
+	            'Content-Type' => 'application/x-www-form-urlencoded',
+	        ],
+	        'timeout'   => 30,
+	    ]);
+
+	    if ($response->code() < 200 || $response->code() >= 300) {
+	        throw new \RuntimeException(
+	            'Matomo API returned HTTP ' . $response->code()
+	        );
+	    }
+
+	    return json_decode($response->content(), true);
 	}
 
 }
